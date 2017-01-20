@@ -1,0 +1,18 @@
+[30-Jun-2016 06:16:22 America/Chicago] PHP Fatal error:  Class 'PHPMailer' not found in /home1/bashsofts/public_html/sendmail.php on line 2
+[12-Jul-2016 03:11:17 America/Chicago] PHP Warning:  require(connection.php): failed to open stream: No such file or directory in /home1/bashsofts/public_html/index.php on line 17
+[12-Jul-2016 03:11:17 America/Chicago] PHP Warning:  require(connection.php): failed to open stream: No such file or directory in /home1/bashsofts/public_html/index.php on line 17
+[12-Jul-2016 03:11:17 America/Chicago] PHP Fatal error:  require(): Failed opening required 'connection.php' (include_path='.:/opt/php56/lib/php') in /home1/bashsofts/public_html/index.php on line 17
+[12-Jul-2016 03:11:57 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home1/bashsofts/public_html/connection.php on line 2
+[12-Jul-2016 03:11:57 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[12-Jul-2016 03:11:57 America/Chicago] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[12-Jul-2016 03:14:50 America/Chicago] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'bashsoft_shahab'@'localhost' to database 'bashsoft_mpi' in /home1/bashsofts/public_html/connection.php on line 2
+[12-Jul-2016 03:14:50 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[12-Jul-2016 03:14:50 America/Chicago] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[02-Aug-2016 23:54:14 America/Chicago] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /home1/bashsofts/public_html/index.php:16) in /home1/bashsofts/public_html/connection.php on line 2
+[02-Aug-2016 23:54:14 America/Chicago] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home1/bashsofts/public_html/index.php:16) in /home1/bashsofts/public_html/connection.php on line 2
+[02-Aug-2016 23:54:47 America/Chicago] PHP Warning:  mysqli_connect(): (42000/1102): Incorrect database name 'bashsoft_mpi	' in /home1/bashsofts/public_html/connection.php on line 5
+[02-Aug-2016 23:54:47 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[02-Aug-2016 23:54:47 America/Chicago] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[02-Aug-2016 23:54:52 America/Chicago] PHP Warning:  mysqli_connect(): (42000/1102): Incorrect database name 'bashsoft_mpi	' in /home1/bashsofts/public_html/connection.php on line 5
+[02-Aug-2016 23:54:52 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
+[02-Aug-2016 23:54:52 America/Chicago] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home1/bashsofts/public_html/index.php on line 43
