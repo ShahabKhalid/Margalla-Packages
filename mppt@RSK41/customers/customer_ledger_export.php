@@ -35,18 +35,18 @@ while($data = mysqli_fetch_array($run))
 	{
 		$seperator = "";
 		if($data['type'] == "invoice")
-		{ 
+		{
 			$total_balance += floatval($data['amount']);
 			$total_of_inv += floatval($data['amount']);
-			$seperator = "Bill,INV-".$data['id'].",".$data['date'].",---,----,".floatval($data['amount']).",---,".$total_balance."\n"; 
-			
+			$seperator = "Bill,INV-".$data['id'].",".$data['date'].",---,----,".floatval($data['amount']).",---,".$total_balance."\n";
+
 		}
 		else
 		{
 			$total_balance -= floatval($data['amount']);
 		 	$total_of_pay += floatval($data['amount']);
 		 	$seperator = "Cash,---,---,PY-".$data['id'].",".$data['date'].",---,".floatval($data['amount']).",".$total_balance."\n";
-		 	
+
 		}
 		fputs($fp, $seperator);
 		if($data['type'] == "invoice") $prev_inv_no = $data['id'];

@@ -1,4 +1,4 @@
-<div class="container addBox">
+<div class="container addBox" style="width:95%">
 <div class="inBox">
 <div class="row">
 <div class="col-md-10">
@@ -17,6 +17,7 @@ $qry = "SELECT * FROM `Ledgers` WHERE id = '".$_GET['id']."'";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $data = mysqli_fetch_array($run);
 $total = 0;
+$id = $_GET['id'];
 ?>
 <h3><?php echo "Account : ".$data['name'];?></h3>
 <br>
@@ -44,11 +45,11 @@ $lid = $data2['id'];
   <div class="col-sm-1"><?php if($data2['bill'] == '1')  echo "BILL-".$data2['id']; else echo "--"; ?></div>
 	<div class="col-sm-1"><?php if($data2['bill'] == '0') echo "PY-".$data2['id']; else echo "--"; ?></div>
 	<div class="col-sm-2"><?php echo $data2['date']; ?></div>
-	<div class="col-sm-2"><?php if($data2['bill'] == '1') { echo $data2['amount']; $total += intval($data2['amount']); } else  echo "---"; ?></div>
-		<div class="col-sm-2"><?php if($data2['bill'] == '0') { echo $data2['amount']; $total -= intval($data2['amount']); } else  echo "---"; ?></div>
-	<div class="col-sm-1"><?php echo "Rs. ".number_format(intval($total)); ?></div>
+	<div class="col-sm-2"><?php if($data2['bill'] == '1') { echo $data2['amount']; $total += floatval($data2['amount']); } else  echo "---"; ?></div>
+		<div class="col-sm-2"><?php if($data2['bill'] == '0') { echo $data2['amount']; $total -= floatval($data2['amount']); } else  echo "---"; ?></div>
+	<div class="col-sm-1"><?php echo "Rs. ".number_format(floatval($total)); ?></div>
 	<div class="col-sm-1"><a href='javascript:void()' onclick="deleteEntry('<?php echo $lid; ?>')">Delete</a></div>
-	</div>	
+	</div>
 	<?php
 	}
 
@@ -64,10 +65,10 @@ $lid = $data2['id'];
   	<input style="width:100%;height:30px;" type="text" id="billno" value="Auto" readonly>
   </div>
 	<div class="col-sm-1">
-  		<input style="width:100%;height:30px;" type="text" id="payno" value="Auto" readonly>		
+  		<input style="width:100%;height:30px;" type="text" id="payno" value="Auto" readonly>
 	</div>
 	<div class="col-sm-2">
-  		<input style="width:100%;height:30px;" type="text" id="date" value="<?php echo date('Y-m-d'); ?>">		
+  		<input style="width:100%;height:30px;" type="text" id="date" value="<?php echo date('Y-m-d'); ?>">
 	</div>
 	<div class="col-sm-2">
 		<input style="width:100%;height:30px;" type="text" id="bill" placeholder="Bill">
@@ -78,7 +79,7 @@ $lid = $data2['id'];
 	<div class="col-sm-2">
 		<input style="width:100%;height:30px;" type="button" id="addL" value="Add" onclick="AddLedger()">
 	</div>
-</div>	
+</div>
 <br>
 <div class="row" style="border-top:2px solid black;width:95%;position:relative;margin:0 auto;">
 	<div class="col-sm-3"></div>
@@ -87,10 +88,9 @@ $lid = $data2['id'];
 	<div class="col-sm-2" id="totalBalDIV">Rs. <?php echo number_format($total); ?></div>
 	<input id="totalBal" type="hidden" value="<?php echo $total; ?>">
 </div>
-
-
-
 <br><br>
+<a href="javascript:void()" onclick="return exportLedger('<?php echo $id; ?>')">Export to excel</a>
+<!-- <a href="javascript:void()" onclick="return printView('<?php echo $id; ?>')">Print</a> -->
 </div><br>
 <p id="esc">Press Escape to go back!</p>
 </div>
@@ -144,9 +144,9 @@ function AddLedger()
 	}
 
 	if(opt === '1')
-	{		
+	{
 		if($("#bill").val().length === 0) return alert("Please enter bill.");
-		amount = $("#bill").val();								
+		amount = $("#bill").val();
 		xhttp.open("POST", "do.php?action=addLbill", true);
   	  	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   		xhttp.send("account="+accountID+"&particular="+part+"&date="+date+"&amount="+amount+"&ajax");
@@ -178,12 +178,12 @@ function AddLedger()
 	}
 	else
 	{
-		if($("#pay").val().length === 0) return alert("Please enter pay.");                  	
-		amount = $("#pay").val();		
+		if($("#pay").val().length === 0) return alert("Please enter pay.");
+		amount = $("#pay").val();
 		xhttp.open("POST", "do.php?action=addLPayment", true);
     	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	xhttp.send("account="+accountID+"&particular="+part+"&date="+date+"&amount="+amount+"&ajax");
-  		bal = parseFloat($("#totalBal").val()) - parseFloat(amount);    	
+  		bal = parseFloat($("#totalBal").val()) - parseFloat(amount);
   		xhttp.onreadystatechange = function() {
 	    if (xhttp.readyState != 4)
 	    {
@@ -207,7 +207,7 @@ function AddLedger()
 										<div class='col-sm-2'>--</div>\
 										</div>");
 	        }
-	    }};    	
+	    }};
 	}
 
 	$("#totalBalDIV").html("Rs." + bal);
@@ -221,31 +221,22 @@ function changeOptions()
 	var opt = $("#particular").val();
 	if(opt === '1')
 	{
-		$("#payno").prop("readonly", true);		
-		$("#billno").prop("readonly", false);	
-		$("#pay").prop("readonly", true);		
-		$("#bill").prop("readonly", false);	
+		$("#payno").prop("readonly", true);
+		$("#billno").prop("readonly", false);
+		$("#pay").prop("readonly", true);
+		$("#bill").prop("readonly", false);
 	}
 	else
 	{
-		$("#payno").prop("readonly", false);		
-		$("#billno").prop("readonly", true);	
-		$("#pay").prop("readonly", false);		
+		$("#payno").prop("readonly", false);
+		$("#billno").prop("readonly", true);
+		$("#pay").prop("readonly", false);
 		$("#bill").prop("readonly", true);
 	}
 }
 
-function printView(id)
+function exportLedger(id)
 {
-	window.open("customers/customer_ledger_print.php?id="+id);
-}
-function viewPayment(id)
-{
-    pageLoad("customers/payment_update.php?id="+id);
-}
-
-function viewInvoice(id)
-{
-	pageLoad("customers/invoice_print.php?id="+id);
+	window.open("ledgers/ledger_export.php?id="+id);
 }
 </script>
