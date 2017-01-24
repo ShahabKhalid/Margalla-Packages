@@ -17,10 +17,10 @@ fputs($fp, $seperator);
 $qry = "DELETE FROM `tmp` WHERE 1 ";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "INSERT INTO tmp (id,ref,date,amount,type)
-						SELECT i.no,i.id,i.date,sub.amount,'invoice' FROM (SELECT i.no,i.id,SUM(idd.weices * idd.rate + idd.charges) as amount FROM invoice i , invoice_detail idd WHERE i.no = idd.ref and i.date <= '2017-01-01' GROUP BY idd.ref ) sub, invoice i,customers c WHERE i.no = sub.no and c.id = i.customer and c.id = '".$id."'";
+						SELECT i.no,i.id,i.date,sub.amount,'invoice' FROM (SELECT i.no,i.id,SUM(idd.weices * idd.rate + idd.charges) as amount FROM invoice i , invoice_detail idd WHERE i.no = idd.ref GROUP BY idd.ref ) sub, invoice i,customers c WHERE i.no = sub.no and c.id = i.customer and c.id = '".$id."'";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "INSERT INTO tmp (id,ref,date,amount,type)
-SELECT id,ref_no,rec_date,amount,'pay' FROM payments_recv WHERE `rec_date` <= '2017-01-01' and `customer` = '".$id."'";
+SELECT id,ref_no,rec_date,amount,'pay' FROM payments_recv WHERE `customer` = '".$id."'";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "SELECT * FROM tmp order by date;";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));

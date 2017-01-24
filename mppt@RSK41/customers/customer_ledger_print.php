@@ -57,10 +57,10 @@ $open_balance = $data['opening_balance'];
 $qry = "DELETE FROM `tmp` WHERE 1 ";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "INSERT INTO tmp (id,ref,date,amount,type)
-						SELECT i.no,i.id,i.date,sub.amount,'invoice' FROM (SELECT i.no,i.id,SUM(idd.weices * idd.rate + idd.charges) as amount FROM invoice i , invoice_detail idd WHERE i.no = idd.ref and i.date <= '2017-01-01' GROUP BY idd.ref ) sub, invoice i,customers c WHERE i.no = sub.no and c.id = i.customer and c.id = '".$id."'";
+						SELECT i.no,i.id,i.date,sub.amount,'invoice' FROM (SELECT i.no,i.id,SUM(idd.weices * idd.rate + idd.charges) as amount FROM invoice i , invoice_detail idd WHERE i.no = idd.ref GROUP BY idd.ref ) sub, invoice i,customers c WHERE i.no = sub.no and c.id = i.customer and c.id = '".$id."'";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "INSERT INTO tmp (id,ref,date,amount,type)
-SELECT id,ref_no,rec_date,amount,'pay' FROM payments_recv WHERE `rec_date` <= '2017-01-01' and `customer` = '".$id."'";
+SELECT id,ref_no,rec_date,amount,'pay' FROM payments_recv WHERE `customer` = '".$id."'";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "SELECT * FROM tmp order by date;";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -94,7 +94,7 @@ else $prev_inv_no = 0;
 <?php
 $qry = "DELETE FROM `tmp` WHERE 1 ";
 mysqli_query($con,$qry) or die(mysqli_error($con));
-$qry = "SELECT * FROM `invoice` WHERE `customer` = '$id' and `date` > '2017-01-01'";
+/*$qry = "SELECT * FROM `invoice` WHERE `customer` = '$id' and `date` > '2017-01-01'";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 
 while($data = mysqli_fetch_array($run))
@@ -152,6 +152,7 @@ $advance = floatval($data['advance']);
 	}
 	echo "<br>";
 }
+*/
 ?>
 <div class="row" style="border-top:2px solid black;width:95%;position:relative;margin:0 auto;">
 	<div class="col-sm-2" style="padding-left:5px;">Total</div>

@@ -102,7 +102,7 @@ $month = $_GET['month'];
 <div class="row">
 	<div class="col-sm-1" ></div>
 	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;">Customer's Invoice</span></div>
-	<?php 
+	<?php
 	$qry = "SELECT SUM(idd.weices * idd.rate + idd.charges) as total FROM `invoice` i,`invoice_detail` idd WHERE i.no = idd.ref and i.date >= '$year-$month-01' and i.date <= '$year-$month-31'";
 	//echo $qry;
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -117,7 +117,7 @@ $month = $_GET['month'];
 	<div class="col-sm-10 text-left" style="border:1px solid black;"><span style="font-size:24px;font-weight:bold;">PURCHASES</span></div>
 	<div class="col-sm-1"></div>
 </div>
-<?php 
+<?php
 $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.ref = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Factory' group by b.vendor ";
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$fac_bill = 0;
@@ -133,7 +133,7 @@ $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`b
 	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;"><?php echo "Rs. ".number_format($fac_bill); ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
-<?php 
+<?php
 $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.ref = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Block' group by b.vendor ";
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$block_bill = 0;
@@ -154,7 +154,7 @@ $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`b
 	<div class="col-sm-10 text-left" style="border:1px solid black;"><span style="font-size:24px;font-weight:bold;">EXPENCES</span></div>
 	<div class="col-sm-1"></div>
 </div>
-<?php 
+<?php
 $qry = "SELECT a.name,SUM(e.amount) as total FROM `expAccounts` a, expences e WHERE a.id = e.acc_id  and e.date >= '$year-$month-01' and e.date <= '$year-$month-31' group by a.id";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $exp_tot = 0;
@@ -167,7 +167,7 @@ while($data = mysqli_fetch_array($run))
 	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;"><?php  echo "Rs.". number_format(floatval($data['total'])); $exp_tot += floatval($data['total']); ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
-<?php 
+<?php
 }
 ?>
 <div class="row">
@@ -234,7 +234,7 @@ while($data = mysqli_fetch_array($run))
 				$advdeduct = intval($advance);
 			}
 		}
-		
+
 
 	}
 
@@ -251,7 +251,7 @@ while($data = mysqli_fetch_array($run))
 	$sal = $data['salary'];
 	$qry = "SELECT * FROM salaries WHERE employee = '".$id."' and year = '".date('Y')."' and month = '".$month."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-	
+
 	if(mysqli_num_rows($run2))
 	{
 		$data4 = mysqli_fetch_array($run2);
@@ -261,7 +261,7 @@ while($data = mysqli_fetch_array($run))
 	$bonusdesc = '--';
 	$qry = "SELECT * FROM bonuses WHERE employee = '".$id."' and year = '".date('Y')."' and month = '".$month."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-	
+
 	if(mysqli_num_rows($run2))
 	{
 		$data4 = mysqli_fetch_array($run2);
@@ -280,7 +280,7 @@ while($data = mysqli_fetch_array($run))
 	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;">Rs. <?php echo number_format($tot_sal_all); ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
-<?php 
+<?php
 $profitEarned = $custInvTot - $fac_bill - $block_bill - $exp_tot - $tot_sal_all;
 ?>
 <div class="row">
@@ -380,8 +380,8 @@ while($data = mysqli_fetch_array($run))
 	$total = 0;
 	while($data2 = mysqli_fetch_array($run2))
 	{
-		$balance += floatval($data2['amount']); 
-		$total_balance += floatval($data2['amount']); 
+		$balance += floatval($data2['amount']);
+		$total_balance += floatval($data2['amount']);
 	}
 }
 ?>
@@ -411,8 +411,8 @@ while($data = mysqli_fetch_array($run))
 	$total = 0;
 	while($data2 = mysqli_fetch_array($run2))
 	{
-		$balance += floatval($data2['amount']); 
-		$total_balance += floatval($data2['amount']); 
+		$balance += floatval($data2['amount']);
+		$total_balance += floatval($data2['amount']);
 	}
 }
 ?>
@@ -423,7 +423,7 @@ while($data = mysqli_fetch_array($run))
 	<div class="col-sm-1"></div>
 </div>
 <div id="payableArea">
-	<?php 
+	<?php
 	$payableCount = 0;
 	$qry = "SELECT * FROM `monthPayable` WHERE `month` = '$month' and `year` = '$year'";
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -440,7 +440,7 @@ while($data = mysqli_fetch_array($run))
 		<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;"><input style="text-align:center;" type='text' value='<?php echo $amount; ?>' id='otherspayable<?php echo $payableCount; ?>Amount' placeholder="Others payable amount" style="width:100%;position:relative;top:-1px;" /></span></div>
 		<div class="col-sm-1"></div>
 	</div>
-	<?php	
+	<?php
 	}
 	if($payableCount == 0) { $payableCount = 1;
 	?>
@@ -469,12 +469,13 @@ while($data = mysqli_fetch_array($run))
 <div class="row">
 	<div class="col-sm-1" ></div>
 	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Closing Balance</span></div>
-	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;"><?php echo number_format($recable_ALL + $TOTAL_PAYABLE + $openBal); ?></span></div>
+	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;"><?php echo number_format($recable_ALL + $openBal - $TOTAL_PAYABLE); ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
 <br>
 <button onclick="savePayable()">Save All</button><br><br>
 <span id="not"></span>
+<a href="javascript:void()" onclick="return exportPS('<?php echo $month; ?>','<?php echo $year; ?>')">Export to excel</a>
 <br>
 </div>
 </div>
@@ -497,7 +498,7 @@ function savePayable()
 	var month = $("#monthOpt").val();
 	var year = $("#yearOpt").val();
 	var postStr = "year="+year+"&month="+month+"&dataCount="+currentPayable;
-	
+
 	var jsonStr = "";
 	for (var i = 1; i <=  currentPayable; i++) {
 		var name = $("#otherspayable"+i).val()
@@ -506,7 +507,7 @@ function savePayable()
 		postStr += "&data_"+i+"="+jsonStr;
 	}
 	//alert(postStr);
-	
+
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -532,6 +533,10 @@ function savePayable()
     xhttp.send(postStr+"&ajax");
 }
 
+function exportPS(month,year)
+{
+	window.open("sheets/profitsheet_export.php?year="+year+"&month="+month);
+}
 
 
 function addPayable()
