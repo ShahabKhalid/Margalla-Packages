@@ -1,12 +1,91 @@
-<div class="container addBox" style="width:95%;">
+<div class="container addBox" style="width:98%;">
 <div class="inBox">
 <div class="row">
 <div class="col-md-10">
-<h1 style="position:relative;left:100px;">Van Ledger</h1>
-</div>
 <?php
 require "../123321.php";
+if(!isset($_GET['year']) && !isset($_GET['month']))
+{
+$year = date("Y");
+$month = date("m");
+}
+else
+{
+$year = $_GET['year'];
+$month = $_GET['month'];
+}
+		switch ($month) {
+      case 1:
+        $monthT = "Jan";
+        break;
+      case 2:
+        $monthT = "Feb";
+        break;
+      case 3:
+        $monthT = "March";
+        break;
+      case 4:
+        $monthT = "April";
+        break;
+      case 5:
+        $monthT = "May";
+        break;
+      case 6:
+        $monthT = "June";
+        break;
+      case 7:
+        $monthT = "July";
+        break;
+      case 8:
+        $monthT = "Aug";
+        break;
+      case 9:
+        $monthT = "Sep";
+        break;
+      case 10:
+        $monthT = "Oct";
+        break;
+      case 11:
+        $monthT = "Nov";
+        break;
+      case 12:
+        $monthT = "Dec";
+        break;
+
+      default:
+        $monthT = "Unknown";
+        break;
+    }
 ?>
+<br><br>
+<div class="row" style="font-size:16px;">
+<div class="col-sm-5"></div>
+<div class="col-sm-4 text-center">
+	<select id="yearOpt">
+		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+	</select>
+<select id="monthOpt">
+		<option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
+		<option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
+		<option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
+		<option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
+		<option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
+		<option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
+		<option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
+		<option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
+		<option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
+		<option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
+		<option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
+		<option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
+	</select>
+	<button onclick="updateVLMonth()">Go</button>
+</div>
+<div class="col-sm-3"></div>
+</div>
+<h1 style="position:relative;left:100px;">Van Ledger</h1>
+</div>
+
 <div class="col-md-2 text-right">
 <span style="font-size:20px;padding-right:20px;position:relative;top:20px;text-decoration:underline;"></span>
 </div>
@@ -25,7 +104,7 @@ require "../123321.php";
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">	
+		<div class="row">
 		<div class="col-sm-2">Rec</div>
 		<div class="col-sm-2">Ledger</div>
 		<div class="col-sm-2">Petrol</div>
@@ -33,11 +112,11 @@ require "../123321.php";
 		<div class="col-sm-2">Profit</div>
 		<div class="col-sm-2"></div>
 		</div>
-	</div>	
+	</div>
 </div>
 <div id="tableDIV">
 <?php
-$qry = "SELECT vl.*,c.name as cName FROM `vanledger` vl,`customers` c WHERE vl.PartyName = c.id";
+$qry = "SELECT vl.*,c.name as cName FROM `vanledger` vl,`customers` c WHERE vl.PartyName = c.id and vl.Date > '$year-$month-01' and vl.Date < '$year-$month-31'";
 $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 $Profit = 0;
 $InHand = 0;
@@ -96,7 +175,7 @@ else if(strcmp($data2['SenderName'],"Factory") === 0)
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">	
+		<div class="row">
 		<div class="col-sm-2" style="border:1px solid black;height:40px;"><?php echo $data2['Rent']; ?></div>
 		<div class="col-sm-2" style="border:1px solid black;height:40px;"><?php echo $data2['Ledger']; ?></div>
 		<div class="col-sm-2" style="border:1px solid black;height:40px;"><?php echo $data2['Petrol']; ?></div>
@@ -104,7 +183,7 @@ else if(strcmp($data2['SenderName'],"Factory") === 0)
 		<div class="col-sm-2" style="border:1px solid black;height:40px;">Rs. <?php echo $Profit; ?></div>
 		<div class="col-sm-2" style="border:1px solid black;height:40px;"><a href="javascript:void();" onclick="deleteEntry(<?php echo $data2['id']; ?>)">Delete</a></div>
 		</div>
-	</div>	
+	</div>
 </div>
 	<?php
 	}
@@ -147,7 +226,7 @@ else if(strcmp($data2['SenderName'],"Factory") === 0)
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">	
+		<div class="row">
 		<div class="col-sm-2"><input style="width:100%;height:30px;" type="text" id="Rent" placeholder="Rent" value="0"></div>
 		<div class="col-sm-2"><input style="width:100%;height:30px;" type="text" id="Ledger" placeholder="Ledger" value="0"></div>
 		<div class="col-sm-2"><input style="width:100%;height:30px;" type="text" id="Petrol" placeholder="Petrol" value="0"></div>
@@ -155,7 +234,7 @@ else if(strcmp($data2['SenderName'],"Factory") === 0)
 		<div class="col-sm-2"><input style="width:100%;height:30px;" type="text" id="Profit" value="Auto" readonly></div>
 		<div class="col-sm-2"><input style="width:100%;height:30px;" type="button" onclick="addVANLedger()" value="Add"></div>
 		</div>
-	</div>	
+	</div>
 </div>
 </form>
 <br>
@@ -168,7 +247,7 @@ else if(strcmp($data2['SenderName'],"Factory") === 0)
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<div class="row">	
+		<div class="row">
 		<div class="col-sm-2"><b>Rs. <?php echo $totRec; ?></b></div>
 		<div class="col-sm-2"><b>Rs. <?php echo $totLedger; ?></b></div>
 		<div class="col-sm-2"><b><?php echo $totPetrol; ?></b></div>
@@ -176,7 +255,7 @@ else if(strcmp($data2['SenderName'],"Factory") === 0)
 		<div class="col-sm-2"><b>Rs. <?php echo $Profit; ?></b></div>
 		<div class="col-sm-2"></div>
 		</div>
-	</div>	
+	</div>
 </div>
 <br><br><br><br>
 <div class="container" style="width:50%;">
@@ -248,6 +327,15 @@ function deleteEntry(id)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id="+id+"&ajax");
 }
+
+
+function updateVLMonth()
+{
+	var month = $("#monthOpt").val();
+	var year = $("#yearOpt").val();
+	pageLoad('vanledger.php?year='+year+'&month='+month);
+}
+
 function addVANLedger() {
 	var vanForm = document.getElementById("vanLedger");
 	var date = vanForm[0].value;

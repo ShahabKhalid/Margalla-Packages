@@ -3,6 +3,7 @@
 <div class="row">
 <div class="col-md-10">
 <?php
+require "../123321.php";
 if(!isset($_GET['year']) && !isset($_GET['month']))
 {
 $year = date("Y");
@@ -56,8 +57,37 @@ $month = $_GET['month'];
         break;
     }
 ?>
-<h1 style="position:relative;left:100px;">Employees Salary Sheet (<?php echo $monthT."-".$year; ?>)</h1>
+
+
 </div>
+<br><br>
+<div class="row" style="font-size:16px;">
+<div class="col-sm-3"></div>
+<div class="col-sm-6 text-center">
+	<h1>Employees Salary Sheet (<?php echo $monthT."-".$year; ?>)</h1>
+	<select id="yearOpt">
+		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+	</select>
+<select id="monthOpt">
+		<option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
+		<option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
+		<option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
+		<option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
+		<option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
+		<option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
+		<option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
+		<option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
+		<option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
+		<option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
+		<option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
+		<option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
+	</select>
+	<button onclick="updateSSMonth()">Go</button>
+</div>
+<div class="col-sm-3"></div>
+</div>
+<br><br>
 <div class="row" style="border-bottom:2px solid black;width:98%;position:relative;margin:0 auto;">
 	<div class="col-sm-6">
 		<div class="row">
@@ -86,7 +116,7 @@ $month = $_GET['month'];
 	</div>
 </div>
 <?php
-require "../123321.php";
+
 $qry = "SELECT * FROM `employee` WHERE 1";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $tot_sal = 0;
@@ -150,7 +180,7 @@ while($data = mysqli_fetch_array($run))
 				$advdeduct = intval($advance);
 			}
 		}
-		
+
 	?>
 	<input type="hidden" id='advd_<?php echo $data["id"]; ?>' value='<?php echo $advdeduct ?>'>
 	<?php
@@ -169,7 +199,7 @@ while($data = mysqli_fetch_array($run))
 	$sal = $data['salary'];
 	$qry = "SELECT * FROM salaries WHERE employee = '".$id."' and year = '".date('Y')."' and month = '".$month."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-	
+
 	if(mysqli_num_rows($run2))
 	{
 		$data4 = mysqli_fetch_array($run2);
@@ -179,20 +209,20 @@ while($data = mysqli_fetch_array($run))
 	$bonusdesc = '--';
 	$qry = "SELECT * FROM bonuses WHERE employee = '".$id."' and year = '".date('Y')."' and month = '".$month."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-	
+
 	if(mysqli_num_rows($run2))
 	{
 		$data4 = mysqli_fetch_array($run2);
 		$bonus = intval($data4['bonus']);
 		$bonusdesc = $data4['desc'];
 	}
-	
-	
+
+
 	?>
 	<div class="row" style="width:98%;position:relative;margin:0 auto;">
 		<div class="col-sm-6">
 			<div class="row">
-				<input type="hidden" id="id_<?php echo $count; ?>" value="<?php echo $data['id']; ?>"/>	
+				<input type="hidden" id="id_<?php echo $count; ?>" value="<?php echo $data['id']; ?>"/>
 				<div class="col-sm-2" style="border:1px solid black;font-size:12px;"><a href="javascript:void()" onclick='pageLoad("employees/salSheet.php?id=<?php echo $id; ?>&month=<?php echo $month;?>&year=<?php echo $year; ?>")'><?php echo $data['name']; ?></a></div>
 				<div class="col-sm-2" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:20px;" type="text" id='normsalDIV_<?php echo $data["id"]; ?>' value='<?php echo $sal; ?>' style='width:140px;height:20px;'></div>
 				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salperdayDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / 30, 1, PHP_ROUND_HALF_UP); ?></div>
@@ -270,7 +300,7 @@ function deductSal(id,Y,m)
 	var profit = $("#profitDIV_"+id).html();
 	var advdeduct = $("#advdeductDIV_"+id).html();
 	var bonus = $("#bonus_"+id).val();
-	
+
 	var bonusdesc = $("#bonusDesc_"+id).val();
 	//alert(bonusdesc);
 	$("#salDIV_"+id).html("" + Number(parseFloat(sal) - parseFloat(salperday) * parseFloat(abs).toFixed(1)));
@@ -288,6 +318,13 @@ function deductSal(id,Y,m)
     xhttp.send("id="+id+"&abs="+abs+"&bonus="+bonus+"&bonusdesc="+bonusdesc+"&Y="+Y+"&m="+m+"&ajax");
 }
 
+function updateSSMonth()
+{
+	var month = $("#monthOpt").val();
+	var year = $("#yearOpt").val();
+	pageLoad('employees/salarysheet.php?year='+year+'&month='+month);
+}
+
 function printView(id)
 {
 	window.open("customers/customer_ledger_print.php?id="+id);
@@ -302,12 +339,3 @@ function viewInvoice(id)
 	pageLoad("customers/invoice_print.php?id="+id);
 }
 </script>
-
-<script src="../js/jquery.min.js"></script>
-<script src="../js/raphael-min.js"></script>
-<script src="../js/prettify.min.js"></script>
-<script src="lib/morris.js"></script>
-<script src="lib/example.js"></script>
-<link rel="stylesheet" href="lib/example.css">
-<link rel="stylesheet" href="../css/prettify.min.css">
-<link rel="stylesheet" href="lib/morris.css">
