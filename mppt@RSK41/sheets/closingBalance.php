@@ -203,7 +203,7 @@ while($data = mysqli_fetch_array($run))
 		$total_balance += floatval($data2['amount']);
 	}
 }
-
+$total_balance = $total_balance * -1;
 $TOTAL_PAYABLE += $total_balance;
 
 $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date > '$year-$month-01' and date < '$year-$month-31'";
@@ -229,6 +229,7 @@ while($data = mysqli_fetch_array($run))
 		$total_balance += floatval($data2['amount']);
 	}
 }
+$total_balance = $total_balance * -1;
 $TOTAL_PAYABLE += $total_balance;
 
 $payableCount = 0;

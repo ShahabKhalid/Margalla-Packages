@@ -1,16 +1,97 @@
-<div class="container addBox">
+<div class="container addBox" style="width:95%;">
 <div class="inBox">
+	<?php
+	require "../123321.php";
+	if(!isset($_GET['year']) && !isset($_GET['month']))
+	{
+		$year = '0';
+		$month = '0';
+	}
+	else
+	{
+		$year = $_GET['year'];
+		$month = $_GET['month'];
+	}
+			switch ($month) {
+	      case 1:
+	        $monthT = "Jan";
+	        break;
+	      case 2:
+	        $monthT = "Feb";
+	        break;
+	      case 3:
+	        $monthT = "March";
+	        break;
+	      case 4:
+	        $monthT = "April";
+	        break;
+	      case 5:
+	        $monthT = "May";
+	        break;
+	      case 6:
+	        $monthT = "June";
+	        break;
+	      case 7:
+	        $monthT = "July";
+	        break;
+	      case 8:
+	        $monthT = "Aug";
+	        break;
+	      case 9:
+	        $monthT = "Sep";
+	        break;
+	      case 10:
+	        $monthT = "Oct";
+	        break;
+	      case 11:
+	        $monthT = "Nov";
+	        break;
+	      case 12:
+	        $monthT = "Dec";
+	        break;
+
+	      default:
+	        $monthT = "Unknown";
+	        break;
+	    }
+	$id = $_GET['id'];
+	$qry = "SELECT * FROM `vendor` WHERE `id` = '$id'";
+	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
+	$data = mysqli_fetch_array($run);
+	?>
+		<br>
+	<div class="row">
+		<div class="col-sm-11 text-center">
+	<select id="yearOpt">
+		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+	</select>
+	<select id="monthOpt">
+		<option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
+		<option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
+		<option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
+		<option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
+		<option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
+		<option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
+		<option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
+		<option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
+		<option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
+		<option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
+		<option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
+		<option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
+	</select>
+	<input type="hidden" value="<?php echo $id; ?>" id="_id">
+	<button onclick="updateLMonth()">Go</button>
+	<button onclick="updateAllMonth()">Show All</button>
+	</div>
+	</div>
 <div class="row">
+
 <div class="col-md-10">
+
 <h1 style="position:relative;left:100px;">Vendor Ledger / Statement</h1>
 </div>
-<?php
-require "../123321.php";
-$id = $_GET['id'];
-$qry = "SELECT * FROM `vendor` WHERE `id` = '$id'";
-$run = mysqli_query($con,$qry) or die(mysqli_error($con));
-$data = mysqli_fetch_array($run);
-?>
+
 <div class="col-md-2 text-right">
 <span style="font-size:20px;padding-right:20px;position:relative;top:20px;text-decoration:underline;">ID: VEND-<?php echo $id; ?></span>
 </div>
@@ -30,7 +111,8 @@ $data = mysqli_fetch_array($run);
 	<div class="col-sm-2">Balance</div>
 </div>
 <?php
-$qry = "SELECT * FROM `bill` WHERE `vendor` = '$id'";
+if(intval($year) == 0) $qry = "SELECT * FROM `bill` WHERE `vendor` = '$id' order by `date`	";
+else $qry = "SELECT * FROM `bill` WHERE `vendor` = '$id' and date > '$year-$month-01' and date < '$year-$month-31' order by `date`	";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $total_balance = 0;
 while($data = mysqli_fetch_array($run))
@@ -76,7 +158,6 @@ $advance = 0;
 		</div>
 	<?php
 	}
-	echo "<br>";
 }
 ?>
 <div class="row" style="border-top:2px solid black;width:95%;position:relative;margin:0 auto;">
@@ -106,5 +187,18 @@ function viewPayment(id)
 function viewBill(id)
 {
 	pageLoad("vendors/bill_detail.php?id="+id);
+}
+function updateLMonth()
+{
+	var month = $("#monthOpt").val();
+	var year = $("#yearOpt").val();
+	var id = $("#_id").val();
+	pageLoad('vendors/vendor_ledger.php?year='+year+'&month='+month+'&id='+id);
+}
+
+function updateAllMonth()
+{
+	var id = $("#_id").val();
+	pageLoad('vendors/vendor_ledger.php?year=0&month=0&id='+id);
 }
 </script>

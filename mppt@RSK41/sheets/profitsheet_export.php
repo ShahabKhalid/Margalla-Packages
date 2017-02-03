@@ -305,6 +305,7 @@ while($data = mysqli_fetch_array($run))
 		$total_balance += floatval($data2['amount']);
 	}
 }
+$total_balance = $total_balance * -1;
 $seperator = "Factory,".round($total_balance,2, PHP_ROUND_HALF_EVEN)."\n";
 fputs($fp, $seperator);
 $TOTAL_PAYABLE += $total_balance;
@@ -332,6 +333,7 @@ while($data = mysqli_fetch_array($run))
 		$total_balance += floatval($data2['amount']);
 	}
 }
+$total_balance = $total_balance * -1;
 $seperator = "Block,".round($total_balance,2, PHP_ROUND_HALF_EVEN)."\n";
 fputs($fp, $seperator);
 $TOTAL_PAYABLE += $total_balance;

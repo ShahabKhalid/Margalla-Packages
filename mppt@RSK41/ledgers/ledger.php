@@ -28,8 +28,9 @@ $id = $_GET['id'];
 	<div class="col-sm-1">Pay #</div>
 	<div class="col-sm-2">Date</div>
 	<div class="col-sm-2">Debit</div>
-	<div class="col-sm-2">Credit</div>
+	<div class="col-sm-1">Credit</div>
 	<div class="col-sm-1">Balance</div>
+	<div class="col-sm-1">Edit</div>
 	<div class="col-sm-1">Delete</div>
 </div>
 <div id="tableDIV">
@@ -46,9 +47,10 @@ $lid = $data2['id'];
 	<div class="col-sm-1"><?php if($data2['bill'] == '0') echo "PY-".$data2['id']; else echo "--"; ?></div>
 	<div class="col-sm-2"><?php echo $data2['date']; ?></div>
 	<div class="col-sm-2"><?php if($data2['bill'] == '1') { echo $data2['amount']; $total += floatval($data2['amount']); } else  echo "---"; ?></div>
-		<div class="col-sm-2"><?php if($data2['bill'] == '0') { echo $data2['amount']; $total -= floatval($data2['amount']); } else  echo "---"; ?></div>
+		<div class="col-sm-1"><?php if($data2['bill'] == '0') { echo $data2['amount']; $total -= floatval($data2['amount']); } else  echo "---"; ?></div>
 	<div class="col-sm-1"><?php echo "Rs. ".number_format(floatval($total)); ?></div>
-	<div class="col-sm-1"><a href='javascript:void()' onclick="deleteEntry('<?php echo $lid; ?>')">Delete</a></div>
+	<div class="col-sm-1"><a href='javascript:void()' onclick="editEntry('<?php echo $lid; ?>','<?php echo $id; ?>')">Edit</a></div>
+	<div class="col-sm-1"><a href='javascript:void()' onclick="deleteEntry('<?php echo $lid; ?>','<?php echo $id; ?>')">Delete</a></div>
 	</div>
 	<?php
 	}
@@ -97,22 +99,28 @@ $lid = $data2['id'];
 <script>
 
 
-function deleteEntry(id)
+function editEntry(id,lid)
 {
-	alert(id);
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-    if (xhttp.readyState != 4)
-    {
+		pageLoad("ledgers/editbill.php?id="+id+"&lid="+lid)
+}
 
-    }
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-        alert(xhttp.responseText);
-    }};
+function deleteEntry(id,lid)
+{
+		if(confirm("Delete entry?")) {
+	    var xhttp = new XMLHttpRequest();
+	    xhttp.onreadystatechange = function() {
+	    if (xhttp.readyState != 4)
+	    {
 
-    xhttp.open("POST", "do.php?action=deleteLedgerEntry", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("id="+id+"&ajax");
+	    }
+	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+						pageLoad("ledgers/ledger.php?id="+lid)
+	    }};
+
+	    xhttp.open("POST", "do.php?action=deleteLedgerEntry", true);
+	    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    xhttp.send("id="+id+"&ajax");
+		}
 }
 
 

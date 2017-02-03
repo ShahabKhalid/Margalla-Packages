@@ -285,7 +285,7 @@ $profitEarned = $custInvTot - $fac_bill - $block_bill - $exp_tot - $tot_sal_all;
 ?>
 <div class="row">
 	<div class="col-sm-1" ></div>
-	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Profit Earned</span></div>
+	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;"><b>Profit Earned</b> (Month's Invoices - Bills - Expences - Salaries)</span></div>
 	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;">Rs. <?php echo number_format($profitEarned); ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
@@ -319,7 +319,7 @@ while($data2 = mysqli_fetch_array($run2))
 </div>
 <div class="row">
 	<div class="col-sm-1" ></div>
-	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Total</span></div>
+	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Total Profit</span></div>
 	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Rs. <?php $finTotal = floatval($profitEarned) + floatval($vanProfit); echo number_format($finTotal);?></span></div>
 	<div class="col-sm-1"></div>
 </div>
@@ -388,7 +388,7 @@ while($data = mysqli_fetch_array($run))
 <div class="row">
 	<div class="col-sm-1" ></div>
 	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Factory</span></div>
-	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Rs. <?php echo number_format($total_balance); $TOTAL_PAYABLE += $total_balance; ?></span></div>
+	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Rs. <?php $total_balance = $total_balance * -1; echo number_format($total_balance); $TOTAL_PAYABLE += $total_balance; ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
 <?php
@@ -414,12 +414,13 @@ while($data = mysqli_fetch_array($run))
 		$balance += floatval($data2['amount']);
 		$total_balance += floatval($data2['amount']);
 	}
+
 }
 ?>
 <div class="row">
 	<div class="col-sm-1" ></div>
 	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Block</span></div>
-	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Rs. <?php echo number_format($total_balance); $TOTAL_PAYABLE += $total_balance; ?></span></div>
+	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Rs. <?php $total_balance = $total_balance * -1; echo number_format($total_balance); $TOTAL_PAYABLE += $total_balance; ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
 <div id="payableArea">
@@ -455,17 +456,23 @@ while($data = mysqli_fetch_array($run))
 </div>
 <div class="row">
 	<div class="col-sm-1" ></div>
-	<div class="col-sm-10 text-center"><span style="font-size:18px;font-weight:bold;"><a href="javascript:void()" onclick="addPayable();">Add Payable</a></span></div>
-	<div class="col-sm-1"></div>
-</div>
-<br>
-<div class="row">
-	<div class="col-sm-1" ></div>
 	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Total Payables</span></div>
 	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;"><?php echo number_format($TOTAL_PAYABLE); ?></span></div>
 	<div class="col-sm-1"></div>
 </div>
+<div class="row">
+	<div class="col-sm-1" ></div>
+	<div class="col-sm-10 text-center"><span style="font-size:18px;font-weight:bold;"><a href="javascript:void()" onclick="addPayable();">Add Payable</a></span></div>
+	<div class="col-sm-1"></div>
+</div>
+<br>
 
+<div class="row">
+	<div class="col-sm-1" ></div>
+	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Opening Balance</span></div>
+	<div class="col-sm-5 text-center" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;"><?php echo number_format($openBal); ?></span></div>
+	<div class="col-sm-1"></div>
+</div>
 <div class="row">
 	<div class="col-sm-1" ></div>
 	<div class="col-sm-5 text-left" style="border:1px solid black;"><span style="font-size:18px;font-weight:bold;">Closing Balance</span></div>

@@ -40,8 +40,8 @@ if(isset($_POST['ajax']))
 						if(mysqli_num_rows($run) > 0)
 						{
 							$data = mysqli_fetch_array($run);
-							$_SESSION['mppt_admin'] = $data['id'];							
-							$_SESSION['access'] = $data['access'];							
+							$_SESSION['mppt_admin'] = $data['id'];
+							$_SESSION['access'] = $data['access'];
 							echo "1";
 							$qry = "INSERT INTO `login_log`(`id`, `date`, `time`, `ip`, `userName`, `pass`, `pin`, `fail`) VALUES (NULL,'".date('Y-m-d')."','".date("h:i:s")."','".$_SERVER['REMOTE_ADDR']."','".$_POST['email']."','----','-----','0')";
 						}
@@ -125,8 +125,8 @@ if(isset($_POST['ajax']))
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 					}
 
-					
-					
+
+
 					break;
 				case 'addadmin':
 					if(!isset($_SESSION['mppt_admin']))
@@ -209,7 +209,7 @@ if(isset($_POST['ajax']))
 						//echo $qry;
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 						echo "1";
-						break;				
+						break;
 				case 'deleteVanLedgerEntry':
 						if(!isset($_SESSION['mppt_admin']))
 						{
@@ -221,7 +221,7 @@ if(isset($_POST['ajax']))
 						//echo $qry;
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 						echo "1";
-						break;	
+						break;
 
 				case 'deleteLedgerEntry':
 						if(!isset($_SESSION['mppt_admin']))
@@ -230,11 +230,11 @@ if(isset($_POST['ajax']))
 						}
 
 
-						$qry = "DELETE FROM `Ledgers` WHERE `id` = '".$_POST['id']."'";
-						//echo $qry;
+						$qry = "DELETE FROM `Ledgers_bill` WHERE `id` = '".$_POST['id']."'";
+						echo $qry;
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 						echo "1";
-						break;	
+						break;
 
 				case 'addPettyCash':
 								if(!isset($_SESSION['mppt_admin']))
@@ -403,7 +403,7 @@ if(isset($_POST['ajax']))
 							//echo $_POST['data_'.$i].'\n';
 							$name = $data['name'];
 							$amount = $data['amount'];
-							
+
 							$qry = "SELECT * FROM `monthPayable` WHERE `name` = '$name' and `month` = '$month' and `year` = '$year'";
 							//echo $qry.'\n';
 							$run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -426,7 +426,7 @@ if(isset($_POST['ajax']))
 								//echo $qry.'\n';
 								mysqli_query($con,$qry) or die(mysqli_error($con));
 							}
-							
+
 							//echo $data['size'];
 						}
 					break;
@@ -484,7 +484,7 @@ if(isset($_POST['ajax']))
 							//echo $data['size'];
 						}
 						echo $inv_no;
-						
+
 					break;
 
 				case 'addbill':
@@ -885,7 +885,7 @@ if(isset($_POST['ajax']))
 						{
 							header('location: index.php');
 						}
-						$qry = "UPDATE `Ledgers_bill` SET `date`='".$_POST['date']."',`amount`='".$_POST['amount']."' WHERE `id` = '".$_POST['id']."'";
+						$qry = "UPDATE `Ledgers_bill` SET `date`='".$_POST['date']."',`particular`='".$_POST['particular']."',`amount`='".$_POST['amount']."' WHERE `id` = '".$_POST['id']."'";
 						//echo $qry;
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 						echo "1";
@@ -934,7 +934,7 @@ if(isset($_POST['ajax']))
 					$qry = "DELETE FROM `customers` WHERE `id` = '".$_POST['id']."'";
 					//echo $qry;
 					mysqli_query($con,$qry) or die(mysqli_error($con));
-					
+
 					echo "1";
 					break;
 
@@ -1095,7 +1095,7 @@ if(isset($_POST['ajax']))
 					if($count++ % 2 == 0) $color = "rgba(0,0,0,0.05);";
 					else $color = "rgba(0,0,0,0.15);";
 					?>
-					<div class="row" id="inv_data" 
+					<div class="row" id="inv_data"
 					<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/payment_update.php') !== false) { ?>
 					onclick="viewPayment('<?php echo $data['id'] ?>')" <?php } ?> style="background-color:<?php echo $color; ?>;width:95%;position:relative;margin:0 auto;">
 					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $count; ?></div>
@@ -1134,7 +1134,7 @@ if(isset($_POST['ajax']))
 					if($count++ % 2 == 0) $color = "rgba(0,0,0,0.05);";
 					else $color = "rgba(0,0,0,0.15);";
 					?>
-					<div class="row" id="inv_data" 
+					<div class="row" id="inv_data"
 					<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'vendors/payment_update.php') !== false) { ?>
 					onclick="viewPayment('<?php echo $data['id'] ?>')" <?php } ?> style="background-color:<?php echo $color; ?>;width:95%;position:relative;margin:0 auto;">
 					    <div class="col-sm-1 no-border"><?php echo $count; ?></div>
@@ -1165,7 +1165,7 @@ if(isset($_POST['ajax']))
 					while($row = mysqli_fetch_array($run))
 					{
 						$id = $row['id'];
-						
+
 
 						$qry = "SELECT * FROM employee WHERE id = '".$row['saleRep']."'";
 						$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -1191,9 +1191,9 @@ if(isset($_POST['ajax']))
 						$prev_inv_no = 0;
 						while($data = mysqli_fetch_array($run3))
 						{
-						
-						if($data['type'] == "invoice") {  if($prev_inv_no !== $data['id']) { $total_balance += floatval($data['amount']); } $prev_inv_no = $data['id']; } 
-						else if($data['type'] == "pay") { $prev_inv_no = 0;  $total_balance -= floatval($data['amount']); } 
+
+						if($data['type'] == "invoice") {  if($prev_inv_no !== $data['id']) { $total_balance += floatval($data['amount']); } $prev_inv_no = $data['id']; }
+						else if($data['type'] == "pay") { $prev_inv_no = 0;  $total_balance -= floatval($data['amount']); }
 
 						}
 							if($count % 2 == 0) echo '<div  class="row" id="r2" style="background-color:rgba(0,0,0,0.15);">';
@@ -1217,7 +1217,7 @@ if(isset($_POST['ajax']))
 						$pay_date = $data['rec_date'];
 						$pay_amount = $data['amount'];
 
-							
+
 
 						?>
 						<div onclick='pageLoad("customers/customer_ledger.php?id=<?php echo $id; ?>")'>
@@ -1239,7 +1239,7 @@ if(isset($_POST['ajax']))
 						 	?>;"><?php if($pay_result > 0) echo "Rs. ".round( $pay_amount, 2, PHP_ROUND_HALF_EVEN)." (".$pay_date.")"; else echo "--"; ?></div>
 						<div class="col-md-2" style="border:1px solid black;">Rs. <?php echo round( $total_balance, 2, PHP_ROUND_HALF_EVEN); ?></div>
 						</div>
-						
+
 						<div class="col-md-1" style="border:1px solid black;">
 						<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/edit.php') !== false) { ?>
 						<a href="javascript:void()" onclick='pageLoad("customers/edit.php?id=<?php echo $id; ?>")'>Edit</a>
@@ -1403,23 +1403,23 @@ if(isset($_POST['ajax']))
 						if(isset($_POST['f_id'])) $filter_qry .= "and `id` LIKE '".$_POST['f_id']."%'";
 						if(isset($_POST['f_name'])) $filter_qry .= "and `name` LIKE '".$_POST['f_name']."%'";
 						if(isset($_POST['pid'])) $filter_qry .= "and `parent` = '".$_POST['pid']."'";
-						else $filter_qry .= "and `parent` = '0'";						
+						else $filter_qry .= "and `parent` = '0'";
 						$qry = "SELECT * FROM `expAccounts`  WHERE 1 ".$filter_qry." order by `".$_POST['orderBy']."`";
 
-						$run = mysqli_query($con,$qry) or die(mysqli_error($con));						
+						$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 						$count = 1;
 
 						while($row = mysqli_fetch_array($run))
 						{
 							$id = $row['id'];
-							$qry = "SELECT SUM(amount) as exp FROM expences WHERE acc_id = '$id' GROUP by acc_id";		
-					
+							$qry = "SELECT SUM(amount) as exp FROM expences WHERE acc_id = '$id' GROUP by acc_id";
+
 							$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 							$exp = 0;
 							if(mysqli_num_rows($run2) > 0)
 							{
-								$data = mysqli_fetch_array($run2);		
-									
+								$data = mysqli_fetch_array($run2);
+
 								$exp += floatval($data['exp']);
 
 
@@ -1427,16 +1427,16 @@ if(isset($_POST['ajax']))
 							}
 
 							$qry = "SELECT * FROM `expAccounts`  WHERE parent = '$id'";
-	
+
 							$run3 = mysqli_query($con,$qry) or die(mysqli_error($con));
 							while($data = mysqli_fetch_array($run3))
 							{
 								$id2 = $data['id'];
-								$qry = "SELECT SUM(amount) as exp FROM expences WHERE acc_id = '$id2' GROUP by acc_id";						
+								$qry = "SELECT SUM(amount) as exp FROM expences WHERE acc_id = '$id2' GROUP by acc_id";
 								$run4 = mysqli_query($con,$qry) or die(mysqli_error($con));
 								if(mysqli_num_rows($run4) > 0)
 								{
-									$data2 = mysqli_fetch_array($run4);						
+									$data2 = mysqli_fetch_array($run4);
 									$exp += floatval($data2['exp']);
 
 								}
@@ -1461,7 +1461,7 @@ if(isset($_POST['ajax']))
 							<div class="col-md-2">Rs. <?php echo $exp; ?></div>
 							</div>
 							<div class="col-md-2"><a href="javascript:void()" onclick='pageLoad("expences/accounts.php?id=<?php echo $id; ?>")'>SubAccounts</a></div>
-							<div class="col-md-1"><a href="javascript:void()" onclick='pageLoad("expences/editaccount.php?id=<?php echo $id; ?>")'>Edit</a></div>						
+							<div class="col-md-1"><a href="javascript:void()" onclick='pageLoad("expences/editaccount.php?id=<?php echo $id; ?>")'>Edit</a></div>
 							</div>
 							<?php
 						}
@@ -1696,7 +1696,7 @@ if(isset($_POST['ajax']))
 					$custCount = mysqli_num_rows($run);
 					$filter_qry = "";
 					$overTime = 0;
-					$todaysInvoice = 0;                                       
+					$todaysInvoice = 0;
 					$filterCustomer = 0;
 					$filterSaleRep = 0;
 					//if(isset($_POST['f_inv'])) $filter_qry .= "and `no` LIKE '".$_POST['f_inv']."%'";
@@ -1798,7 +1798,7 @@ if(isset($_POST['ajax']))
 
 						if($todaysInvoice == 1)
 							if($row['date'] != date("d-m-Y"))
-								continue;							
+								continue;
 
 						if(isset($_POST['f_inv']))
 							if(strpos($row['no'],$_POST['f_inv']) === false)
@@ -1814,15 +1814,15 @@ if(isset($_POST['ajax']))
 								continue;
 
 						if(isset($_POST['f_due']))
-							if(intval($_POST['f_due']) === 1) 
+							if(intval($_POST['f_due']) === 1)
 								if(intval($dayDif*-1) > 30 && intval($dayDif*-1) <= 60 && intval($total_ - $advance - $total_amount) !==  0);
 								else
 									continue;
-							else if(intval($_POST['f_due']) === 2) 
+							else if(intval($_POST['f_due']) === 2)
 								if(intval($dayDif*-1) > 60 && intval($dayDif*-1) <= 90 && intval($total_ - $advance - $total_amount) !==  0);
 								else
 									continue;
-							else if(intval($_POST['f_due']) === 3) 
+							else if(intval($_POST['f_due']) === 3)
 								if(intval($dayDif*-1) > 90 && intval($total_ - $advance - $total_amount) !==  0);
 								else
 									continue;
@@ -1905,11 +1905,11 @@ if(isset($_POST['ajax']))
 						<div class="col-sm-1 no-border" style="padding-left:0px;text-align:left;border:1px solid black;"><span style='font-size:10px;'><?php echo $row['id']; ?></span></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php
 
-						if(strlen($row['cName']) > 10) echo "<span style='font-size:12px;'>".substr($row['cName'],0,10)."..."."</span>"; else echo "<span style='font-size:12px;'>".$row['cName']."</span>"; 
+						if(strlen($row['cName']) > 10) echo "<span style='font-size:12px;'>".substr($row['cName'],0,10)."..."."</span>"; else echo "<span style='font-size:12px;'>".$row['cName']."</span>";
 						?></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php
 
-						 if(strlen($row['eName']) > 13) echo "<span style='font-size:12px;'>".substr($row['eName'],0,13)."..."."</span>"; else echo "<span style='font-size:12px;'>".$row['eName']."</span>"; 
+						 if(strlen($row['eName']) > 13) echo "<span style='font-size:12px;'>".substr($row['eName'],0,13)."..."."</span>"; else echo "<span style='font-size:12px;'>".$row['eName']."</span>";
 						?></div>
 
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php echo $total_weight;
@@ -1932,9 +1932,9 @@ if(isset($_POST['ajax']))
 						<div class="col-sm-2 no-border" style="border:1px solid black;">Rs. <?php
 						echo $total_amount;
 						?></div>
-						<div class="col-sm-2 no-border" style="border:1px solid black;<?php 
+						<div class="col-sm-2 no-border" style="border:1px solid black;<?php
 
-							if(intval($total_ - $advance - $total_amount) ===  0) 
+							if(intval($total_ - $advance - $total_amount) ===  0)
 								echo "color:black;font-weight:bolder;background-color:rgba(0,255,0,0.2);";
 							else
 							{
@@ -1951,7 +1951,7 @@ if(isset($_POST['ajax']))
 									echo "color:red;font-weight:bolder;background-color:black;";
 								}
 							}
-							 ?>">Rs. <?php echo $total_ - $advance - $total_amount; ?></div>						
+							 ?>">Rs. <?php echo $total_ - $advance - $total_amount; ?></div>
 						</div>
 
 						</div>
