@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="No 1 packaging in Islamabad and Rawalpindi, offering wide range of shopings bags of best quality. We offer both High and Low defination shoping bags. Contact us at zubair@margallapackages.com">
+    <meta name="author" content="Sheikh Muhammad Zubair">
+    <meta name="developer" content="BashSofts">
 
     <title>Margalla Packages</title>
     <link rel="shortcut icon" type="image/png" href="favicon.png">
@@ -40,7 +41,7 @@
                             $run = mysqli_query($con,$qry) or die(mysqli_error($con));
                             $row = mysqli_fetch_array($run);
                         ?>
-                        <li><span class="glyphicon glyphicon-phone"></span> <?php echo $row['text']; ?> <span class="glyphicon glyphicon-phone"></span> 
+                        <li><span class="glyphicon glyphicon-phone"></span> <?php echo $row['text']; ?> <span class="glyphicon glyphicon-phone"></span>
                         <?php
                             $qry = "SELECT `text` FROM misc WHERE `name` = 'phone2'";
                             $run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -96,9 +97,9 @@
                     $row = mysqli_fetch_array($run);
                 ?>
                 <img src="<?php echo $row['text']; ?>" style="width:95%;height:450px;"/>
-    
+
                 </div>
-                    
+
                     <div class="speciality">
                         <h1>Our Speciality</h1>
                         <div class="row container sp_box_super">

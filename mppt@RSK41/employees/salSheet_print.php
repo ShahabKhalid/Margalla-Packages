@@ -124,10 +124,10 @@ $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $total_profit = 0;
 
 while($data = mysqli_fetch_array($run))
-{	
+{
 	$qry = "SELECT * FROM salaries WHERE employee = $id and year = '$year' and month ='$month'";
 	$run1 = mysqli_query($con,$qry) or die(mysqli_error($con));
-	if(mysqli_num_rows($run1) > 0) 
+	if(mysqli_num_rows($run1) > 0)
 	{
 		$data1 = mysqli_fetch_array($run1);
 		$sal = $data1['salary'];
@@ -139,7 +139,7 @@ while($data = mysqli_fetch_array($run))
 	$cust = $data['id'];
 	$qry = "SELECT i.* FROM `invoice` i WHERE i.customer = $cust and i.date >= '$year-$month-01' and i.date <= '$year-$month-31' order by i.no";
 	$run1 = mysqli_query($con,$qry) or die(mysqli_error($con));
-	
+
 	$ldTotal = 0;
 	$hdTotal = 0;
 	$_profit = 0;
@@ -149,7 +149,7 @@ while($data = mysqli_fetch_array($run))
 
 
 	while($data1 = mysqli_fetch_array($run1))
-	{	
+	{
 		$advance = intval($data1['advance']);
 
 		$qry = "SELECT i.id,SUM(idd.weices) as weices FROM `invoice` i,invoice_detail idd WHERE i.no = idd.ref and idd.ref = '".$data1['no']."' and i.date >= '$year-$month-01' and i.date <= '$year-$month-31' and idd.material = 'LD' group by i.id";

@@ -9,8 +9,8 @@ function getDays($date,$paymentTime)
 	$d_year = intval($year) - intval($c_year);
 	$d_month = intval($month) - intval($c_month);
 	$d_day = intval($day) - intval($c_day);
-
-	$d = $d_day + $d_month * 30 + $d_year * 356 + $paymentTime;
+	$numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+	$d = $d_day + $d_month * $numberOfDays + $d_year * 356 + $paymentTime;
 	return $d;
 
 }

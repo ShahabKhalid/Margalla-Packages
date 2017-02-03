@@ -1,4 +1,4 @@
-<div class="container addBox">
+<div class="container addBox" style="width:95%;">
 <div class="inBox">
 <h1>Employee List</h1>
 <div class="row" id="r2" style="background-color:rgba(0,0,0,0.7);color:white;">

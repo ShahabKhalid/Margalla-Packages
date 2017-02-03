@@ -86,8 +86,12 @@ $month = $_GET['month'];
 <div class="row" id="r1"><div class="col-md-2"><label>Name</label></div><div class="col-md-4 text-left"><span style="font-size:18px;"><?php echo $data['name']; ?></span></div><div class="col-md-3"><label>Contact #</label></div><div class="col-md-3 text-left"><span style="font-size:18px;"><?php echo $data['contact']; ?></span></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"><label>Address</label></div><div class="col-md-10 text-left"><span style="font-size:18px;"><?php echo $data['address']; ?></span></div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"><label>Month-Year</label></div><div class="col-md-4 text-left"><span style="font-size:18px;"><?php echo $monthT."-".$year; ?></span></div><div class="col-md-3"><label>Month</label></div>
-<div class="col-md-3 text-left">	
-<select id="monthOpt" onchange="updatePSMonth()">
+<div class="col-md-3 text-left">
+<select id="yearOpt">
+	<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+	<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+</select>
+<select id="monthOpt" >
 		<option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
 		<option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
 		<option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
@@ -101,7 +105,7 @@ $month = $_GET['month'];
 		<option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
 		<option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
 	</select>
-
+<button onclick="updatePSMonth()">Go</button>
 </div></div>
 <br><br>
 <div class="row" style="border-bottom:2px solid black;width:95%;position:relative;margin:0 auto;">
@@ -150,8 +154,8 @@ $advance = intval($data['advance']);
 	<div class="col-sm-1"><?php $total_hd += floatval($data3['weices']); echo round( $data3['weices'], 1, PHP_ROUND_HALF_UP); ?></div>
 	<div class="col-sm-1"><?php echo round( $data['hdRate'], 1, PHP_ROUND_HALF_UP); ?></div>
 	<div class="col-sm-1">Rs. <?php $total_hdProfit += intval($data['hdRate']) * floatval($data3['weices']); $total_profit += intval($data['hdRate'])  * $data3['weices'];echo round( intval($data['hdRate'])  * $data3['weices'], 1, PHP_ROUND_HALF_UP); ?></div>
-	
-	
+
+
 	<div class="col-sm-2">Rs. <?php echo round( intval($data['hdRate'])  * $data3['weices'] + intval($data['ldRate'])  * $data2['weices'], 1, PHP_ROUND_HALF_UP); ?></div>
 </div>
 <?php
@@ -171,8 +175,8 @@ $advance = intval($data['advance']);
 	<div class="col-sm-1">Rs. <?php echo round( $total_hdProfit, 1, PHP_ROUND_HALF_UP); ?></div>
 	<div class="col-sm-2">Rs. <?php echo round( $total_profit, 1, PHP_ROUND_HALF_UP); ?></div>
 </div><br><br>
-<a href="javascript:void()" onclick="pageLoad('employees/overallprofitSheet.php?id=<?php echo $id; ?>')">Overall ProfitSheet</a> | 
-<a href="javascript:void()" onclick="pageLoad('employees/performance.php?id=<?php echo $id; ?>')">Emplyee Performance</a> | 
+<a href="javascript:void()" onclick="pageLoad('employees/overallprofitSheet.php?id=<?php echo $id; ?>')">Overall ProfitSheet</a> |
+<a href="javascript:void()" onclick="pageLoad('employees/performance.php?id=<?php echo $id; ?>')">Emplyee Performance</a> |
 <a href="javascript:void()" onclick="exportProfitSheet('<?php echo $id; ?>','<?php echo $month; ?>','<?php echo $year; ?>')">Export to Excel</a>
 <!-- 	<a href="javascript:void()" onclick="return printView('<?php echo $id; ?>')">Print</a> -->
 <br><br>
@@ -201,8 +205,9 @@ function viewInvoice(no)
 function updatePSMonth()
 {
 	var month = $("#monthOpt").val();
+	var year = $("#yearOpt").val();
 	var id = $("#empid").val();
 	//alert(month);
-	pageLoad('employees/profitSheet.php?year=2016&month='+month+'&id='+id);
+	pageLoad('employees/profitSheet.php?year=2016&month='+month+'&year='+year+'&id='+id);
 }
 </script>

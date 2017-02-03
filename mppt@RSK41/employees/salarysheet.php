@@ -56,6 +56,7 @@ $month = $_GET['month'];
         $monthT = "Unknown";
         break;
     }
+$numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 ?>
 
 
@@ -225,9 +226,9 @@ while($data = mysqli_fetch_array($run))
 				<input type="hidden" id="id_<?php echo $count; ?>" value="<?php echo $data['id']; ?>"/>
 				<div class="col-sm-2" style="border:1px solid black;font-size:12px;"><a href="javascript:void()" onclick='pageLoad("employees/salSheet.php?id=<?php echo $id; ?>&month=<?php echo $month;?>&year=<?php echo $year; ?>")'><?php echo $data['name']; ?></a></div>
 				<div class="col-sm-2" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:20px;" type="text" id='normsalDIV_<?php echo $data["id"]; ?>' value='<?php echo $sal; ?>' style='width:140px;height:20px;'></div>
-				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salperdayDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / 30, 1, PHP_ROUND_HALF_UP); ?></div>
+				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salperdayDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / $numberOfDays, 1, PHP_ROUND_HALF_UP); ?></div>
 				<div class="col-sm-2" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:20px;" type='text' id='absents_<?php echo $data["id"]; ?>' placeholder='Absents' style='width:140px;height:20px;' value='<?php echo $abs; ?>' onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)'></div>
-				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / 30 * intval($abs), 1, PHP_ROUND_HALF_UP); ?></div>
+				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / $numberOfDays * intval($abs), 1, PHP_ROUND_HALF_UP); ?></div>
 				<div class="col-sm-1" style="border:1px solid black;" id='ldDIV_<?php echo $data["id"]; ?>'><?php echo round($ldTotal[$id], PHP_ROUND_HALF_UP); ?></div>
 				<div class="col-sm-1" style="border:1px solid black;" id='hdDIV_<?php echo $data["id"]; ?>'><?php echo round($hdTotal[$id], PHP_ROUND_HALF_UP); ?></div>
 				<div class="col-sm-2" style="border:1px solid black;" id='ldhdDIV_<?php echo $data["id"]; ?>'><?php echo round($ldTotal[$id]+$hdTotal[$id], PHP_ROUND_HALF_UP); ?></div>
@@ -242,7 +243,7 @@ while($data = mysqli_fetch_array($run))
 				<div class="col-sm-1" style="border:1px solid black;padding:0px;"><input style="width:100%;height:20px;" type="text" id='bonus_<?php echo $data["id"]; ?>' value='<?php echo $bonus; ?>' style='width:140px;height:20px;' onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)'></div>
 				<div class="col-sm-1" style="border:1px solid black;padding:0px;"><input style="padding-left:1px;width:100%;height:20px;" type="text" onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)' id='bonusDesc_<?php echo $data['id']; ?>' value='<?php echo $bonusdesc; ?>' style='width:140px;height:20px;'></div>
 				<div class="col-sm-1" style="border:1px solid black;" id='advdeductDIV_<?php echo $data["id"]; ?>'><?php echo $advdeduct; ?></div>
-				<div class="col-sm-2" style="border:1px solid black;" id='finalSalDIV_<?php echo $data["id"]; ?>'><?php echo  round((intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(floatval($sal) / 30 * intval($abs)),1, PHP_ROUND_HALF_UP); $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / 30 * intval($abs));?></div>
+				<div class="col-sm-2" style="border:1px solid black;" id='finalSalDIV_<?php echo $data["id"]; ?>'><?php echo  round((intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(floatval($sal) / $numberOfDays * intval($abs)),1, PHP_ROUND_HALF_UP); $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / $numberOfDays * intval($abs));?></div>
 				</div>
 			</div>
 	</div>

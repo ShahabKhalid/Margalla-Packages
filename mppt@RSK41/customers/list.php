@@ -1,8 +1,8 @@
 <?php
 require "../123321.php";
 ?>
-<div class="container addBox" style="width:95%;">
-<div class="inBox"> 
+<div class="container addBox" style="width:98%;">
+<div class="inBox">
 <h1>Customers List</h1>
 <div class="row" id="r2">
 <div class="col-md-8"></div>
@@ -49,9 +49,9 @@ require "../123321.php";
 var orderByWas;
 $(document).ready(function(){
     $("").click(function() {
-    	
+
     });
-    
+
 });
 
 
@@ -62,9 +62,9 @@ function toggleFilter()
 	{
 		$(".filter-box").slideUp();
 	}
-	else 
+	else
 	{
-		$(".filter-box").slideDown();	
+		$(".filter-box").slideDown();
 	}
 }
 
@@ -88,15 +88,15 @@ function updateCustomerList(orderBy)
 	{
 		$("#customer_table").html("<h1 style='text-decoration:none;'>Loading......</h1>");
 	}
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         //alert(xhttp.responseText);
         $("#customer_table").html(xhttp.responseText);
         orderByWas = orderBy;
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=updateCustomerTable", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("orderBy="+orderBy+filter_qry+"&ajax");	
+    xhttp.send("orderBy="+orderBy+filter_qry+"&ajax");
 }
 
 function exportList()
