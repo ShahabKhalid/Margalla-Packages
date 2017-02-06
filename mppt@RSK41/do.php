@@ -1323,11 +1323,14 @@ if(isset($_POST['ajax']))
 				case 'updateExpencesTable':
 
 						$filter_qry = "";
+						$year = $_POST['year'];
+						$month = $_POST['month'];
 						if(isset($_POST['f_id'])) $filter_qry .= "and e.id LIKE '".$_POST['f_id']."%'";
 						if(isset($_POST['f_name'])) $filter_qry .= "and a.name LIKE '".$_POST['f_name']."%'";
 						if(isset($_POST['f_description'])) $filter_qry .= "and e.description LIKE '".$_POST['f_description']."%'";
 						if(isset($_POST['f_amount'])) $filter_qry .= "and e.amount LIKE '".$_POST['f_amount']."%'";
-						$qry = "SELECT e.*,a.name FROM `expences` e,`expAccounts` a WHERE e.acc_id = a.id and e.acc_id != '-1' ".$filter_qry." order by `".$_POST['orderBy']."`";
+						if(intval($year) == 0) $qry = "SELECT e.*,a.name FROM `expences` e,`expAccounts` a WHERE e.acc_id = a.id and e.acc_id != '-1' ".$filter_qry." order by `".$_POST['orderBy']."`";
+						else $qry = "SELECT e.*,a.name FROM `expences` e,`expAccounts` a WHERE e.date >= '$year-$month-01' and e.date <= '$year-$month-31' and e.acc_id = a.id and e.acc_id != '-1' ".$filter_qry." order by `".$_POST['orderBy']."`";
 						$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 						$count = 1;
 
