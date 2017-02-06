@@ -1,12 +1,12 @@
 <div class="container addBox">
-<div class="inBox"> 
+<div class="inBox">
 <h1>Payment</h1>
 <form id="addPaymentForm">
 <?php
 require "../123321.php";
 $qry = "SELECT * FROM `payments_recv` WHERE `id` = '".$_GET['id']."'";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
-$data = mysqli_fetch_array($run); 
+$data = mysqli_fetch_array($run);
 
 $qry = "SELECT * FROM `customers` WHERE `id` = '".$data['customer']."'";
 $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -16,8 +16,8 @@ $custName = $data2['name'];
 
 $qry = "SELECT * FROM `employee` WHERE `id` = '".$data['receiver']."'";
 $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-$data2 = mysqli_fetch_array($run2);    
-$recName = $data2['name'];   
+$data2 = mysqli_fetch_array($run2);
+$recName = $data2['name'];
 ?>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Date</label></div><div class="col-md-4"><span style="font-size:18px;"><?php echo $data['entry_date']; ?></span>
 <input type="hidden" name="todaysDate" id="todaysDate" value="<?php echo $data['entry_date']; ?>">
@@ -38,6 +38,15 @@ $recName = $data2['name'];
 	?>
 </select>
 </div><div class="col-md-3"></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Payment</label></div><div class="col-md-4">
+<select id="paymentMethod" style="width:200px;" onchange="onPaymentChange()">
+	<<option value="0" <?php if(intval($data['payMethod']) == 0) echo "Selected"; ?>>Cash</option>
+	<<option value="1" <?php if(intval($data['payMethod']) == 1) echo "Selected"; ?>>Check</option>
+</select>
+</div><div class="col-md-3"></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Check No.</label></div><div class="col-md-4">
+	<input class="mainField" maxlength="64" type="text" name="checKNo" id="checkNo" placeholder="Check No." value="<?php echo $data['checkNo']; ?>"
+	<?php if(intval($data['payMethod']) == 0) echo 'disabled="true"'; ?>></div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Inv. #</label></div><div class="col-md-4"><input class="mainField" maxlength="12" type="text" name="invNo" id="invNo" placeholder="Invoice No." list="inv_list" value="<?php echo $data['inv_no']; ?>"></div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Receiver</label></div><div class="col-md-4">
 <input class="mainField" type='text' list='listid' id="amountReceiver" value="<?php echo $recName; ?>">
@@ -58,8 +67,10 @@ $recName = $data2['name'];
 </datalist>
 </div><div class="col-md-3"></div></div>
 <div class="row" id="r1"><div class="col-md-5"></div><div class="col-md-4"></div><div class="col-md-3"></div></div><br>
-<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Ref. #</label></div><div class="col-md-4"><input class="mainField" maxlength="12" type="text" name="refNo" id="refNo" placeholder="Reference No." value="<?php echo $data['ref_no']; ?>"></div><div class="col-md-3"></div></div><br>
-<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Date</label></div><div class="col-md-4"><input class="mainField" type="date" name="date" id="dateEle" value="<?php echo $data['rec_date']; ?>"></div><div class="col-md-3"></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Ref.
+#</label></div><div class="col-md-4"><input class="mainField" maxlength="12" type="text" name="refNo" id="refNo" placeholder="Reference No." value="<?php echo $data['ref_no']; ?>"></div><div class="col-md-3"></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Date</label></div><div class="col-md-4"><input class="mainField"
+type="date" name="date" id="dateEle" value="<?php echo $data['rec_date']; ?>"></div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Amount</label></div><div class="col-md-4">
 <input class="mainField" maxlength="12" type="text" name="amount" id="amountEle" placeholder="Amount" value="<?php echo $data['amount']; ?>">
 </div><div class="col-md-3"></div></div>
@@ -75,16 +86,26 @@ $recName = $data2['name'];
 </div>
 <script>
 
+function onPaymentChange() {
+	var payment = $("#paymentMethod").val();
+	if(parseInt(payment) == 1) {
+		$("#checkNo").prop('disabled', false);
+	}
+	else {
+		$("#checkNo").prop('disabled', true);
+	}
+}
+
 
 function deletePayment(id)
 {
 
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         alert(xhttp.responseText);
         pageLoad('customers/payments_list.php');
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=deletepayment", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -96,21 +117,24 @@ function updatePayment()
 	var form = document.getElementById("addPaymentForm");
 	var todaysDate = form[0].value;
 	var Customer = form[1].value;
-	var invNo = form[2].value;
-	var Receiver = form[3].value;
-	var refNo = form[4].value;
-	var date = form[5].value;
-	var Amount = form[6].value;
-	var id = form[7].value;
-	
+	var paymentMethod = form[2].value;
+	var checkNo = form[3].value;
+	var invNo = form[4].value;
+	var Receiver = form[5].value;
+	var refNo = form[6].value;
+	var date = form[7].value;
+	var Amount = form[8].value;
+	var id = form[9].value;
 
-	postStr = "id="+id+"&todaysDate="+todaysDate+"&Customer="+Customer+"&invNo="+invNo+"&Receiver="+Receiver+"&refNo="+refNo+"&Date="+date+"&Amount="+Amount;
 
-	
+	postStr = "id="+id+"&todaysDate="+todaysDate+"&Customer="+Customer+"&invNo="+invNo+"&Receiver="
+	+Receiver+"&refNo="+refNo+"&Date="+date+"&Amount="+Amount+"&payMethod="+paymentMethod+"&checkNo="+checkNo;;
+
+
 
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         //alert(xhttp.responseText);
         if(xhttp.responseText === "0")
         {
@@ -120,14 +144,14 @@ function updatePayment()
             $("#not").slideDown();
         }
         else if(xhttp.responseText === "1")
-        {                      
-            $("#not").slideUp();            
+        {
+            $("#not").slideUp();
             $("#not").text("Payment Updated!");
             $("#not").css({color:'green'});
-            $("#not").slideDown();            
+            $("#not").slideDown();
         }
-    }};  
-	
+    }};
+
     xhttp.open("POST", "do.php?action=updatepayment", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(postStr+"&ajax");
@@ -135,7 +159,7 @@ function updatePayment()
 
 function OnCustomerChange()
 {
-	var customer = $("#custEle").val();	
+	var customer = $("#custEle").val();
 	setLastInvoiceForCustomer(customer);
 	updateInvoiceListForCustomer(customer);
 }
@@ -144,10 +168,10 @@ function setLastInvoiceForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
     	//alert(xhttp.responseText);
         $("#invNo").val(xhttp.responseText);
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=getlastinv", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -159,10 +183,10 @@ function updateInvoiceListForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
     	//alert(xhttp.responseText);
         $("#inv_list").html(xhttp.responseText);
-    }};  
+    }};
 
     xhttp.open("POST", "customers/inv_list_customer.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

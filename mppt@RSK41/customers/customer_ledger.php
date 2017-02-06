@@ -41,7 +41,7 @@ $qry = "INSERT INTO tmp (id,ref,date,amount,type)
 						SELECT i.no,i.id,i.date,sub.amount,'invoice' FROM (SELECT i.no,i.id,SUM(idd.weices * idd.rate + idd.charges) as amount FROM invoice i , invoice_detail idd WHERE i.no = idd.ref GROUP BY idd.ref ) sub, invoice i,customers c WHERE i.no = sub.no and c.id = i.customer and c.id = '".$id."'";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "INSERT INTO tmp (id,ref,date,amount,type)
-SELECT id,ref_no,rec_date,amount,'pay' FROM payments_recv WHERE `customer` = '".$id."'";
+SELECT id,ref_no,rec_date,amount,CONCAT('pay-',payMethod) FROM payments_recv WHERE `customer` = '".$id."'";
 mysqli_query($con,$qry) or die(mysqli_error($con));
 $qry = "SELECT * FROM tmp order by date;";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -57,13 +57,13 @@ if($prev_inv_no !== $data['id'])
 ?>
 <div class="row" style="width:95%;position:relative;margin:0 auto;">
 
-<div class="col-sm-2" style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] == "invoice") echo "Bill"; else echo "Cash"; ?></div>
+<div class="col-sm-2" style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] == "invoice") echo "Bill"; else if($data['type'] == 'pay-0') echo "Cash"; else echo "Check" ?></div>
 <div class="col-sm-1 pointer" style="border-right:1px solid black;border-bottom:1px solid gray;" onclick="viewInvoice('<?php echo $data['id'] ?>')"><?php if($data['type'] == "invoice") echo "INV-".$data['id']; else echo "---";?></div>
 <div class="col-sm-1" style="border-right:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] == "invoice") echo $data['date']; else echo "---"; ?></div>
-<div class="col-sm-1 pointer" style="border-right:1px solid black;border-bottom:1px solid gray;" onclick="viewPayment('<?php echo $data['id'] ?>')"><?php if($data['type'] == "pay") echo $data['ref']; else echo "---"; ?></div>
-<div class="col-sm-1" style="border-right:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] == "pay") echo $data['date']; else echo "---"; ?></div>
+<div class="col-sm-1 pointer" style="border-right:1px solid black;border-bottom:1px solid gray;" onclick="viewPayment('<?php echo $data['id'] ?>')"><?php if($data['type'] != "invoice") echo $data['ref']; else echo "---"; ?></div>
+<div class="col-sm-1" style="border-right:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] != "invoice") echo $data['date']; else echo "---"; ?></div>
 <div class="col-sm-2" style="border-right:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] == "invoice") { echo "Rs.".floatval($data['amount']); $total_of_inv += floatval($data['amount']); $total_balance += floatval($data['amount']); } else echo "---"; ?></div>
-<div class="col-sm-2" style="border-right:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] == "pay") { echo "Rs. ".floatval($data['amount']); $total_of_pay += floatval($data['amount']); $total_balance -= floatval($data['amount']); } else echo "---"; ?></div>
+<div class="col-sm-2" style="border-right:1px solid black;border-bottom:1px solid gray;"><?php if($data['type'] != "invoice") { echo "Rs. ".floatval($data['amount']); $total_of_pay += floatval($data['amount']); $total_balance -= floatval($data['amount']); } else echo "---"; ?></div>
 <div class="col-sm-2" style="border-right:1px solid black;border-bottom:1px solid gray;">Rs. <?php echo $total_balance; ?></div>
 </div>
 <?php
@@ -86,7 +86,7 @@ mysqli_query($con,$qry) or die(mysqli_error($con));
 	<div class="col-sm-2">Rs. <?php echo $total_balance; ?></div>
 </div>
 </table>
-<a href="javascript:void()" onclick="return exportLedger('<?php echo $id; ?>')">Export to excel</a> 
+<a href="javascript:void()" onclick="return exportLedger('<?php echo $id; ?>')">Export to excel</a>
 <a href="javascript:void()" onclick="return printView('<?php echo $id; ?>')">Print</a>
 </div><br>
 <p id="esc">Press Escape to go back!</p>

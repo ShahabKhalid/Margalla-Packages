@@ -1,5 +1,5 @@
 <div class="container addBox">
-<div class="inBox"> 
+<div class="inBox">
 <h1>New Payment</h1>
 <form id="addPaymentForm">
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Date</label></div><div class="col-md-4"><span style="font-size:18px;"><?php echo date("Y-m-d"); ?></span>
@@ -21,6 +21,14 @@
 	?>
 </select>
 </div><div class="col-md-3"></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Payment</label></div><div class="col-md-4">
+<select id="paymentMethod" style="width:200px;" onchange="onPaymentChange()">
+	<<option value="0">Cash</option>
+	<<option value="1">Check</option>
+</select>
+</div><div class="col-md-3"></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Check No.</label></div><div class="col-md-4">
+	<input class="mainField" maxlength="64" type="text" name="checKNo" id="checkNo" placeholder="Check No." disabled="true"></div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Inv. #</label></div><div class="col-md-4"><input class="mainField" maxlength="12" type="text" name="invNo" id="invNo" placeholder="Invoice No." list="inv_list"></div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Receiver</label></div><div class="col-md-4">
 <input class="mainField" type='text' list='listid' id="amountReceiver">
@@ -55,26 +63,38 @@
 </div>
 <script>
 
+function onPaymentChange() {
+	var payment = $("#paymentMethod").val();
+	if(parseInt(payment) == 1) {
+		$("#checkNo").prop('disabled', false);
+	}
+	else {
+		$("#checkNo").prop('disabled', true);
+	}
+}
 
 function addPayment()
 {
 	var form = document.getElementById("addPaymentForm");
 	var todaysDate = form[0].value;
 	var Customer = encodeURIComponent(form[1].value);
-	var invNo = form[2].value;
-	var Receiver = encodeURIComponent(form[3].value);
-	var refNo = form[4].value;
-	var date = form[5].value;
-	var Amount = form[6].value;
-	
+	var paymentMethod = form[2].value;
+	var checkNo = form[3].value;
+	var invNo = form[4].value;
+	var Receiver = encodeURIComponent(form[5].value);
+	var refNo = form[6].value;
+	var date = form[7].value;
+	var Amount = form[8].value;
 
-	postStr = "todaysDate="+todaysDate+"&Customer="+Customer+"&invNo="+invNo+"&Receiver="+Receiver+"&refNo="+refNo+"&Date="+date+"&Amount="+Amount;
 
-	
+	postStr = "todaysDate="+todaysDate+"&Customer="+Customer+"&invNo="+invNo+"&Receiver="+Receiver+"&refNo="+refNo+"&Date="+date+"&Amount="+Amount
+						+"&payMethod="+paymentMethod+"&checkNo="+checkNo;
+
+
 
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         //alert(xhttp.responseText);
         if(xhttp.responseText === "0")
         {
@@ -84,16 +104,16 @@ function addPayment()
             $("#not").slideDown();
         }
         else if(xhttp.responseText === "1")
-        {                      
-            $("#not").slideUp();            
+        {
+            $("#not").slideUp();
             $("#not").text("Payment Added!");
             $("#not").css({color:'green'});
-            $("#not").slideDown();  
-            form.reset();  
-            $("#custEle").focus();            
+            $("#not").slideDown();
+            form.reset();
+            $("#custEle").focus();
         }
-    }};  
-	
+    }};
+
     xhttp.open("POST", "do.php?action=addpayment", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(postStr+"&ajax");
@@ -101,7 +121,7 @@ function addPayment()
 
 function OnCustomerChange()
 {
-	var customer = $("#custEle").val();	
+	var customer = $("#custEle").val();
 	setLastInvoiceForCustomer(customer);
 	updateInvoiceListForCustomer(customer);
 }
@@ -110,10 +130,10 @@ function setLastInvoiceForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
     	//alert(xhttp.responseText);
         $("#invNo").val(xhttp.responseText);
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=getlastinv", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -125,10 +145,10 @@ function updateInvoiceListForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
     	//alert(xhttp.responseText);
         $("#inv_list").html(xhttp.responseText);
-    }};  
+    }};
 
     xhttp.open("POST", "customers/inv_list_customer.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

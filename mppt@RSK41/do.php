@@ -702,7 +702,9 @@ if(isset($_POST['ajax']))
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$data = mysqli_fetch_array($run);
 					$recId = $data['id'];
-					$qry = "INSERT INTO `payments_recv`(`id`, `customer`, `receiver`, `inv_no`, `ref_no`, `amount`, `entry_date`, `rec_date`,`advance`) VALUES (NULL,'".$custId."','".$recId."','".$_POST['invNo']."','".$_POST['refNo']."','".$_POST['Amount']."','".$_POST['todaysDate']."','".$_POST['Date']."','0')";
+					$qry = "INSERT INTO `payments_recv`(`id`, `customer`, `receiver`, `inv_no`, `ref_no`, `amount`, `entry_date`, `rec_date`,`advance`,`payMethod`,`checkNo`)
+									VALUES (NULL,'".$custId."','".$recId."','".$_POST['invNo']."','".$_POST['refNo']."','".$_POST['Amount']."','".$_POST['todaysDate']."',
+									'".$_POST['Date']."','0','".$_POST['payMethod']."','".$_POST['checkNo']."')";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					echo "1";
 
@@ -733,7 +735,9 @@ if(isset($_POST['ajax']))
 					$data = mysqli_fetch_array($run);
 					$recId = $data['id'];
 
-					$qry = "UPDATE `payments_recv` SET `customer`='".$custId."',`receiver`='".$recId."',`inv_no`='".$_POST['invNo']."',`ref_no`='".$_POST['refNo']."',`amount`='".$_POST['Amount']."',`entry_date`='".$_POST['todaysDate']."',`rec_date`='".$_POST['Date']."' WHERE `id` = '".$_POST['id']."'";
+					$qry = "UPDATE `payments_recv` SET `customer`='".$custId."',`receiver`='".$recId."',`inv_no`='".$_POST['invNo']."',`ref_no`='".$_POST['refNo']."',`amount`='".$_POST['Amount']."',
+									`entry_date`='".$_POST['todaysDate']."',`rec_date`='".$_POST['Date']."',payMethod
+									= '".$_POST['payMethod']."',checkNo = '".$_POST['checkNo']."' WHERE `id` = '".$_POST['id']."'";
 
 					//echo $qry;
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -1116,8 +1120,8 @@ if(isset($_POST['ajax']))
 						$filter_qry .= "and `advance` = '1'";
 
 
-					if(intval($year) != 0) $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id and rec_date > '$year-$month-01' and rec_date < '$year-$month-31' ".$filter_qry." order by `".$_POST['orderBy']."` ";
-					else $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id ".$filter_qry." order by `".$_POST['orderBy']."` ";
+					if(intval($year) != 0) $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,p.payMethod,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id and rec_date > '$year-$month-01' and rec_date < '$year-$month-31' ".$filter_qry." order by `".$_POST['orderBy']."` ";
+					else $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,p.payMethod,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id ".$filter_qry." order by `".$_POST['orderBy']."` ";
 					//echo $qry;
 					$count = 0;
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -1131,7 +1135,7 @@ if(isset($_POST['ajax']))
 					<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/payment_update.php') !== false) { ?>
 					onclick="viewPayment('<?php echo $data['id'] ?>')" <?php } ?> style="background-color:<?php echo $color; ?>;width:95%;position:relative;margin:0 auto;">
 					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $count; ?></div>
-					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php if(intval($data['advance']) == 0) echo "PY-"; else echo "AD-"; echo $data['id']; ?></div>
+					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php if(intval($data['advance']) == 0) echo "PY-"; else echo "AD-"; echo $data['id'];  if(intval($data['payMethod']) == 1) echo " (CHECK)"; ?></div>
 					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $data['ref_no']; ?></div>
 					    <div class="col-sm-1 no-border" style="border:1px solid black;">INV-<?php echo $data['inv_no']; ?></div>
 					    <div class="col-sm-2 no-border" style="border:1px solid black;"><?php echo $data['cname']; ?></div>
