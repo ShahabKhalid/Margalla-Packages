@@ -9,7 +9,7 @@ function getDays($date,$paymentTime)
 	$d_year = intval($year) - intval($c_year);
 	$d_month = intval($month) - intval($c_month);
 	$d_day = intval($day) - intval($c_day);
-	$numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+	$numberOfDays = cal_days_in_month(CAL_JEWISH, $month, $year);
 	$d = $d_day + $d_month * $numberOfDays + $d_year * 356 + $paymentTime;
 	return $d;
 
@@ -1070,6 +1070,8 @@ if(isset($_POST['ajax']))
 
 				case 'updatePaymentTable':
 					$filter_qry = "";
+					$year = $_POST['year'];
+					$month = $_POST['month'];
 					if(isset($_POST['f_inv'])) $filter_qry .= "and `inv_no` LIKE '".$_POST['f_inv']."%'";
 					if(isset($_POST['f_ref'])) $filter_qry .= "and `ref_no` LIKE '".$_POST['f_ref']."%'";
 					if(isset($_POST['f_edate'])) $filter_qry .= "and `entry_date` LIKE '".$_POST['f_edate']."%'";
@@ -1085,7 +1087,8 @@ if(isset($_POST['ajax']))
 						$filter_qry .= "and `advance` = '1'";
 
 
-					$qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id ".$filter_qry." order by `".$_POST['orderBy']."` ";
+					if(intval($year) != 0) $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id and rec_date > '$year-$month-01' and rec_date < '$year-$month-31' ".$filter_qry." order by `".$_POST['orderBy']."` ";
+					else $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id ".$filter_qry." order by `".$_POST['orderBy']."` ";
 					//echo $qry;
 					$count = 0;
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));

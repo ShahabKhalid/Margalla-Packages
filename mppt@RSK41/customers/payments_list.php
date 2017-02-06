@@ -1,6 +1,86 @@
 <div class="container-fluid addBox" style="width:95%;">
-<div class="inBox"> 
+<div class="inBox">
+<?php
+if(!isset($_GET['year']) && !isset($_GET['month']))
+{
+$year = date("Y");
+$month = date("m");
+}
+else
+{
+$year = $_GET['year'];
+$month = $_GET['month'];
+}
+		switch ($month) {
+      case 1:
+        $monthT = "Jan";
+        break;
+      case 2:
+        $monthT = "Feb";
+        break;
+      case 3:
+        $monthT = "March";
+        break;
+      case 4:
+        $monthT = "April";
+        break;
+      case 5:
+        $monthT = "May";
+        break;
+      case 6:
+        $monthT = "June";
+        break;
+      case 7:
+        $monthT = "July";
+        break;
+      case 8:
+        $monthT = "Aug";
+        break;
+      case 9:
+        $monthT = "Sep";
+        break;
+      case 10:
+        $monthT = "Oct";
+        break;
+      case 11:
+        $monthT = "Nov";
+        break;
+      case 12:
+        $monthT = "Dec";
+        break;
+
+      default:
+        $monthT = "Unknown";
+        break;
+    }
+?>
+<br>
 <h1>Payments</h1>
+<br>
+<div class="row" style="font-size:16px;">
+<div class="col-sm-12 text-center">
+	<select id="yearOpt">
+		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+	</select>
+<select id="monthOpt">
+		<option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
+		<option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
+		<option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
+		<option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
+		<option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
+		<option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
+		<option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
+		<option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
+		<option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
+		<option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
+		<option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
+		<option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
+	</select>
+  <button onclick="updatePaymentList()">Go</button>
+	<button onclick="updatePaymentList(null,1)">All</button>
+</div>
+</div>
 <div class="row" id="r2">
 <div class="col-md-8"></div>
 <div class="col-md-2 text-right"><b><a href="javascript:void()" onclick="exportExcel()">Export to excel</a></b></div>
@@ -39,7 +119,7 @@
     <div class="col-sm-1 text-left"><input type="checkbox" id="filter_advanceOnly" value="1" onchange="updatePaymentList(orderByWas)"></div>
     <div class="col-sm-1"></div>
 </div><br>
-</div>  
+</div>
 <div class="row" id="r2" style="background-color:rgba(0,0,0,0.7);color:white;width:95%;position:relative;margin:0 auto;">
     <div class="col-sm-1 head_">Sr.</div>
     <div class="col-sm-1 head_" onclick="updatePaymentList('id')">Pay #</div>
@@ -52,7 +132,7 @@
     <div class="col-sm-2 head_" onclick="updatePaymentList('amount')"> Amount</div>
 </div>
 <div id="payment_table">
-    
+
 </div>
 <br><br><br>
 </div><br>
@@ -73,9 +153,9 @@ function toggleFilter()
     {
         $(".filter-box2").slideUp();
     }
-    else 
+    else
     {
-        $(".filter-box2").slideDown();  
+        $(".filter-box2").slideDown();
     }
 }
 
@@ -130,13 +210,18 @@ function exportExcel()
 }
 
 function viewPayment(id)
-{   
-    pageLoad("customers/payment_update.php?id="+id);  
+{
+    pageLoad("customers/payment_update.php?id="+id);
 }
 
 
-function updatePaymentList(orderBy)
+function updatePaymentList(orderBy = null,all = null)
 {
+    if(orderBy == null) {
+      orderBy = orderByWas;
+    }
+    var month = $("#monthOpt").val();
+    var year = $("#yearOpt").val();
     var inv = $("#filter_inv").val();
     var ref = $("#filter_ref").val();
     var edate = $("#filter_edate").val();
@@ -161,15 +246,16 @@ function updatePaymentList(orderBy)
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         //alert(xhttp.responseText);
         if(xhttp.responseText != "0") {
         $("#payment_table").html(xhttp.responseText); }
         orderByWas = orderBy;
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=updatePaymentTable", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("orderBy="+orderBy+filter_qry+"&ajax");  
+    if(all == null) xhttp.send("orderBy="+orderBy+filter_qry+"&year="+year+"&month="+month+"&ajax");
+    else xhttp.send("orderBy="+orderBy+filter_qry+"&year=0&month=0&ajax");
 }
 </script>
