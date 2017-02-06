@@ -155,21 +155,50 @@ if(isset($_POST['ajax']))
 
 
 
-
+					case 'deleteAdvance':
+							if(!isset($_SESSION['mppt_admin']))
+							{
+								header('location: index.php');
+							}
+							$id = $_POST["id"];
+							$qry = "DELETE FROM advance WHERE id = '$id'";
+							mysqli_query($con,$qry) or die(mysqli_error($con));
+							echo "1";
+							break;
 
 				case 'addAdvance':
 						if(!isset($_SESSION['mppt_admin']))
 						{
 							header('location: index.php');
 						}
+						$advance = $_POST['advance'];
+						$dur = $_POST['duration'];
+						$advancePerMonth = intval($advance) / intval($dur);
+						$startDate = date('Y-m-d',strtotime($_POST['startDate']));
+						$startDate = date('Y-m-d',strtotime(date("Y-m-d", strtotime($startDate)) . " +0 month"));
 
-						$qry = "INSERT INTO `advance`(`id`, `employee`, `amount`,`duration`,`date`) VALUES (NULL,'".$_POST['name']."','".$_POST['advance']."','".$_POST['duration']."','".date('Y-m-d')."')";
 
-						//echo $qry;
-						mysqli_query($con,$qry) or die(mysqli_error($con));
-						addLog("New Advance \'".$_POST['advance']."\' for employee  \'".$_POST['name']."\' added!",$con);
+						for ($i=0; $i < intval($dur); $i++) {
+							$startDate = date('Y-m-d',strtotime(date("Y-m-d", strtotime($startDate)) . " +$i month"));
+							$qry = "INSERT INTO `advance`(`id`, `employee`, `amount`,`duration`,`date`) VALUES (NULL,'".$_POST['name']."','".$advancePerMonth."','".$dur."','".$startDate."')";
+							//echo $qry;
+							mysqli_query($con,$qry) or die(mysqli_error($con));
+							addLog("New Advance \'".$_POST['advance']."\' for employee  \'".$_POST['name']."\', (".$startDate.") added!",$con);
+						}
 						echo "1";
 						break;
+
+						case 'updateAdvance':
+								if(!isset($_SESSION['mppt_admin']))
+								{
+									header('location: index.php');
+								}
+
+								$qry = "UPDATE `advance` SET employee = '".$_POST['name']."',amount = '".$_POST['advance']."',duration = '".$_POST['duration']."',date = '".$_POST['startDate']."' WHERE id = '".$_POST['id']."'";
+								mysqli_query($con,$qry) or die(mysqli_error($con));
+								addLog("Update Advance \'".$_POST['advance']."\' for employee  \'".$_POST['name']."\'!",$con);
+								echo "1";
+								break;
 				case 'addexpence':
 						if(!isset($_SESSION['mppt_admin']))
 						{

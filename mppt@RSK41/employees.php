@@ -35,14 +35,14 @@
 
 		<div class="col-md-3 infoBox">
 			<div class="box" style="background-color: rgba(31,174,255,.8);">
-			<div class="row">
-				<div class="col-md-6" id="view"><h1></h1></div>
+			<div class="row" onclick="return pageLoad('employees/adv_list.php')">
+				<div class="col-md-6" id="view"><h1>Advances</h1></div>
 				<div class="col-md-6"><span class="glyphicon glyphicon-usd"></span></div>
 			</div>
 			<h2 style="background-color:rgba(31,174,255,255);">Advance</h2>
 			<ul style="background-color:rgba(31,174,255,255);">
 			<li><a href="#" onclick="return pageLoad('employees/add_adv.php')" title="Add Advance">Add Advance</a></li>
-			<li><a href="#" title="Edit Advance">..</a></li>
+			<li><a href="#" onclick="return pageLoad('employees/adv_list.php')" title="Edit Advance">List Advance</a></li>
 			</ul></div>
 		</div>
 		<div class="col-md-3 infoBox">

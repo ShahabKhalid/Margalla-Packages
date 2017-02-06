@@ -20,7 +20,8 @@
 </div>
 <div class="col-md-1"></div></div><br>
 <div class="row" id="r1"><div class="col-md-1"></div><div class="col-md-5"><label>Advance</label></div><div class="col-md-5"><input class="mainField" maxlength="12" type="text" placeholder="Advance amount"></div><div class="col-md-1"></div></div><br>
-<div class="row" id="r1"><div class="col-md-1"></div><div class="col-md-5"><label>Duration</label></div><div class="col-md-5"><input class="mainField" maxlength="12" type="text" placeholder="Duration (Months)"></div><div class="col-md-1"></div></div>
+<div class="row" id="r1"><div class="col-md-1"></div><div class="col-md-5"><label>Duration</label></div><div class="col-md-5"><input class="mainField" maxlength="12" type="text" placeholder="Duration (Months)"></div><div class="col-md-1"></div></div><br>
+<div class="row" id="r1"><div class="col-md-1"></div><div class="col-md-5"><label>Advance Start Date</label></div><div class="col-md-5"><input type="date" class="mainField" maxlength="12" type="text" placeholder="Date" value="<?php echo date('Y-m-d'); ?>"></div><div class="col-md-1"></div></div>
 <br>
 <div class="row" id="r1"><input class="mainField" onclick="addAdvance()" type="button" name="submit" value="Add"></div><br>
 <div class="row" id="r1"><p id="not">Advance successfully added!</p></div>
@@ -42,6 +43,7 @@ function addAdvance()
 	var name = addForm[0].value;
 	var advance = addForm[1].value;
 	var duration = addForm[2].value;
+	var startDate = addForm[3].value;
 
 	//alert(name);
 
@@ -52,7 +54,7 @@ function addAdvance()
 
     }
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-        alert(xhttp.responseText);
+        //alert(xhttp.responseText);
         if(xhttp.responseText === "0")
         {
             $("#not").hide();
@@ -73,7 +75,7 @@ function addAdvance()
 
     xhttp.open("POST", "do.php?action=addAdvance", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("name="+name+"&advance="+advance+"&duration="+duration+"&ajax");
+    xhttp.send("name="+name+"&advance="+advance+"&duration="+duration+"&startDate="+startDate+"&ajax");
 
 }
 </script>

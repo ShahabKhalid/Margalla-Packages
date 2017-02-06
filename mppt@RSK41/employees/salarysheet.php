@@ -160,7 +160,7 @@ while($data = mysqli_fetch_array($run))
 
 	}
 
-	$qry = "SELECT SUM(amount) as amount,SUM(duration) as dur FROM `advance` WHERE employee = '$id' and date > '$year-$month-01' and date < '$year-$month-31' group by employee";
+	$qry = "SELECT SUM(amount) as amount,SUM(duration) as dur FROM `advance` WHERE employee = '$id' and date >= '$year-$month-01' and date <= '$year-$month-31' group by employee";
 	$run1 = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$advance = 0;
 	$dur = 0;
@@ -170,17 +170,7 @@ while($data = mysqli_fetch_array($run))
 		$data1 = mysqli_fetch_array($run1);
 		$advance = $data1['amount'];
 		$dur = $data1['dur'];
-		if(intval($advance) > 0)
-		{
-			if(intval($dur) > 0)
-			{
-				$advdeduct = intval($advance) / intval($dur);
-			}
-			else
-			{
-				$advdeduct = intval($advance);
-			}
-		}
+		$advdeduct = intval($advance);
 
 	?>
 	<input type="hidden" id='advd_<?php echo $data["id"]; ?>' value='<?php echo $advdeduct ?>'>
