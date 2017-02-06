@@ -1581,12 +1581,15 @@ if(isset($_POST['ajax']))
 					$todaysInvoice = 0;
 					$filterCustomer = 0;
 					$filterSaleRep = 0;
+					$year = $_POST['year'];
+					$month = $_POST['month'];
 					if(isset($_POST['f_bill'])) $filter_qry .= "and b.id LIKE '".$_POST['f_bill']."%'";
 					if(isset($_POST['f_ref'])) $filter_qry .= "and b.ref LIKE '".$_POST['f_ref']."%'";
 					if(isset($_POST['f_date'])) $filter_qry .= "and b.date LIKE '".$_POST['f_date']."%'";
 					if(isset($_POST['f_vendor'])) $filter_qry .= "and v.name LIKE '".$_POST['f_vendor']."%'";
 
-					$qry = "SELECT b.*,v.name as vName FROM `bill` b,`vendor` v WHERE b.vendor = v.id ".$filter_qry." order by ".$_POST['orderBy']."";
+					if(intval($year) == 0) $qry = "SELECT b.*,v.name as vName FROM `bill` b,`vendor` v WHERE b.vendor = v.id ".$filter_qry." order by ".$_POST['orderBy']."";
+					else $qry = "SELECT b.*,v.name as vName FROM `bill` b,`vendor` v WHERE b.vendor = v.id and date > '$year-$month-01' and date < '$year-$month-31' ".$filter_qry." order by ".$_POST['orderBy']."";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$count = 1;
 

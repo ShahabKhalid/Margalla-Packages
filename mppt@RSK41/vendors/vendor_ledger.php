@@ -59,7 +59,21 @@
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$data = mysqli_fetch_array($run);
 	?>
-		<br>
+<div class="row">
+
+<div class="col-md-10">
+
+<h1 style="position:relative;left:100px;">Vendor Ledger / Statement</h1>
+</div>
+
+<div class="col-md-2 text-right">
+<span style="font-size:20px;padding-right:20px;position:relative;top:20px;text-decoration:underline;">ID: VEND-<?php echo $id; ?></span>
+</div>
+</div>
+
+<div class="row" id="r1"><div class="col-md-2"><label>Name</label></div><div class="col-md-4 text-left"><span style="font-size:18px;"><?php echo $data['name']; ?></span></div><div class="col-md-3"><label>Contact #</label></div><div class="col-md-3 text-left"><span style="font-size:18px;"><?php echo $data['contact']; ?></span></div></div><br>
+<div class="row" id="r1"><div class="col-md-2"><label>Address</label></div><div class="col-md-10 text-left"><span style="font-size:18px;"><?php echo $data['address']; ?></span></div><div class="col-md-3"></div></div>
+<br>
 	<div class="row">
 		<div class="col-sm-11 text-center">
 	<select id="yearOpt">
@@ -84,22 +98,7 @@
 	<button onclick="updateLMonth()">Go</button>
 	<button onclick="updateAllMonth()">Show All</button>
 	</div>
-	</div>
-<div class="row">
-
-<div class="col-md-10">
-
-<h1 style="position:relative;left:100px;">Vendor Ledger / Statement</h1>
-</div>
-
-<div class="col-md-2 text-right">
-<span style="font-size:20px;padding-right:20px;position:relative;top:20px;text-decoration:underline;">ID: VEND-<?php echo $id; ?></span>
-</div>
-</div>
-
-<div class="row" id="r1"><div class="col-md-2"><label>Name</label></div><div class="col-md-4 text-left"><span style="font-size:18px;"><?php echo $data['name']; ?></span></div><div class="col-md-3"><label>Contact #</label></div><div class="col-md-3 text-left"><span style="font-size:18px;"><?php echo $data['contact']; ?></span></div></div><br>
-<div class="row" id="r1"><div class="col-md-2"><label>Address</label></div><div class="col-md-10 text-left"><span style="font-size:18px;"><?php echo $data['address']; ?></span></div><div class="col-md-3"></div></div>
-<br><br><br>
+	</div><br>
 <div class="row" style="border-bottom:2px solid black;width:95%;position:relative;margin:0 auto;">
 	<div class="col-sm-2">Particular</div>
 	<div class="col-sm-1">Bill #</div>
@@ -136,7 +135,7 @@ $advance = 0;
 	}
 	?>
 	<div class="col-sm-2"><?php echo number_format($total); ?></div>
-	<div class="col-sm-2"><?php $balance = $advance - $total; $total_balance += $balance; echo number_format($balance); ?></div>
+	<div class="col-sm-2"><?php $balance = $advance - $total; $total_balance += $balance; echo number_format($total_balance); ?></div>
 </div>
 <?php
 	$qry = "SELECT * FROM `payments_paid` WHERE `bill_no` = '".$data['id']."'";
@@ -153,8 +152,7 @@ $advance = 0;
 			<div class="col-sm-1"><?php echo $data2['paid_date']; ?></div>
 			<div class="col-sm-2"><?php echo number_format($data2['amount']); ?></div>
 			<div class="col-sm-2">--</div>
-			<div class="col-sm-2"><?php $balance += floatval($data2['amount']); echo number_format($balance);
-			$total_balance += floatval($data2['amount']); ?></div>
+			<div class="col-sm-2"><?php $total_balance += floatval($data2['amount']); echo number_format($total_balance); ?></div>
 		</div>
 	<?php
 	}
