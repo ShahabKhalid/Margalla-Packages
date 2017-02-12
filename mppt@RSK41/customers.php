@@ -1,7 +1,7 @@
 <br><br><br>
-<div class="conatiner-fluid">
+<div class="conatiner">
 	<div class="row">
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(70,23,180,.8);">
 			<div class="row" onclick="pageLoad('customers/list.php')">
 				<?php
@@ -30,7 +30,7 @@
 			<?php }?>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(170,64,255,.8);">
 			<div class="row" onclick="return pageLoad('customers/invoices.php')">
 				<div class="col-md-6" id="view"><h1><?php echo $invCount; ?></h1></div>
@@ -46,7 +46,7 @@
 			</ul></div>
 		</div>
 
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(31,174,255,.8);">
 			<div class="row" onclick="return pageLoad('customers/payments_list.php')">
 				<div class="col-md-6" id="view"><h1><?php echo $paymentCount; ?></h1></div>
@@ -61,28 +61,6 @@
 			<?php }?>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
-			<div class="box" style="background-color: rgba(25,153,0,.8);">
-			<div class="row">
-			<?php 
-			$qry = "SELECT * FROM `invoice` order by `no` desc limit 1";
-			$run = mysqli_query($con,$qry) or die(mysqli_error($con));
-			$row = mysqli_fetch_array($run);
-			$inv_no = $row['no'];
-			$qry = "SELECT * FROM `customers` WHERE `id` = '".$row['customer']."'";
-			$run = mysqli_query($con,$qry) or die(mysqli_error($con));
-			$row = mysqli_fetch_array($run);
-			$custName = $row['name'];
-			
-			?>
-				<div class="col-md-6" id="view" onclick="viewInvoice('<?php echo $inv_no ?>')"><h1><?php echo $custName; ?></h1></div>
-				<div class="col-md-6"><span class="glyphicon glyphicon-shopping-cart"></span></div>
-			</div>
-			<h2 style="background-color:rgba(25,153,0,255);" onclick="viewInvoice('<?php echo $inv_no ?>')">Last Invoice</h2>
-			<ul style="background-color:rgba(25,153,0,255);">
-			<li>.</li>
-			<li>.</li>
-			</ul></div>
 		</div>
 	</div>
 </div>

@@ -1,14 +1,13 @@
 <?php
-function closingBalance($month,$year)
+
+function closingBalance($con,$month,$year)
 {
-require "../123321.php";
 if(intval($month) < 11 && intval($year) == 2016) return 0;
 $qry = "SELECT SUM(idd.weices * idd.rate + idd.charges) as total FROM `invoice` i,`invoice_detail` idd WHERE i.no = idd.ref and i.date >= '$year-$month-01' and i.date <= '$year-$month-31'";
 
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $data = mysqli_fetch_array($run);
 $custInvTot = floatval($data['total']);
-
 $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.ref = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Factory' group by b.vendor ";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $fac_bill = 0;
@@ -238,12 +237,11 @@ $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 while($data = mysqli_fetch_array($run))
 {
 	$payableCount++;
-	$name = $data['name'];
 	$amount = $data['amount'];
 	$TOTAL_PAYABLE += floatval($amount);
 }
-
-$closingBalance = $recable_ALL + closingBalance(intval($month) - 1,$year) - $TOTAL_PAYABLE;
+if(intval($month) > 1) { $closingBalance = $recable_ALL + closingBalance($con,intval($month) - 1,$year) - $TOTAL_PAYABLE; }
+else { $closingBalance = $recable_ALL + closingBalance($con,12,intval($year) - 1) - $TOTAL_PAYABLE; }
 return $closingBalance;
 }
 ?>

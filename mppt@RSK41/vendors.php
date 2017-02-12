@@ -1,7 +1,7 @@
 <br><br><br>
 <div class="conatiner-fluid">
 	<div class="row">
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(255,46,23,.8);">
 			<div class="row" onclick="pageLoad('vendors/list.php')">
 				<?php
@@ -31,7 +31,7 @@
 			<?php } ?>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(46,23,0,.8);">
 			<div class="row" onclick="return pageLoad('vendors/bills.php')">
 				<div class="col-md-6" id="view"><h1><?php echo $invCount; ?></h1></div>
@@ -49,7 +49,7 @@
 			</ul></div>
 		</div>
 
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(0,174,0,.8);">
 			<div class="row" onclick="return pageLoad('vendors/payments_list.php')">
 				<div class="col-md-6" id="view"><h1><?php echo $paymentCount; ?></h1></div>
@@ -66,25 +66,6 @@
 			<?php } ?>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
-			<div class="box" style="background-color: rgba(0,170,170,.8);">
-			<div class="row">
-			<?php 
-			$qry = "SELECT id FROM bill WHERE 1";
-			$run = mysqli_query($con,$qry) or die(mysqli_error($con));
-			$total = mysqli_num_rows($run);
-			$qry = "SELECT sub.*,SUM(p.amount) as amount FROM (SELECT b.id,b.ref,SUM(bd.weices * bd.rate) as bill FROM `bill` b,bill_detail bd WHERE b.ref = bd.ref GROUP BY b.ref,b.id) sub, payments_paid p WHERE sub.id = p.bill_no and amount = bill GROUP BY sub.id,sub.ref";
-			$run = mysqli_query($con,$qry) or die(mysqli_error($con));
-			$result = $total - mysqli_num_rows($run);
-			?>
-				<div class="col-md-6" id="view"><h1><?php echo $result; ?></h1></div>
-				<div class="col-md-6"><span class="glyphicon glyphicon-shopping-cart"></span></div>
-			</div>
-			<h2 style="background-color:rgba(0,170,170,255);">Not Paid Bills</h2>
-			<ul style="background-color:rgba(0,170,170,255);">
-			<li>.</li>
-			<li>.</li>
-			</ul></div>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>MPPT | Margalla Packages</title>
+    <title>MPPT | Margalla Packages Islamabad</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/_style.css" rel="stylesheet">
@@ -50,49 +49,36 @@
             <div class="col-sm-2 head">
              <h4>Margalla Packages</h4>
             </div>
-            <div class="col-sm-6 inav">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="?page=customers" >Customer</a></li>
+            <div class="col-sm-10 inav" style="padding-left: 0px;">
+            <ul class="nav navbar-nav mainMenu" >
+                <?php
+                $qry = "SELECT a.*,l.title FROM `alpha` a, `level` l WHERE a.level = l.id and a.id = '".$_SESSION['mppt_admin']."'";
+                $run = mysqli_query($con,$qry) or die(mysqli_error($con));
+                $row = mysqli_fetch_array($run);
+                ?>
+                <li><a href="javascript:void()" style="color: black; background-color: white;"><span class=" 	glyphicon glyphicon-user"></span> <?php echo $row['fname']." ".$row['lname']." [<span style='color:green;'> ".$row['title']."</span> ]"; ?></a></li>
+
+                <li class="active"><a href="?page=customers" >Customer</a></li>
               <li><a href="?page=vendors">Vendors</a></li>
               <li><a href="?page=employees">Employees</a></li>
-              <?php 
+                <?php
               if(strcmp($_SESSION['access'],"all") === 0)
               {
               ?>
-              <li><a href="?page=expences">Expences</a></li>              
+              <li><a href="?page=expences">Expences</a></li>
               <li><a href="?page=ledgers">Ledgers</a></li>
               <li><a href="?page=vanledger">Van Ledger</a></li>
-              <li><a href="?page=sheets">Sheets</a></li>
-              <li><a href="?page=settings">Settings</a></li>
-              <?php
+              <li><a href="?page=sheets"><span class="glyphicon glyphicon-list-alt"></span> Sheets</a></li>
+              <li><a href="?page=settings"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+
+                  <?php
               }
               ?>
+                <li><a href="logout.php" style="color: black;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             </div>
-            <div class="col-sm-4 lhead text-right">
-                <div style="position:relative;left:-10px;">
-                <?php
-                    $qry = "SELECT * FROM `alpha` WHERE `id` = '".$_SESSION['mppt_admin']."'";
-                    $run = mysqli_query($con,$qry) or die(mysqli_error($con));
-                    $row = mysqli_fetch_array($run);
-                ?>
-                <img src="<?php echo $row['dp']; ?>" id="dp">
-                <span id="name"><?php echo $row['fname']." ".$row['lname']; ?></span>
-                <?php
-                $qry = "SELECT * FROM `level` WHERE `id` = '".$row['level']."'";
-                $run = mysqli_query($con,$qry) or die(mysqli_error($con));
-                $row2 = mysqli_fetch_array($run);
-                ?>
-                <span id="post" style="position:relative;left:20px;"><?php echo $row2['title']; ?></span>
-                <span id="dd_btn" style="position:relative;left:20px;" class="glyphicon glyphicon-menu-down"></span>
-                <div class="dd-menu">
-                <ul>
-                    <li><a href="javascript:void()">Settings</a></li>
-                    <li><a href="logout.php">Logout</a></li>
-                </ul>
-                </div>
-              </div>
-            </div>
+
+
 
         </div>
         </div>
@@ -190,7 +176,7 @@
         }
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-            
+
             if(xhttp.responseText === "0")
             {
 
@@ -204,7 +190,7 @@
                 $("#wrong_msg").text("Logged in!");
                 $("#wrong_msg").css({color:'green'});
                 $("#wrong_msg").slideDown();
-                 alert("Work Done\n1) Customers LD and HD Rate! Also Change it for old invoices!\n2)Ledger new req. particular is hardcore!\n3)Files can be uploaded at Settings>Files.");
+                 //alert("Work Done\n1) Customers LD and HD Rate! Also Change it for old invoices!\n2)Ledger new req. particular is hardcore!\n3)Files can be uploaded at Settings>Files.");
                 window.location = "index.php";
             }
         }};

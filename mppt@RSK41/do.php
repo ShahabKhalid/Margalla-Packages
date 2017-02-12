@@ -41,7 +41,8 @@ if(isset($_POST['ajax']))
 						{
 							$data = mysqli_fetch_array($run);
 							$_SESSION['mppt_admin'] = $data['id'];
-							$_SESSION['access'] = $data['access'];
+                            $_SESSION['access'] = $data['access'];
+                            $_SESSION['level'] = $data['level'];
 							echo "1";
 							$qry = "INSERT INTO `login_log`(`id`, `date`, `time`, `ip`, `userName`, `pass`, `pin`, `fail`) VALUES (NULL,'".date('Y-m-d')."','".date("h:i:s")."','".$_SERVER['REMOTE_ADDR']."','".$_POST['email']."','----','-----','0')";
 						}
@@ -670,7 +671,7 @@ if(isset($_POST['ajax']))
 							$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 						}
 					}
-					echo $dataCount;
+					
 					for($i = 1;$i <= $dataCount;$i++)
 					{
 						$data = json_decode($_POST['data_'.$i], true);

@@ -1,7 +1,7 @@
 <br><br><br>
 <div class="conatiner-fluid">
 	<div class="row">
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(70,23,180,.8);">
 			<div class="row" onclick="pageLoad('employees/list.php')">
 				<?php
@@ -20,7 +20,7 @@
 			<li><a href="#" onclick="return pageLoad('employees/list.php')" title="Edit Customer">List Employees</a></li>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(170,64,255,.8);">
 			<div class="row" onclick="return pageLoad('employees/salarysheet.php')">
 				<div class="col-md-6" id="view"><h1>Salary</h1></div>
@@ -33,7 +33,7 @@
 			</ul></div>
 		</div>
 
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(31,174,255,.8);">
 			<div class="row" onclick="return pageLoad('employees/adv_list.php')">
 				<div class="col-md-6" id="view"><h1>Advances</h1></div>
@@ -45,17 +45,6 @@
 			<li><a href="#" onclick="return pageLoad('employees/adv_list.php')" title="Edit Advance">List Advance</a></li>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
-			<div class="box" style="background-color: rgba(25,153,0,.8);">
-			<div class="row">
-				<div class="col-md-6" id="view"><h1>Lahori Nashta</h1></div>
-				<div class="col-md-6"><span class="glyphicon glyphicon-shopping-cart"></span></div>
-			</div>
-			<h2 style="background-color:rgba(25,153,0,255);">Last Invoice</h2>
-			<ul style="background-color:rgba(25,153,0,255);">
-			<li>.</li>
-			<li>.</li>
-			</ul></div>
 		</div>
 	</div>
 </div>

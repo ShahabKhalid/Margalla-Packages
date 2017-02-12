@@ -1,5 +1,6 @@
 <br>
-<div class="row settings">
+<div class="container-fluid">
+<div class="row">
 	<div class="col-md-12 head2">
 		<ul>
 			<li><a href="javascript:void()" onclick='pageLoad("home.php");'>Home</a></li>
@@ -10,6 +11,7 @@
 			<li><a href="javascript:void()" onclick='pageLoad("files.php");'>Uploads</a></li>
 		</ul>
 	</div>
+</div>
 </div>
 <div class="container-fluid" id="settings_main">
 

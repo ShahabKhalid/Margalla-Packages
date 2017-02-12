@@ -104,6 +104,7 @@ Morris.Line({
   element: 'graph3',
   data: [
   <?php
+
   for($i = 1;$i <= 12;$i++) {
     $qry = "SELECT SUM(amount) as pay FROM payments_recv WHERE `rec_date` >= '".date('Y-')."-".sprintf("%02d",$i)."-01' and `rec_date` < '".date('Y-')."-".sprintf("%02d",($i+1))."-01'";
     $exp = 0;

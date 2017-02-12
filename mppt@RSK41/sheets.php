@@ -1,7 +1,7 @@
 <br><br><br>
 <div class="conatiner-fluid">
 	<div class="row">
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(70,23,180,.8);">
 			<div class="row" onclick="pageLoad('sheets/profitsheet.php')">
 				<?php
@@ -17,7 +17,7 @@
 			<li>.</li>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(170,64,255,.8);">
 			<div class="row" onclick="return pageLoad('employees/salarysheet.php')">
 				<div class="col-md-6" id="view"><h1>Salary</h1></div>
@@ -30,11 +30,10 @@
 			</ul></div>
 		</div>
 
-		<div class="col-md-3 infoBox">
+		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(31,174,255,.8);">
 			<div class="row">
-				<div class="col-md-6" id="view"><h1></h1></div>
-				<div class="col-md-6"><span class="glyphicon glyphicon-usd"></span></div>
+				<div class="col-md-12" id="view"><h1>Employee Advance</h1></div>
 			</div>
 			<h2 style="background-color:rgba(31,174,255,255);">Advance</h2>
 			<ul style="background-color:rgba(31,174,255,255);">
@@ -42,17 +41,6 @@
 			<li><a href="#" title="Edit Advance">..</a></li>
 			</ul></div>
 		</div>
-		<div class="col-md-3 infoBox">
-			<div class="box" style="background-color: rgba(25,153,0,.8);">
-			<div class="row">
-				<div class="col-md-6" id="view"><h1>Lahori Nashta</h1></div>
-				<div class="col-md-6"><span class="glyphicon glyphicon-shopping-cart"></span></div>
-			</div>
-			<h2 style="background-color:rgba(25,153,0,255);">Last Invoice</h2>
-			<ul style="background-color:rgba(25,153,0,255);">
-			<li>.</li>
-			<li>.</li>
-			</ul></div>
 		</div>
 	</div>
 </div>
@@ -69,6 +57,8 @@ function pageLoad(page)
 		mainPage = true;
 	else
 		mainPage = false;
+
+
     $("#contentRoom").slideUp();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

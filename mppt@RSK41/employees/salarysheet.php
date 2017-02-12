@@ -1,4 +1,4 @@
-<div class="container addBox" style="width:100%;">
+<div class="container addBox salSheet" style="width:100%;">
 <div class="inBox">
 <div class="row">
 <div class="col-md-10">
@@ -62,10 +62,10 @@ $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 
 </div>
 <br><br>
+    <h1 style="font-size: 2vw;">Employees Salary Sheet (<?php echo $monthT."-".$year; ?>)</h1>
 <div class="row" style="font-size:16px;">
 <div class="col-sm-3"></div>
 <div class="col-sm-6 text-center">
-	<h1>Employees Salary Sheet (<?php echo $monthT."-".$year; ?>)</h1>
 	<select id="yearOpt">
 		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
 		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
@@ -89,32 +89,18 @@ $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 <div class="col-sm-3"></div>
 </div>
 <br><br>
-<div class="row" style="border-bottom:2px solid black;width:98%;position:relative;margin:0 auto;">
-	<div class="col-sm-6">
-		<div class="row">
-			<div class="col-sm-2 bold" style="border:1px solid black;">Employee</div>
-			<div class="col-sm-2 bold" style="border:1px solid black;">Salary</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">Sal/d</div>
-			<div class="col-sm-2 bold" style="border:1px solid black;">Absents</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">D.Sal</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">LD</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">HD</div>
-			<div class="col-sm-2 bold" style="border:1px solid black;">LD+HD</div>
-
-		</div>
-	</div>
-	<div class="col-sm-6">
-		<div class="row">
-			<div class="col-sm-2 bold" style="border:1px solid black;">Profit</div>
-			<div class="col-sm-2 bold" style="border:1px solid black;">Sub Profit</div>
-			<div class="col-sm-2 bold" style="border:1px solid black;">Advance</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">Dur.</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">Bonus</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">B.Desc</div>
-			<div class="col-sm-1 bold" style="border:1px solid black;">Ded.</div>
-			<div class="col-sm-2 bold" style="border:1px solid black;">Salary</div>
-		</div>
-	</div>
+<div class="scrollX">
+<div class="row" style="width:100%;position:relative;margin:0 auto;">
+        <div class="col-sm-2 bold" style="border:1px solid black;">Employee</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Salary</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Sal/d</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Absents</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Profit</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Advance</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Dur.</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">Bonus</div>
+        <div class="col-sm-1 bold" style="border:1px solid black;">B.Desc</div>
+        <div class="col-sm-2 bold" style="border:1px solid black;">Final Salary</div>
 </div>
 <?php
 
@@ -210,48 +196,34 @@ while($data = mysqli_fetch_array($run))
 
 
 	?>
-	<div class="row" style="width:98%;position:relative;margin:0 auto;">
-		<div class="col-sm-6">
-			<div class="row">
-				<input type="hidden" id="id_<?php echo $count; ?>" value="<?php echo $data['id']; ?>"/>
-				<div class="col-sm-2" style="border:1px solid black;font-size:12px;"><a href="javascript:void()" onclick='pageLoad("employees/salSheet.php?id=<?php echo $id; ?>&month=<?php echo $month;?>&year=<?php echo $year; ?>")'><?php echo $data['name']; ?></a></div>
-				<div class="col-sm-2" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:20px;" type="text" id='normsalDIV_<?php echo $data["id"]; ?>' value='<?php echo $sal; ?>' style='width:140px;height:20px;'></div>
-				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salperdayDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / $numberOfDays, 1, PHP_ROUND_HALF_UP); ?></div>
-				<div class="col-sm-2" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:20px;" type='text' id='absents_<?php echo $data["id"]; ?>' placeholder='Absents' style='width:140px;height:20px;' value='<?php echo $abs; ?>' onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)'></div>
-				<div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / $numberOfDays * intval($abs), 1, PHP_ROUND_HALF_UP); ?></div>
-				<div class="col-sm-1" style="border:1px solid black;" id='ldDIV_<?php echo $data["id"]; ?>'><?php echo round($ldTotal[$id], PHP_ROUND_HALF_UP); ?></div>
-				<div class="col-sm-1" style="border:1px solid black;" id='hdDIV_<?php echo $data["id"]; ?>'><?php echo round($hdTotal[$id], PHP_ROUND_HALF_UP); ?></div>
-				<div class="col-sm-2" style="border:1px solid black;" id='ldhdDIV_<?php echo $data["id"]; ?>'><?php echo round($ldTotal[$id]+$hdTotal[$id], PHP_ROUND_HALF_UP); ?></div>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="row">
-				<div class="col-sm-2" style="border:1px solid black;" id='profitDIV_<?php echo $data["id"]; ?>'><?php echo round($total_profit, PHP_ROUND_HALF_UP); ?></div>
-				<div class="col-sm-2" style="border:1px solid black;" id='salProfitDIV_<?php echo $data["id"]; ?>'><?php echo round((intval($sal) + $total_profit), PHP_ROUND_HALF_UP); ?></div>
-				<div class="col-sm-2" style="border:1px solid black;"><?php echo $advance; ?></div>
-				<div class="col-sm-1" style="border:1px solid black;"><?php echo $dur; ?></div>
-				<div class="col-sm-1" style="border:1px solid black;padding:0px;"><input style="width:100%;height:20px;" type="text" id='bonus_<?php echo $data["id"]; ?>' value='<?php echo $bonus; ?>' style='width:140px;height:20px;' onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)'></div>
-				<div class="col-sm-1" style="border:1px solid black;padding:0px;"><input style="padding-left:1px;width:100%;height:20px;" type="text" onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)' id='bonusDesc_<?php echo $data['id']; ?>' value='<?php echo $bonusdesc; ?>' style='width:140px;height:20px;'></div>
-				<div class="col-sm-1" style="border:1px solid black;" id='advdeductDIV_<?php echo $data["id"]; ?>'><?php echo $advdeduct; ?></div>
-				<div class="col-sm-2" style="border:1px solid black;" id='finalSalDIV_<?php echo $data["id"]; ?>'><?php echo  round((intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(floatval($sal) / $numberOfDays * intval($abs)),1, PHP_ROUND_HALF_UP); $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / $numberOfDays * intval($abs));?></div>
-				</div>
-			</div>
+	<div class="row" style="width:100%;position:relative;margin:0 auto;">
+        <input type="hidden" id="id_<?php echo $count; ?>" value="<?php echo $data['id']; ?>"/>
+        <div class="col-sm-2" style="border:1px solid black;font-size:12px;"><a href="javascript:void()" onclick='pageLoad("employees/salSheet.php?id=<?php echo $id; ?>&month=<?php echo $month;?>&year=<?php echo $year; ?>")'><?php echo $data['name']; ?></a></div>
+        <div class="col-sm-1" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:25px;" type="text" id='normsalDIV_<?php echo $data["id"]; ?>' value='<?php echo $sal; ?>' style='width:140px;height:20px;'></div>
+        <div class="col-sm-1" style="text-align:center;padding-left:2px;border:1px solid black;" id='salperdayDIV_<?php echo $data["id"]; ?>'><?php echo round(floatval($sal) / $numberOfDays, 1, PHP_ROUND_HALF_UP); ?></div>
+        <div class="col-sm-1" style="border:1px solid black;padding-left:2px;text-align:left;"><input style="width:100%;height:25px;" type='text' id='absents_<?php echo $data["id"]; ?>' placeholder='Absents' style='width:140px;height:20px;' value='<?php echo $abs; ?>' onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)'></div>
+        <div class="col-sm-1" style="border:1px solid black;" id='profitDIV_<?php echo $data["id"]; ?>'><?php echo round($total_profit, PHP_ROUND_HALF_UP); ?></div>
+        <div class="col-sm-1" style="border:1px solid black;"><?php echo $advance; ?></div>
+        <div class="col-sm-1" style="border:1px solid black;"><?php echo $dur; ?></div>
+        <div class="col-sm-1" style="border:1px solid black;padding:0px;"><input style="width:100%;height:25px;" type="text" id='bonus_<?php echo $data["id"]; ?>' value='<?php echo $bonus; ?>' style='width:140px;height:20px;' onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)'></div>
+        <div class="col-sm-1" style="border:1px solid black;padding:0px;"><input style="padding-left:1px;width:100%;height:25px;" type="text" onchange='deductSal(<?php echo $data["id"]; ?>,<?php echo $year; ?>,<?php echo $month; ?>)' id='bonusDesc_<?php echo $data['id']; ?>' value='<?php echo $bonusdesc; ?>' style='width:140px;height:20px;'></div>
+        <div class="col-sm-2" style="border:1px solid black;" id='finalSalDIV_<?php echo $data["id"]; ?>'>Rs. <?php echo  round((intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(floatval($sal) / $numberOfDays * intval($abs)),1, PHP_ROUND_HALF_UP); $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / $numberOfDays * intval($abs));?></div>
 	</div>
 	<?php
 	$count++;
 }
 ?>
-	<input type="hidden" id="count" value="<?php echo $count; ?>"/>
-	<div class="row" style="width:98%;position:relative;margin:0 auto;">
-		<div class="col-sm-11" style="border:1px solid black;"><b>Total</b></div>
-		<div class="col-sm-1" style="border:1px solid black;"><b><?php echo round($tot_sal, PHP_ROUND_HALF_UP) ?></b></div>
+
+	<div class="row" style="width:100%;position:relative;margin:0 auto;">
+        <input type="hidden" id="count" value="<?php echo $count; ?>"/>
+		<div class="col-sm-10" style="border:1px solid black;"><b>Total</b></div>
+		<div class="col-sm-2" style="border:1px solid black;"><b>Rs <?php echo round($tot_sal, PHP_ROUND_HALF_UP) ?></b></div>
 	</div>
 <br>
 
 <a href="javascript:void()" onclick="return updateSalaries('<?php echo $year;?>','<?php echo $month; ?>')">Update Salary</a>
-<!-- 	<a href="javascript:void()" onclick="return printView('<?php echo $id; ?>')">Print</a> -->
-<br>
-</div><br>
+</div>
+</div></div><br>
 <p id="esc">Press Escape to go back!</p>
 </div>
 </div>

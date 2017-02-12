@@ -1,88 +1,87 @@
 <div class="container addBox" style="width:98%;">
 <div class="inBox">
+    <?php
+    require "../123321.php";
+    if(!isset($_GET['year']) && !isset($_GET['month']))
+    {
+        $year = date("Y");
+        $month = date("m");
+    }
+    else
+    {
+        $year = $_GET['year'];
+        $month = $_GET['month'];
+    }
+    switch ($month) {
+        case 1:
+            $monthT = "Jan";
+            break;
+        case 2:
+            $monthT = "Feb";
+            break;
+        case 3:
+            $monthT = "March";
+            break;
+        case 4:
+            $monthT = "April";
+            break;
+        case 5:
+            $monthT = "May";
+            break;
+        case 6:
+            $monthT = "June";
+            break;
+        case 7:
+            $monthT = "July";
+            break;
+        case 8:
+            $monthT = "Aug";
+            break;
+        case 9:
+            $monthT = "Sep";
+            break;
+        case 10:
+            $monthT = "Oct";
+            break;
+        case 11:
+            $monthT = "Nov";
+            break;
+        case 12:
+            $monthT = "Dec";
+            break;
+
+        default:
+            $monthT = "Unknown";
+            break;
+    }
+    ?>
+    <br><br>
+    <div class="row" style="font-size:16px;">
+        <div class="col-sm-12">
+            <select id="yearOpt">
+                <option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+                <option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+            </select>
+            <select id="monthOpt">
+                <option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
+                <option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
+                <option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
+                <option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
+                <option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
+                <option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
+                <option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
+                <option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
+                <option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
+                <option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
+                <option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
+                <option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
+            </select>
+            <button onclick="updateVLMonth()">Go</button>
+        </div>
+    </div>
 <div class="row">
 <div class="col-md-10">
-<?php
-require "../123321.php";
-if(!isset($_GET['year']) && !isset($_GET['month']))
-{
-$year = date("Y");
-$month = date("m");
-}
-else
-{
-$year = $_GET['year'];
-$month = $_GET['month'];
-}
-		switch ($month) {
-      case 1:
-        $monthT = "Jan";
-        break;
-      case 2:
-        $monthT = "Feb";
-        break;
-      case 3:
-        $monthT = "March";
-        break;
-      case 4:
-        $monthT = "April";
-        break;
-      case 5:
-        $monthT = "May";
-        break;
-      case 6:
-        $monthT = "June";
-        break;
-      case 7:
-        $monthT = "July";
-        break;
-      case 8:
-        $monthT = "Aug";
-        break;
-      case 9:
-        $monthT = "Sep";
-        break;
-      case 10:
-        $monthT = "Oct";
-        break;
-      case 11:
-        $monthT = "Nov";
-        break;
-      case 12:
-        $monthT = "Dec";
-        break;
 
-      default:
-        $monthT = "Unknown";
-        break;
-    }
-?>
-<br><br>
-<div class="row" style="font-size:16px;">
-<div class="col-sm-5"></div>
-<div class="col-sm-4 text-center">
-	<select id="yearOpt">
-		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
-		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
-	</select>
-<select id="monthOpt">
-		<option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
-		<option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
-		<option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
-		<option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
-		<option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
-		<option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
-		<option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
-		<option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
-		<option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
-		<option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
-		<option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
-		<option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
-	</select>
-	<button onclick="updateVLMonth()">Go</button>
-</div>
-<div class="col-sm-3"></div>
-</div>
 <h1 style="position:relative;left:100px;">Van Ledger</h1>
 </div>
 

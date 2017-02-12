@@ -1,8 +1,8 @@
 <div class="container addBox">
-<div class="inBox"> 
+<div class="inBox">
 <h1>Invoice</h1>
 <form id="addInvForm">
-<?php 
+<?php
 require "../123321.php";
 $inv_no = $_GET['no'];
 $qry = "SELECT * FROM `invoice` WHERE `no` = '$inv_no'";
@@ -37,7 +37,7 @@ $sRepName = $row2['name'];
 <input class="mainField" type='text' list='listid2' id="custEle" onchange="OnCustomerChange()" value="<?php echo $custName; ?>">
 <datalist id='listid2'>
 	<?php
-	
+
 	$qry = "SELECT * FROM `customers` WHERE 1 order by `name`";
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 	while($row = mysqli_fetch_array($run))
@@ -93,7 +93,7 @@ $sRepName = $row2['name'];
 		<div class="col-md-1 border head_">Bag</div>
 		<div class="col-md-1 border head_">Total</div>
 	</div>
-	<div id="inv_fields">	
+	<div id="inv_fields">
 		<datalist id="matlist">
 	<option value="LD">LD</option>
 	<option value="HD">HD</option>
@@ -103,7 +103,7 @@ $sRepName = $row2['name'];
 	<option value="Cargo">Cargo</option>
 	</datalist>
 	<datalist id="sizelist">
-	<?php 
+	<?php
 	$qry = "SELECT * FROM `sizes` WHERE 1";
 	$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$count = 0;
@@ -137,18 +137,18 @@ $sRepName = $row2['name'];
 			}
 			else
 			{
-			echo floatval($row['charges']);  $allTotal += floatval($row['charges']);	
+			echo floatval($row['charges']);  $allTotal += floatval($row['charges']);
 			} ?></div>
 			<input class="inv_input" type="hidden" name="bag" id="v_id_<?php echo $i; ?>" value="<?php echo $row['id']; ?>">
 		</div>
 		<?php
 		}
 		?>
-	<input type="hidden" name="fields" id="fieldsCount" value="<?php echo $i; ?>">		
+	<input type="hidden" name="fields" id="fieldsCount" value="<?php echo $i; ?>">
 	</div>
-	<div class="row">		
+	<div class="row">
 		<div class="col-md-11 border2"><input style="height:100%;width:100%;" type="button" name="addRow" id="addRow" value="Add Row" onclick="addNewField()"></div>
-	</div>s
+	</div>
 	<br><br>
 	<div class="row" style="position:relative;left:-50px;">
 		<div class="col-md-4"><b style="position:relative;top:2px;font-size:18px;">Total </b><input type="text" name="total" id="allTotal" value="<?php echo $allTotal; ?>" readonly></div>
@@ -177,7 +177,7 @@ $sRepName = $row2['name'];
 <?php
 require "../123321.php";
 $qry = "SELECT * FROM `payments_recv` WHERE `inv_no` = '".$inv_no."'";
-$count = 0;             
+$count = 0;
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 while($data = mysqli_fetch_array($run))
 {
@@ -186,13 +186,13 @@ else $color = "rgba(230,230,230,1)";
 
 $qry = "SELECT * FROM `customers` WHERE `id` = '".$data['customer']."'";
 $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-$data2 = mysqli_fetch_array($run2);    
+$data2 = mysqli_fetch_array($run2);
 $custName = $data2['name'];
 
 $qry = "SELECT * FROM `employee` WHERE `id` = '".$data['receiver']."'";
 $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
-$data2 = mysqli_fetch_array($run2);    
-$recName = $data2['name'];                
+$data2 = mysqli_fetch_array($run2);
+$recName = $data2['name'];
 ?>
 <div class="row" id="inv_data" onclick="viewPayment('<?php echo $data['id'] ?>')" style="background-color:<?php echo $color; ?>;width:95%;position:relative;margin:0 auto;">
     <div class="col-sm-1 border"><?php echo $count; ?></div>
@@ -226,22 +226,22 @@ if($count == 0)
 
 function noneCharge(row)
 {
-	
+
 		$("#v_type_"+row).val("--");
 		$("#v_charges_"+row).val("0");
-	
+
 }
 
 
 function noneSize(row)
 {
-	
+
 		$("#v_size_"+row).val("--");
 		$("#v_mat_"+row).val("--");
 		$("#v_weices_"+row).val("0");
 		$("#v_rate_"+row).val("0");
 		$("#v_bag_"+row).val("0");
-	
+
 }
 
 
@@ -288,10 +288,10 @@ function deleteInvoice(id)
 
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         alert(xhttp.responseText);
         pageLoad('customers/invoices.php');
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=deleteinvoice", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -326,7 +326,7 @@ function updateInvoice()
 
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         //alert(xhttp.responseText);
         if(xhttp.responseText === "0")
         {
@@ -336,14 +336,15 @@ function updateInvoice()
             $("#not").slideDown();
         }
         else if(xhttp.responseText === "1")
-        {                      
-            $("#not").slideUp();            
+        {
+						alert("Invoice Updated!");
+            $("#not").slideUp();
             $("#not").text("Invoice Updated");
             $("#not").css({color:'green'});
-            $("#not").slideDown();  
-            $("#custEle").focus();            
+            $("#not").slideDown();
+            $("#custEle").focus();
         }
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=updateinvoice", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -363,7 +364,7 @@ function setCustomerPaymentMethod(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         //$("#saleRep").val(xhttp.responseText);
         if(xhttp.responseText == "0")
         {
@@ -374,20 +375,20 @@ function setCustomerPaymentMethod(customer)
         	$(".paymentTimeClass").val("-1");
         	$(".paymentTimeClass").hide();
         }
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=getpaymentmethod", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("customer="+customer+"&ajax");	
+    xhttp.send("customer="+customer+"&ajax");
 }
 
 function setSaleRepForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         $("#saleRep").val(xhttp.responseText);
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=getsalerep", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -399,9 +400,9 @@ function setAdvanceForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
         $("#_advance").val(xhttp.responseText);
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=getadvance", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -412,7 +413,7 @@ function setRateByForCustomer(customer)
 {
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {  
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
     	//alert(xhttp.responseText);
         if(xhttp.responseText == "1")
 		{
@@ -425,7 +426,7 @@ function setRateByForCustomer(customer)
 							   <option value="2" selected>Weight</option>')
 		}
 		changeRateBy();
-    }};  
+    }};
 
     xhttp.open("POST", "do.php?action=getrateby", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

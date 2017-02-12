@@ -1,7 +1,7 @@
 <br><br>
-<div class="container addBox" style="width:95%">
+<div class="container-fluid" style="width:100%">
 <div class="inBox">
-<h1>Login Logs</h1>
+<h1 style="text-align: center;">Login Logs</h1>
 <div class="row" id="r2">
 <div class="col-md-11"></div>
 <div class="col-md-1"><b><a href="javascript:void()" onclick="toggleFilter()">Filter</a></b></div>
