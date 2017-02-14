@@ -2,7 +2,10 @@
 
 function closingBalance($con,$month,$year)
 {
-if(intval($month) < 11 && intval($year) == 2016) return 0;
+if(intval($year) < 2017) return 0;
+else {
+    if(intval($month) < 1) return 0;
+}
 $qry = "SELECT SUM(idd.weices * idd.rate + idd.charges) as total FROM `invoice` i,`invoice_detail` idd WHERE i.no = idd.ref and i.date >= '$year-$month-01' and i.date <= '$year-$month-31'";
 
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));

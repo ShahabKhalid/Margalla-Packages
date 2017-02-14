@@ -236,7 +236,7 @@
                 <input type="hidden" id="count" value="<?php echo $count; ?>"/>
                 <div class="row" style="width:100%;position:relative;margin:0 auto;">
                     <div class="col-sm-11" style="border:1px solid black;"><b>Total</b></div>
-                    <div class="col-sm-1" style="border:1px solid black;"><b id="finalSalary"><?php echo round($tot_sal, PHP_ROUND_HALF_UP) ?></b></div>
+                    <div class="col-sm-1" style="border:1px solid black;"><b id="finalSalary"><?php echo number_format(round($tot_sal, PHP_ROUND_HALF_UP)); ?></b></div>
                 </div>
                 <br>
 

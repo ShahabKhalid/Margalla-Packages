@@ -187,7 +187,7 @@
                     $sal = 0;
                     //echo $month." - ".date("m"). " ".strcmp($month,date("m"));
                     $sal = $data['salary'];
-                    $qry = "SELECT * FROM salaries WHERE employee = '".$id."' and year = '".date('Y')."' and month = '".$month."'";
+                    $qry = "SELECT * FROM salaries WHERE employee = '".$id."' and year = '".$year."' and month = '".$month."'";
                     $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 
                     if(mysqli_num_rows($run2))
@@ -197,7 +197,7 @@
                     }
                     $bonus = 0;
                     $bonusdesc = '--';
-                    $qry = "SELECT * FROM bonuses WHERE employee = '".$id."' and year = '".date('Y')."' and month = '".$month."'";
+                    $qry = "SELECT * FROM bonuses WHERE employee = '".$id."' and year = '".$year."' and month = '".$month."'";
                     $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 
                     if(mysqli_num_rows($run2))
@@ -241,7 +241,7 @@
                 <input type="hidden" id="count" value="<?php echo $count; ?>"/>
                 <div class="row" style="width:100%;position:relative;margin:0 auto;">
                     <div class="col-sm-11" style="border:1px solid black;"><b>Total</b></div>
-                    <div class="col-sm-1" style="border:1px solid black;"><b id="finalSalary"><?php echo round($tot_sal, PHP_ROUND_HALF_UP) ?></b></div>
+                    <div class="col-sm-1" style="border:1px solid black;"><b id="finalSalary"><?php echo number_format(round($tot_sal, PHP_ROUND_HALF_UP)); ?></b></div>
                 </div>
                 <br>
 

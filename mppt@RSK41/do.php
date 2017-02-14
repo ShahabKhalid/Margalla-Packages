@@ -9,7 +9,7 @@ function getDays($date,$paymentTime)
 	$d_year = intval($year) - intval($c_year);
 	$d_month = intval($month) - intval($c_month);
 	$d_day = intval($day) - intval($c_day);
-	$numberOfDays = cal_days_in_month(CAL_JEWISH, $month, $year);
+	$numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 	$d = $d_day + $d_month * $numberOfDays + $d_year * 356 + $paymentTime;
 	return $d;
 
@@ -1641,24 +1641,26 @@ if(isset($_POST['ajax']))
 					if(isset($_POST['f_vendor'])) $filter_qry .= "and v.name LIKE '".$_POST['f_vendor']."%'";
 
 					if(intval($year) == 0) $qry = "SELECT b.*,v.name as vName FROM `bill` b,`vendor` v WHERE b.vendor = v.id ".$filter_qry." order by ".$_POST['orderBy']."";
-					else $qry = "SELECT b.*,v.name as vName FROM `bill` b,`vendor` v WHERE b.vendor = v.id and date > '$year-$month-01' and date < '$year-$month-31' ".$filter_qry." order by ".$_POST['orderBy']."";
+					else $qry = "SELECT b.*,v.name as vName FROM `bill` b,`vendor` v WHERE b.vendor = v.id and date >= '$year-$month-01' and date <= '$year-$month-31' ".$filter_qry." order by ".$_POST['orderBy']."";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$count = 1;
+                    $total = 0;
 
 					while($row = mysqli_fetch_array($run))
 					{
 
-					$total = 0;
+
 					$qry = "SELECT b.id,SUM(bd.weices * bd.rate) as bill FROM `bill` b,`bill_detail` bd WHERE b.id = bd.ref and b.id = '".$row['id']."' GROUP BY b.id";
 					$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$row2 = mysqli_fetch_array($run2);
 					$bill = $row2['bill'];
+					$total += floatval($bill);
 					$qry = "SELECT p.bill_no,SUM(p.amount) as total FROM `bill` b,`payments_paid` p WHERE b.id = p.bill_no and b.id = '".$row['id']."' GROUP BY p.bill_no";
 
 					$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 					if(mysqli_num_rows($run2) > 0 ) {
 						$row2 = mysqli_fetch_array($run2);
-						$total = $row2['total'];
+						$pay = $row2['total'];
 					}
 
 
@@ -1701,38 +1703,28 @@ if(isset($_POST['ajax']))
 					else { $color = "rgba(0,0,0,0.15)"; }
 					?>
 					<div class="row row_inv" id="inv_data"  style="background-color:<?php echo $color; ?>">
-					<div class="col-md-6">
-							<div class="row">
-								<div class="col-sm-1 no-border">
-								<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'vendors/bill_update.php') !== false) { ?>
-								<a href="javascript:void()" onclick="viewBill('<?php echo $row['id'] ?>')">Edit</a><?php } else echo "N/A"; ?></div>
-                                <div class="col-sm-1 no-border">
-                                    <?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'billDelete') !== false) { ?>
-                                    <a href="javascript:void()" onclick="deleteBill('<?php echo $row['id'] ?>')">Delete</a><?php } else echo "N/A"; ?></div>
-                                <div onclick="return pageLoad('vendors/bill_detail.php?id=<?php echo $row['id'] ?>')">
-									<div class="col-sm-1 no-border"><?php echo $count; ?></div>
-									<div class="col-sm-1 no-border">Bill-<?php echo $row['id']; ?></div>
-									<div class="col-sm-2 no-border"><?php echo $row['ref']; ?></div>
-									<div class="col-sm-2 no-border"><?php echo $row['date']; ?></div>
-									<div class="col-sm-4 no-border"><?php echo $row['vName']; ?></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="row">
-
-								<div onclick="return pageLoad('vendors/bill_detail.php?id=<?php echo $row['id'] ?>')">
-									<div class="col-sm-4 no-border">Rs. <?php echo round($bill,2); ?></div>
-									<div class="col-sm-4 no-border">Rs. <?php echo $total; ?></div>
-                                    <div class="col-sm-4 no-border">Rs. <?php echo floatval($bill) - floatval($total); ?></div>
-
-                                </div>
-							</div>
-						</div>
-					</div>
+                        <div class="col-sm-1 no-border">
+                        <?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'vendors/bill_update.php') !== false) { ?>
+                        <a href="javascript:void()" onclick="viewBill('<?php echo $row['id'] ?>')">Edit</a><?php } else echo "N/A"; ?></div>
+                        <div class="col-sm-1 no-border">
+                        <?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'billDelete') !== false) { ?>
+                        <a href="javascript:void()" onclick="deleteBill('<?php echo $row['id'] ?>')">Delete</a><?php } else echo "N/A"; ?></div>
+                        <div class="col-sm-1 no-border"><?php echo $count; ?></div>
+                        <div class="col-sm-1 no-border">Bill-<?php echo $row['id']; ?></div>
+                        <div class="col-sm-2 no-border"><?php echo $row['ref']; ?></div>
+                        <div class="col-sm-2 no-border"><?php echo $row['date']; ?></div>
+                        <div class="col-sm-2 no-border"><?php echo $row['vName']; ?></div>
+                        <div class="col-sm-2 no-border">Rs. <?php echo round($bill,2); ?></div>
+                    </div>
 					<?php
 					$count++;
 					}
+					?>
+                    <div class="row row_inv" id="inv_data"  style="background-color:rgba(0,0,0,0.5);color:white;font-weight: bold;">
+                        <div class="col-sm-10 no-border">Total</div>
+                        <div class="col-sm-2 no-border">Rs. <?php echo round($total,2); ?></div>
+                    </div>
+                    <?php
 
 					break;
 

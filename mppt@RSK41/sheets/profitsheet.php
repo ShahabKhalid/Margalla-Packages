@@ -1,5 +1,5 @@
 <br><br>
-<div class="container addBox" style="width:95%">
+<div class="container addBox" style="width:98%">
 <div class="inBox">
 <?php
 require "../123321.php";
@@ -227,7 +227,7 @@ switch ($month) {
 
         }
 
-        $qry = "SELECT SUM(amount) as amount,SUM(duration) as dur FROM `advance` WHERE employee = '$id' and date > '$year-$month-01' and date < '$year-$month-31' group by employee";
+        $qry = "SELECT SUM(amount) as amount,SUM(duration) as dur FROM `advance` WHERE employee = '$id' and date >= '$year-$month-01' and date <= '$year-$month-31' group by employee";
         $run1 = mysqli_query($con, $qry) or die(mysqli_error($con));
         $advance = 0;
         $dur = 0;
@@ -257,7 +257,7 @@ switch ($month) {
         $sal = 0;
 //echo $month." - ".date("m"). " ".strcmp($month,date("m"));
         $sal = $data['salary'];
-        $qry = "SELECT * FROM salaries WHERE employee = '" . $id . "' and year = '" . date('Y') . "' and month = '" . $month . "'";
+        $qry = "SELECT * FROM salaries WHERE employee = '" . $id . "' and year = '" . $year . "' and month = '" . $month . "'";
         $run2 = mysqli_query($con, $qry) or die(mysqli_error($con));
 
         if (mysqli_num_rows($run2)) {
@@ -266,7 +266,7 @@ switch ($month) {
         }
         $bonus = 0;
         $bonusdesc = '--';
-        $qry = "SELECT * FROM bonuses WHERE employee = '" . $id . "' and year = '" . date('Y') . "' and month = '" . $month . "'";
+        $qry = "SELECT * FROM bonuses WHERE employee = '" . $id . "' and year = '" . $year . "' and month = '" . $month . "'";
         $run2 = mysqli_query($con, $qry) or die(mysqli_error($con));
 
         if (mysqli_num_rows($run2)) {
@@ -274,9 +274,11 @@ switch ($month) {
             $bonus = intval($data4['bonus']);
             $bonusdesc = $data4['desc'];
         }
-
-        $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / 30 * intval($abs));
-        $tot_sal_all += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / 30 * intval($abs));
+        $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        //echo floatval($sal)." -- ".(floatval($sal) / $numberOfDays)."<br>";
+        $tot_sal = floatval($sal) + floatval($total_profit) + floatval($bonus) - floatval($advdeduct) - floatval((floatval($sal) / $numberOfDays) * intval($abs));
+        //echo $tot_sal."<br>";
+        $tot_sal_all += floatval($sal) + floatval($total_profit) + floatval($bonus) - floatval($advdeduct) - floatval(floatval($sal) / $numberOfDays * intval($abs));
         $count++;
     }
     ?>

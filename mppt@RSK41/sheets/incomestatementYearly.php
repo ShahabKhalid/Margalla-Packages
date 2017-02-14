@@ -202,7 +202,7 @@
                     $bonus = intval($data4['bonus']);
                     //$bonusdesc = $data4['desc'];
                 }
-                $numberOfDays = cal_days_in_month(CAL_JEWISH, $month, $year);
+                $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
                 $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / $numberOfDays * intval($abs));
                 $tot_sal_all += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / $numberOfDays * intval($abs));
                 $count++;

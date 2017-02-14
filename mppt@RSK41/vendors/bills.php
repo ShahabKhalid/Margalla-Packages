@@ -123,24 +123,14 @@
 </div><br>
 </div>
 <div class="row row_inv" style="background-color:rgba(0,0,0,.7);color:white;">
-	<div class="col-md-6">
-		<div class="row">
-            <div class="col-sm-1 border3 head_">Edit</div>
-            <div class="col-sm-1 border3 head_">Delete</div>
-			<div class="col-sm-1 border3 head_">Sr.</div>
-			<div class="col-sm-1 border3 head_" onclick="updateBillList('b.id')">Bill #</div>
-			<div class="col-sm-2 border3 head_" onclick="updateBillList('b.ref')">Ref. #</div>
-			<div class="col-sm-2 border3 head_" onclick="updateBillList('b.date')">Date</div>
-			<div class="col-sm-4 border3 head_" onclick="updateBillList('v.name')">Vendor</div>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="row">
-			<div class="col-sm-4 border3 head_">Bill amount</div>
-			<div class="col-sm-4 border3 head_">Payments</div>
-            <div class="col-sm-4 border3 head_">Balance</div>
-		</div>
-	</div>
+    <div class="col-sm-1 border3 head_">Edit</div>
+    <div class="col-sm-1 border3 head_">Delete</div>
+    <div class="col-sm-1 border3 head_">Sr.</div>
+    <div class="col-sm-1 border3 head_" onclick="updateBillList('b.id')">Bill #</div>
+    <div class="col-sm-2 border3 head_" onclick="updateBillList('b.ref')">Ref. #</div>
+    <div class="col-sm-2 border3 head_" onclick="updateBillList('b.date')">Date</div>
+    <div class="col-sm-2 border3 head_" onclick="updateBillList('v.name')">Vendor</div>
+    <div class="col-sm-2 border3 head_">Amount</div>
 </div>
 <div id="bill_table">
 </div>
