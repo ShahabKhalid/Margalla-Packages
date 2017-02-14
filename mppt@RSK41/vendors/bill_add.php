@@ -116,6 +116,21 @@ function addBill()
 	var enteredfields = 0;
 	var jsonStr = "";
 	var postStr = "vendor="+vendorName+"&refNo="+refNo+"&date="+date;
+	var repeat = false;
+    for(var i = 1;i <= totalfields;i++) {
+        var ref2 = $('#v_ref2_'+i).val();
+        if(ref2.length === 0) continue;
+        for(var j = 1;j <= totalfields;j++) {
+            if(i == j) continue;
+            if(ref2 === $('#v_ref2_'+j).val()) {
+                repeat = true;
+            }
+        }
+    }
+    if(repeat) {
+        alert("Ref2 must be unique for each sub-bill!");
+        return;
+    }
 	for(var i = 1;i <= totalfields;i++)
 	{
 		if(parseInt($("#v_total_"+i).html()) > 0)
@@ -132,7 +147,7 @@ function addBill()
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {  
-        alert(xhttp.responseText);
+        //alert(xhttp.responseText);
         if(xhttp.responseText === "0")
         {
             $("#not").hide();

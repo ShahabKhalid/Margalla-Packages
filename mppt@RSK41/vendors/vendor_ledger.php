@@ -126,7 +126,7 @@ $advance = 0;
 	<div class="col-sm-1">--</div>
 	<div class="col-sm-2">--</div>
 	<?php
-	$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$data['ref']."'";
+	$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$data['id']."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$total = 0;
 	while($data2 = mysqli_fetch_array($run2))

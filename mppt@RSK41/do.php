@@ -154,7 +154,18 @@ if(isset($_POST['ajax']))
 					echo "1";
 					break;
 
-
+                case 'deleteBill':
+                    if(!isset($_SESSION['mppt_admin']))
+                    {
+                        header('location: index.php');
+                    }
+                    $id = $_POST["id"];
+                    $qry = "DELETE FROM bill_detail WHERE ref = '$id'";
+                    mysqli_query($con,$qry) or die(mysqli_error($con));
+                    $qry = "DELETE FROM bill WHERE id = '$id'";
+                    mysqli_query($con,$qry) or die(mysqli_error($con));
+                    echo "1";
+                    break;
 
 					case 'deleteAdvance':
 							if(!isset($_SESSION['mppt_admin']))
@@ -533,7 +544,9 @@ if(isset($_POST['ajax']))
 
 					$qry = "INSERT INTO `bill`(`id`,`ref`, `vendor`, `date`) VALUES (NULL,'".$_POST['refNo']."','".$vId."','".$_POST['date']."')";
 					mysqli_query($con,$qry) or die(mysqli_error($con));
-
+					$qry = "SELECT id FROM `bill` WHERE 1 order by id DESC";
+					$result = mysqli_query($con,$qry) or die(mysqli_error($con));
+                    $billIdNew = mysqli_fetch_array($result)['id'];
 					for($i = 1;$i <= $dataCount;$i++)
 					{
 
@@ -547,7 +560,7 @@ if(isset($_POST['ajax']))
 							$data2 = mysqli_fetch_array($run2);
 							$billerId = $data2['id'];
 						}
-						$qry = "INSERT INTO `bill_detail`(`id`, `ref`,`ref2`, `biller_id`,`particular`, `weices`, `rate`) VALUES (NULL,'".$_POST['refNo']."','".$data['ref2']."','".$billerId."','".$data['particular']."','".$data['weices']."','".$data['rate']."')";
+						$qry = "INSERT INTO `bill_detail`(`id`, `ref`,`ref2`, `biller_id`,`particular`, `weices`, `rate`) VALUES (NULL,'".$billIdNew."','".$data['ref2']."','".$billerId."','".$data['particular']."','".$data['weices']."','".$data['rate']."')";
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 						//echo $data['size'];
 					}
@@ -577,6 +590,7 @@ if(isset($_POST['ajax']))
 
 
 						$data = json_decode($_POST['data_'.$i], true);
+
 						//Getting saleRep id
 						$qry = "SELECT * FROM `customers` WHERE `name` = '".$data['billName']."'";
 						$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -587,16 +601,17 @@ if(isset($_POST['ajax']))
 						}
 
 						$data = json_decode($_POST['data_'.$i], true);
-						$qry = "SELECT * FROM `bill_detail` WHERE `id` = '".$data['id']."'";
+						$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$_POST['id']."'";
+						//echo $qry;
 						$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 						if(mysqli_num_rows($run) > 0) {
-							$qry = "UPDATE `bill_detail` SET `ref`='".$_POST['refNo']."',`ref2`='".$data['ref2']."',`biller_id` = '".$billerId."',`particular` = '".$data['particular']."',`weices` = '".$data['weices']."',`rate` = '".$data['rate']."' WHERE `id` = '".$data['id']."'";
+							$qry = "UPDATE `bill_detail` SET `ref`='".$_POST['id']."',`ref2`='".$data['ref2']."',`biller_id` = '".$billerId."',`particular` = '".$data['particular']."',`weices` = '".$data['weices']."',`rate` = '".$data['rate']."' WHERE `id` = '".$data['id']."'";
 							//echo $qry;
 							mysqli_query($con,$qry) or die(mysqli_error($con));
 						}
 						else
 						{
-							$qry = "INSERT INTO `bill_detail`(`id`, `ref`,`ref2`, `biller_id`,`particular`, `weices`, `rate`) VALUES (NULL,'".$_POST['refNo']."','".$data['ref2']."','".$billerId."','".$data['particular']."','".$data['weices']."','".$data['rate']."')";
+							$qry = "INSERT INTO `bill_detail`(`id`, `ref`,`ref2`, `biller_id`,`particular`, `weices`, `rate`) VALUES (NULL,'".$_POST['id']."','".$data['ref2']."','".$billerId."','".$data['particular']."','".$data['weices']."','".$data['rate']."')";
 							//echo $qry;
 							mysqli_query($con,$qry) or die(mysqli_error($con));
 							//echo $data['size'];
@@ -1634,11 +1649,11 @@ if(isset($_POST['ajax']))
 					{
 
 					$total = 0;
-					$qry = "SELECT b.ref,SUM(bd.weices * bd.rate) as bill FROM `bill` b,`bill_detail` bd WHERE b.ref = bd.ref and b.ref = '".$row['ref']."' GROUP BY b.ref";
+					$qry = "SELECT b.id,SUM(bd.weices * bd.rate) as bill FROM `bill` b,`bill_detail` bd WHERE b.id = bd.ref and b.id = '".$row['id']."' GROUP BY b.id";
 					$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$row2 = mysqli_fetch_array($run2);
 					$bill = $row2['bill'];
-					$qry = "SELECT p.bill_no,SUM(p.amount) as total FROM `bill` b,`payments_paid` p WHERE b.id = p.bill_no and b.ref = '".$row['ref']."' GROUP BY p.bill_no";
+					$qry = "SELECT p.bill_no,SUM(p.amount) as total FROM `bill` b,`payments_paid` p WHERE b.id = p.bill_no and b.id = '".$row['id']."' GROUP BY p.bill_no";
 
 					$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 					if(mysqli_num_rows($run2) > 0 ) {
@@ -1688,10 +1703,13 @@ if(isset($_POST['ajax']))
 					<div class="row row_inv" id="inv_data"  style="background-color:<?php echo $color; ?>">
 					<div class="col-md-6">
 							<div class="row">
-								<div class="col-sm-2 no-border">
+								<div class="col-sm-1 no-border">
 								<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'vendors/bill_update.php') !== false) { ?>
 								<a href="javascript:void()" onclick="viewBill('<?php echo $row['id'] ?>')">Edit</a><?php } else echo "N/A"; ?></div>
-								<div onclick="return pageLoad('vendors/bill_detail.php?id=<?php echo $row['id'] ?>')">
+                                <div class="col-sm-1 no-border">
+                                    <?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'billDelete') !== false) { ?>
+                                    <a href="javascript:void()" onclick="deleteBill('<?php echo $row['id'] ?>')">Delete</a><?php } else echo "N/A"; ?></div>
+                                <div onclick="return pageLoad('vendors/bill_detail.php?id=<?php echo $row['id'] ?>')">
 									<div class="col-sm-1 no-border"><?php echo $count; ?></div>
 									<div class="col-sm-1 no-border">Bill-<?php echo $row['id']; ?></div>
 									<div class="col-sm-2 no-border"><?php echo $row['ref']; ?></div>
@@ -1704,10 +1722,11 @@ if(isset($_POST['ajax']))
 							<div class="row">
 
 								<div onclick="return pageLoad('vendors/bill_detail.php?id=<?php echo $row['id'] ?>')">
-									<div class="col-sm-4 no-border">Rs. <?php echo $bill; ?></div>
-									<div class="col-sm-4 no-border">Rs. <?php echo floatval($bill) - floatval($total); ?></div>
+									<div class="col-sm-4 no-border">Rs. <?php echo round($bill,2); ?></div>
 									<div class="col-sm-4 no-border">Rs. <?php echo $total; ?></div>
-								</div>
+                                    <div class="col-sm-4 no-border">Rs. <?php echo floatval($bill) - floatval($total); ?></div>
+
+                                </div>
 							</div>
 						</div>
 					</div>

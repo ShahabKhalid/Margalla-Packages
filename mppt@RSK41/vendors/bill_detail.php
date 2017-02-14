@@ -39,7 +39,7 @@ $row = mysqli_fetch_array($run);
 	<div class="col-md-2">Bill Amount</div>
 </div>
 <?php
-$qry2 = "SELECT bd.*,c.name as cName FROM `bill_detail` bd,`customers` c WHERE bd.biller_id = c.id and bd.ref = '".$row['ref']."' order by bd.ref2";
+$qry2 = "SELECT bd.*,c.name as cName FROM `bill_detail` bd,`customers` c WHERE bd.biller_id = c.id and bd.ref = '".$row['id']."' order by bd.ref2";
 $run2 = mysqli_query($con,$qry2) or die(mysqli_error($con));
 $oldExp = "";
 $newExp = "";

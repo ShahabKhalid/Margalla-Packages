@@ -1,4 +1,4 @@
-<div class="container addBox" style="width:90%;">
+<div class="container addBox" style="width:98%;">
 <div class="inBox">
 	<?php
 	require "../123321.php";
@@ -125,7 +125,8 @@
 <div class="row row_inv" style="background-color:rgba(0,0,0,.7);color:white;">
 	<div class="col-md-6">
 		<div class="row">
-			<div class="col-sm-2 border3 head_">Edit</div>
+            <div class="col-sm-1 border3 head_">Edit</div>
+            <div class="col-sm-1 border3 head_">Delete</div>
 			<div class="col-sm-1 border3 head_">Sr.</div>
 			<div class="col-sm-1 border3 head_" onclick="updateBillList('b.id')">Bill #</div>
 			<div class="col-sm-2 border3 head_" onclick="updateBillList('b.ref')">Ref. #</div>
@@ -136,8 +137,8 @@
 	<div class="col-md-6">
 		<div class="row">
 			<div class="col-sm-4 border3 head_">Bill amount</div>
-			<div class="col-sm-4 border3 head_">Balance</div>
 			<div class="col-sm-4 border3 head_">Payments</div>
+            <div class="col-sm-4 border3 head_">Balance</div>
 		</div>
 	</div>
 </div>
@@ -203,6 +204,22 @@ function updateBillList(orderBy = null,all = null)
 function viewBill(id)
 {
 	pageLoad("vendors/bill_update.php?id="+id);
+}
+
+function deleteBill(id)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //alert(xhttp.responseText);
+            if(xhttp.responseText != "0") {
+                pageLoad("vendors/bills.php") }
+        }};
+
+    xhttp.open("POST", "do.php?action=deleteBill", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id="+id+"&ajax");
+
 }
 
 function printInvoice(id)

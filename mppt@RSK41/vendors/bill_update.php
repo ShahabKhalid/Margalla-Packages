@@ -56,7 +56,7 @@ $data = mysqli_fetch_array($run);
 	<div id="inv_fields">	
 	
 		<?php 
-		$qry = "SELECT bd.*,c.name as cName FROM `bill_detail` bd,`customers` c WHERE bd.biller_id = c.id and bd.ref = '".$data['ref']."'";
+		$qry = "SELECT bd.*,c.name as cName FROM `bill_detail` bd,`customers` c WHERE bd.biller_id = c.id and bd.ref = '".$data['id']."'";
 		$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 		$i = 1;
 		$allTotal = 0;
@@ -185,12 +185,9 @@ function updateBill()
 	var postStr = "id="+bid+"&vendor="+vendorName+"&refNo="+refNo+"&date="+date;
 	for(var i = 1;i <= totalfields;i++)
 	{
-		if(parseInt($("#v_total_"+i).html()) > 0)
-		{
-			enteredfields++;
-			jsonStr = '{"id":"'+$('#v_id_'+i).val()+'","ref2":"'+$('#v_ref2_'+i).val()+'","billName":"'+$('#v_billName_'+i).val()+'","particular":"'+$('#v_particular_'+i).val()+'","weices":"'+$('#v_weices_'+i).val()+'","rate":"'+$('#v_rate_'+i).val()+'"}';
-			postStr += "&data_"+enteredfields+"="+jsonStr;
-		}
+		enteredfields++;
+        jsonStr = '{"id":"'+$('#v_id_'+i).val()+'","ref2":"'+$('#v_ref2_'+i).val()+'","billName":"'+$('#v_billName_'+i).val()+'","particular":"'+$('#v_particular_'+i).val()+'","weices":"'+$('#v_weices_'+i).val()+'","rate":"'+$('#v_rate_'+i).val()+'"}';
+        postStr += "&data_"+enteredfields+"="+jsonStr;
 	}
 	postStr += "&data_count="+enteredfields;
 	//alert(postStr);
@@ -208,7 +205,7 @@ function updateBill()
             $("#not").slideDown();
         }
         else if(xhttp.responseText === "1")
-        {                      
+        {
             $("#not").slideUp();            
             $("#not").text("Bill Added!");
             $("#not").css({color:'green'});
