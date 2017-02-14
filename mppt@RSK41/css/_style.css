@@ -474,6 +474,45 @@ font-size:25px;
 	color:red;
 }
 
+.Tab {
+	font-size: 1.5vw;
+}
+
+
+.Tab .col-sm-5 {
+	padding-top: .5vw;
+	padding-bottom: .5vw;
+	background-color: rgba(0,0,0,0.1);
+}
+
+.Tab .col-sm-5:hover {
+	padding-top: .5vw;
+	padding-bottom: .5vw;
+	background-color: rgba(0,0,0,0.08);
+	color:green;
+	cursor: pointer;
+}
+
+.incomeSatementTable .col-sm-5 {
+	border:1px solid black;
+	font-size:1.2vw;
+	padding: .5vw;
+}
+
+.addBox .inBox2
+{
+	background-color: white;
+	text-align: center;
+}
+
+.addBox .inBox2 h1
+{
+
+	text-align: center;
+	font-weight: bolder;
+	font-size: 2vw;
+}
+
 .addBox .inBox
 {
 	background-color: white;

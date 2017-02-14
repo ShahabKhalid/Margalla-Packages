@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fc4338a-8686-41d0-9700-d91366d8608e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/do.php" afterPath="$PROJECT_DIR$/mppt@RSK41/do.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/vendors/bill_add.php" afterPath="$PROJECT_DIR$/mppt@RSK41/vendors/bill_add.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/vendors/bill_detail.php" afterPath="$PROJECT_DIR$/mppt@RSK41/vendors/bill_detail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/vendors/bill_update.php" afterPath="$PROJECT_DIR$/mppt@RSK41/vendors/bill_update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/vendors/bills.php" afterPath="$PROJECT_DIR$/mppt@RSK41/vendors/bills.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/vendors/vendor_ledger.php" afterPath="$PROJECT_DIR$/mppt@RSK41/vendors/vendor_ledger.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mppt@RSK41/sheets/incomestatement.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mppt@RSK41/sheets/incomestatementYearly.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/css/_style.css" afterPath="$PROJECT_DIR$/mppt@RSK41/css/_style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/expences/detail.php" afterPath="$PROJECT_DIR$/mppt@RSK41/expences/detail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/expences/ledger.php" afterPath="$PROJECT_DIR$/mppt@RSK41/expences/ledger.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/sheets.php" afterPath="$PROJECT_DIR$/mppt@RSK41/sheets.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php" afterPath="$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,11 +27,373 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="123321.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="123321.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mppt@RSK41/123321.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profitsheet.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="497">
+              <caret line="556" column="8" lean-forward="true" selection-start-line="556" selection-start-column="8" selection-end-line="563" selection-end-column="0" />
+              <folding>
+                <marker date="1487042532587" expanded="true" signature="3228:3557" ph="..." />
+                <marker date="1487042532587" expanded="true" signature="4112:4291" ph="SELECT SUM(i... invoice" />
+                <marker date="1487042532587" expanded="true" signature="5041:5283" ph="SELECT SUM(b... bill" />
+                <marker date="1487042532587" expanded="true" signature="5972:6212" ph="SELECT SUM(b... bill" />
+                <marker date="1487042532587" expanded="true" signature="7152:7322" ph="SELECT a.nam... expAccounts" />
+                <marker date="1487042532587" expanded="true" signature="8534:8566" ph="SELECT * FRO... employee" />
+                <marker date="1487042532587" expanded="true" signature="8787:8969" ph="SELECT i.*,c... invoice" />
+                <marker date="1487042532587" expanded="true" signature="9214:9447" ph="SELECT i.id,... invoice" />
+                <marker date="1487042532587" expanded="true" signature="9639:9873" ph="SELECT i.id,... invoice" />
+                <marker date="1487042532587" expanded="true" signature="10238:10401" ph="SELECT SUM(a... advance" />
+                <marker date="1487042532587" expanded="true" signature="10985:11093" ph="SELECT * FRO... absents" />
+                <marker date="1487042532587" expanded="true" signature="11444:11557" ph="SELECT * FRO... salaries" />
+                <marker date="1487042532587" expanded="true" signature="11826:11938" ph="SELECT * FRO... bonuses" />
+                <marker date="1487042532587" expanded="true" signature="13587:13674" ph="SELECT vl.*,... vanledger" />
+                <marker date="1487042532587" expanded="true" signature="15543:15661" ph="SELECT SUM(a... payments_recv" />
+                <marker date="1487042532587" expanded="true" signature="15867:16014" ph="SELECT SUM(i... invoice" />
+                <marker date="1487042532587" expanded="true" signature="16196:16280" ph="SELECT SUM(a... payments_recv" />
+                <marker date="1487042532587" expanded="true" signature="17985:18125" ph="SELECT b.* F... bill" />
+                <marker date="1487042532587" expanded="true" signature="18361:18424" ph="SELECT * FRO... bill_detail" />
+                <marker date="1487042532587" expanded="true" signature="18842:18911" ph="SELECT * FRO... payments_paid" />
+                <marker date="1487042532587" expanded="true" signature="20025:20163" ph="SELECT b.* F... bill" />
+                <marker date="1487042532587" expanded="true" signature="20399:20462" ph="SELECT * FRO... bill_detail" />
+                <marker date="1487042532587" expanded="true" signature="20880:20949" ph="SELECT * FRO... payments_paid" />
+                <marker date="1487042532587" expanded="true" signature="22148:22222" ph="SELECT * FRO... monthPayable" />
+                <marker date="1487042532587" expanded="true" signature="31112:31601" ph="..." />
+                <marker date="1487042532587" expanded="false" signature="31189:31212" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="do.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/do.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="65" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="65" />
+              <folding>
+                <marker date="1487040488211" expanded="true" signature="534:684" ph="INSERT INTO `logs`... " />
+                <marker date="1487040488211" expanded="true" signature="925:1129" ph="SELECT * FRO... alpha" />
+                <marker date="1487040488211" expanded="true" signature="1511:1722" ph="INSERT INTO `login_log`... " />
+                <marker date="1487040488211" expanded="true" signature="1784:2075" ph="INSERT INTO `login_log`... " />
+                <marker date="1487040488211" expanded="true" signature="2203:2319" ph="SELECT * FRO... absents" />
+                <marker date="1487040488211" expanded="true" signature="2535:2614" ph="UPDATE `abse... " />
+                <marker date="1487040488211" expanded="true" signature="2736:2892" ph="INSERT INTO `absents`... " />
+                <marker date="1487040488211" expanded="true" signature="2995:3111" ph="SELECT * FRO... bonuses" />
+                <marker date="1487040488211" expanded="true" signature="3327:3439" ph="UPDATE `bonu... " />
+                <marker date="1487040488211" expanded="true" signature="3561:3750" ph="INSERT INTO `bonuses`... " />
+                <marker date="1487040488211" expanded="true" signature="3891:4015" ph="SELECT * FRO... salaries" />
+                <marker date="1487040488211" expanded="true" signature="4231:4310" ph="UPDATE `sala... " />
+                <marker date="1487040488211" expanded="true" signature="4432:4595" ph="INSERT INTO `salaries`... " />
+                <marker date="1487040488211" expanded="true" signature="4794:4874" ph="UPDATE `empl... " />
+                <marker date="1487040488211" expanded="true" signature="4955:5014" ph="SELECT * FRO... advance" />
+                <marker date="1487040488211" expanded="true" signature="5196:5410" ph="UPDATE `adva... " />
+                <marker date="1487040488211" expanded="true" signature="5638:6088" ph="INSERT INTO `alpha`... " />
+                <marker date="1487040488211" expanded="true" signature="6386:6774" ph="INSERT INTO `customers`... " />
+                <marker date="1487040488211" expanded="true" signature="7220:7261" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="7364:7397" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="7699:7735" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="8395:8548" ph="INSERT INTO `advance`... " />
+                <marker date="1487040488211" expanded="true" signature="8940:9124" ph="UPDATE `adva... " />
+                <marker date="1487040488211" expanded="true" signature="9456:9630" ph="INSERT INTO `expences`... " />
+                <marker date="1487040488211" expanded="true" signature="9871:10061" ph="INSERT INTO `Ledgers_bill`... " />
+                <marker date="1487040488211" expanded="true" signature="10305:10371" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="10593:10952" ph="INSERT INTO `vanledger`... " />
+                <marker date="1487040488211" expanded="true" signature="11206:11261" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="11513:11571" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="11824:11979" ph="INSERT INTO `expences`... " />
+                <marker date="1487040488211" expanded="true" signature="12241:12431" ph="INSERT INTO `Ledgers_bill`... " />
+                <marker date="1487040488211" expanded="true" signature="12684:12786" ph="INSERT INTO `expAccounts`... " />
+                <marker date="1487040488211" expanded="true" signature="13035:13105" ph="INSERT INTO `Ledgers`... " />
+                <marker date="1487040488211" expanded="true" signature="13342:13478" ph="INSERT INTO `vendor`... " />
+                <marker date="1487040488211" expanded="true" signature="13619:13684" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="13848:13908" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="14157:14222" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="14461:14526" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="14795:14860" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="15113:15201" ph="SELECT * FRO... invoice" />
+                <marker date="1487040488211" expanded="true" signature="15406:15468" ph="SELECT * FRO... invoice_detail" />
+                <marker date="1487040488211" expanded="true" signature="16213:16277" ph="SELECT * FRO... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="16528:16589" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="17211:17306" ph="SELECT * FRO... monthPayable" />
+                <marker date="1487040488211" expanded="true" signature="17504:17620" ph="INSERT INTO `monthPayable`... " />
+                <marker date="1487040488211" expanded="true" signature="17853:17898" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="17942:18025" ph="UPDATE `mont... " />
+                <marker date="1487040488211" expanded="true" signature="18296:18358" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="18648:18711" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="18911:19177" ph="INSERT INTO `invoice`... " />
+                <marker date="1487040488211" expanded="true" signature="19272:19357" ph="SELECT * FRO... invoice" />
+                <marker date="1487040488211" expanded="true" signature="19607:19867" ph="INSERT INTO `payments_recv`... " />
+                <marker date="1487040488211" expanded="true" signature="20062:20340" ph="INSERT INTO `invoice_detail`... " />
+                <marker date="1487040488211" expanded="true" signature="20602:20662" ph="SELECT * FRO... vendor" />
+                <marker date="1487040488211" expanded="true" signature="20860:20976" ph="INSERT INTO `bill`... " />
+                <marker date="1487040488211" expanded="true" signature="21049:21071" ph="SELECT id FR... bill" />
+                <marker date="1487040488211" expanded="true" signature="21049:21095" ph="SELECT id FR... bill" />
+                <marker date="1487040488211" expanded="true" signature="21375:21439" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="21651:21875" ph="INSERT INTO `bill_detail`... " />
+                <marker date="1487040488211" expanded="true" signature="22111:22171" ph="SELECT * FRO... vendor" />
+                <marker date="1487040488211" expanded="true" signature="22369:22494" ph="UPDATE `bill... " />
+                <marker date="1487040488211" expanded="true" signature="22718:22782" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="23048:23108" ph="SELECT * FRO... bill_detail" />
+                <marker date="1487040488211" expanded="true" signature="23248:23488" ph="UPDATE `bill... " />
+                <marker date="1487040488211" expanded="true" signature="23612:23838" ph="INSERT INTO `bill_detail`... " />
+                <marker date="1487040488211" expanded="true" signature="24108:24170" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="24394:24457" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="24721:24995" ph="UPDATE `invo... " />
+                <marker date="1487040488211" expanded="true" signature="25159:25227" ph="SELECT * FRO... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="25416:25660" ph="UPDATE `paym... " />
+                <marker date="1487040488211" expanded="true" signature="25793:26049" ph="INSERT INTO `payments_recv`... " />
+                <marker date="1487040488211" expanded="true" signature="26214:26282" ph="SELECT * FRO... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="26470:26519" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="26742:26803" ph="SELECT * FRO... invoice_detail" />
+                <marker date="1487040488211" expanded="true" signature="26924:27186" ph="UPDATE `invo... " />
+                <marker date="1487040488211" expanded="true" signature="27310:27584" ph="INSERT INTO `invoice_detail`... " />
+                <marker date="1487040488211" expanded="true" signature="27805:27902" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="28049:28145" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="28291:28665" ph="INSERT INTO `payments_recv`... " />
+                <marker date="1487040488211" expanded="true" signature="28797:28857" ph="SELECT * FRO... vendor" />
+                <marker date="1487040488211" expanded="true" signature="29004:29065" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="29211:29478" ph="INSERT INTO `payments_paid`... " />
+                <marker date="1487040488211" expanded="true" signature="29613:29678" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="29825:29889" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="30036:30400" ph="UPDATE `paym... " />
+                <marker date="1487040488211" expanded="true" signature="30557:30617" ph="SELECT * FRO... vendor" />
+                <marker date="1487040488211" expanded="true" signature="30764:30825" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="30972:31243" ph="UPDATE `paym... " />
+                <marker date="1487040488211" expanded="true" signature="31394:31459" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="31663:31724" ph="SELECT * FRO... invoice" />
+                <marker date="1487040488211" expanded="true" signature="31861:31923" ph="SELECT * FRO... invoice_detail" />
+                <marker date="1487040488211" expanded="true" signature="32275:32339" ph="SELECT * FRO... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="32724:32789" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="32936:33015" ph="SELECT * FRO... invoice" />
+                <marker date="1487040488211" expanded="true" signature="33244:33304" ph="SELECT * FRO... vendor" />
+                <marker date="1487040488211" expanded="true" signature="33472:33546" ph="SELECT * FRO... bill" />
+                <marker date="1487040488211" expanded="true" signature="33771:33839" ph="INSERT INTO `sizes`... " />
+                <marker date="1487040488211" expanded="true" signature="33962:34013" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="34231:34465" ph="INSERT INTO `employee`... " />
+                <marker date="1487040488211" expanded="true" signature="34710:34794" ph="UPDATE `expA... " />
+                <marker date="1487040488211" expanded="true" signature="35041:35121" ph="UPDATE `Ledg... " />
+                <marker date="1487040488211" expanded="true" signature="35363:35426" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="35546:35836" ph="UPDATE `cust... " />
+                <marker date="1487040488211" expanded="true" signature="35933:36015" ph="UPDATE invoi... " />
+                <marker date="1487040488211" expanded="true" signature="36164:36283" ph="UPDATE invoi... " />
+                <marker date="1487040488211" expanded="true" signature="36593:36774" ph="UPDATE `expe... " />
+                <marker date="1487040488211" expanded="true" signature="37019:37176" ph="UPDATE `Ledg... " />
+                <marker date="1487040488211" expanded="true" signature="37436:37584" ph="UPDATE `expe... " />
+                <marker date="1487040488211" expanded="true" signature="37832:37976" ph="UPDATE `vend... " />
+                <marker date="1487040488211" expanded="true" signature="38214:38456" ph="UPDATE `empl... " />
+                <marker date="1487040488211" expanded="true" signature="38694:38749" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="38988:39041" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="39279:39338" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="39581:39635" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="39880:39938" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="40188:40245" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="40492:40545" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="40639:40698" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="40938:40990" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="41228:41282" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="41515:41594" ph="UPDATE `misc... " />
+                <marker date="1487040488211" expanded="true" signature="41822:42040" ph="INSERT INTO `admin`... " />
+                <marker date="1487040488211" expanded="true" signature="42305:42355" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="43474:43797" ph="SELECT p.id,... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="43819:44076" ph="SELECT p.id,... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="46552:46781" ph="SELECT p.id,... payments_paid" />
+                <marker date="1487040488211" expanded="true" signature="48565:48651" ph="SELECT c.* F... customers" />
+                <marker date="1487040488211" expanded="true" signature="48827:48882" ph="SELECT * FRO... employee" />
+                <marker date="1487040488211" expanded="true" signature="49210:49235" ph="DELETE FROM " />
+                <marker date="1487040488211" expanded="true" signature="49311:49643" ph="INSERT INTO tmp... " />
+                <marker date="1487040488211" expanded="true" signature="49359:49643" ph="SELECT i.no,... no" />
+                <marker date="1487040488211" expanded="true" signature="49410:49551" ph="SELECT i.no,... invoice" />
+                <marker date="1487040488211" expanded="true" signature="49718:49852" ph="INSERT INTO tmp... " />
+                <marker date="1487040488211" expanded="true" signature="49766:49852" ph="SELECT id,re... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="49927:49944" ph="SELECT * FRO... tmp" />
+                <marker date="1487040488211" expanded="true" signature="50426:50460" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="50515:50549" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="50570:50654" ph="SELECT * FRO... invoice" />
+                <marker date="1487040488211" expanded="true" signature="50855:50960" ph="SELECT SUM(c... invoice_detail" />
+                <marker date="1487040488211" expanded="true" signature="51112:51202" ph="SELECT * FRO... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="53695:53774" ph="SELECT * FRO... vendor" />
+                <marker date="1487040488211" expanded="true" signature="54005:54039" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="54095:54129" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="55448:55591" ph="SELECT e.*,a... expences" />
+                <marker date="1487040488211" expanded="true" signature="55613:55820" ph="SELECT e.*,a... expences" />
+                <marker date="1487040488211" expanded="true" signature="56051:56085" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="56141:56175" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="57046:57182" ph="SELECT e.*,a... Ledgers_bill" />
+                <marker date="1487040488211" expanded="true" signature="57413:57447" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="57503:57537" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="58377:58472" ph="SELECT * FRO... expences" />
+                <marker date="1487040488211" expanded="true" signature="58715:58749" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="58807:58841" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="59681:59817" ph="SELECT e.*,a... Ledgers_bill" />
+                <marker date="1487040488211" expanded="true" signature="60060:60094" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="60152:60186" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="61042:61127" ph="SELECT * FRO... expAccounts" />
+                <marker date="1487040488211" expanded="true" signature="61308:61384" ph="SELECT SUM(a... expences" />
+                <marker date="1487040488211" expanded="true" signature="61631:61680" ph="SELECT * FRO... expAccounts" />
+                <marker date="1487040488211" expanded="true" signature="61852:61929" ph="SELECT SUM(a... expences" />
+                <marker date="1487040488211" expanded="true" signature="62176:62222" ph="SELECT * FRO... expAccounts" />
+                <marker date="1487040488211" expanded="true" signature="62405:62439" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="62495:62529" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="63533:63595" ph="SELECT a.* F... Ledgers" />
+                <marker date="1487040488211" expanded="true" signature="63830:63888" ph="SELECT * FRO... Ledgers_bill" />
+                <marker date="1487040488211" expanded="true" signature="64254:64288" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="64344:64378" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="65170:65252" ph="SELECT * FRO... login_log" />
+                <marker date="1487040488211" expanded="true" signature="65477:65511" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="65566:65600" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="66123:66133" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="66173:66185" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="66717:66855" ph="SELECT l.*,C... logs" />
+                <marker date="1487040488211" expanded="true" signature="67086:67120" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="67176:67210" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="68208:68329" ph="SELECT b.*,v... bill" />
+                <marker date="1487040488211" expanded="true" signature="68349:68528" ph="SELECT b.*,v... bill" />
+                <marker date="1487040488211" expanded="true" signature="68694:68829" ph="SELECT b.ref... bill" />
+                <marker date="1487040488211" expanded="true" signature="68694:68831" ph="SELECT b.id,... bill" />
+                <marker date="1487040488211" expanded="true" signature="68980:69121" ph="SELECT p.bil... bill" />
+                <marker date="1487040488211" expanded="true" signature="72161:72192" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="72398:72524" ph="SELECT c.id,... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="72716:72741" ph="SELECT * FRO... customers" />
+                <marker date="1487040488211" expanded="true" signature="73487:73688" ph="SELECT i.*,c... invoice" />
+                <marker date="1487040488211" expanded="true" signature="74049:74110" ph="SELECT * FRO... invoice_detail" />
+                <marker date="1487040488211" expanded="true" signature="74831:74894" ph="SELECT * FRO... payments_recv" />
+                <marker date="1487040488211" expanded="true" signature="79954:79969" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="80041:80056" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="80234:80249" ph="..." />
+                <marker date="1487040488211" expanded="true" signature="80321:80336" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sheets.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="27" column="9" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding>
+                <marker date="1487051235295" expanded="true" signature="2271:2304" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="incomestatement.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/incomestatement.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="572">
+              <caret line="192" column="24" lean-forward="true" selection-start-line="192" selection-start-column="24" selection-end-line="192" selection-end-column="24" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h1#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#5;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#6;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#7;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#8;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1487053645563" expanded="true" signature="3955:4134" ph="SELECT SUM(i... invoice" />
+                <marker date="1487053645563" expanded="true" signature="4719:4961" ph="SELECT SUM(b... bill" />
+                <marker date="1487053645563" expanded="true" signature="5247:5487" ph="SELECT SUM(b... bill" />
+                <marker date="1487053645563" expanded="true" signature="6681:6851" ph="SELECT a.nam... expAccounts" />
+                <marker date="1487053645563" expanded="true" signature="7713:7745" ph="SELECT * FRO... employee" />
+                <marker date="1487053645563" expanded="true" signature="8022:8204" ph="SELECT i.*,c... invoice" />
+                <marker date="1487053645563" expanded="true" signature="8497:8730" ph="SELECT i.id,... invoice" />
+                <marker date="1487053645563" expanded="true" signature="8954:9188" ph="SELECT i.id,... invoice" />
+                <marker date="1487053645563" expanded="true" signature="9609:9772" ph="SELECT SUM(a... advance" />
+                <marker date="1487053645563" expanded="true" signature="10492:10600" ph="SELECT SUM(a... absents" />
+                <marker date="1487053645563" expanded="true" signature="10962:11071" ph="SELECT * FRO... salaries" />
+                <marker date="1487053645563" expanded="true" signature="11404:11512" ph="SELECT * FRO... bonuses" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="incomestatementYearly.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/incomestatementYearly.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="182" column="51" lean-forward="false" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="56" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h1#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#5;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#6;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#7;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#8;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1487053469035" expanded="true" signature="1123:1133" ph="..." />
+                <marker date="1487053469035" expanded="true" signature="1478:1649" ph="SELECT SUM(i... invoice" />
+                <marker date="1487053469035" expanded="true" signature="1693:1864" ph="SELECT SUM(i... invoice" />
+                <marker date="1487053469035" expanded="true" signature="2485:2719" ph="SELECT SUM(b... bill" />
+                <marker date="1487053469035" expanded="true" signature="2764:2998" ph="SELECT SUM(b... bill" />
+                <marker date="1487053469035" expanded="true" signature="3320:3552" ph="SELECT SUM(b... bill" />
+                <marker date="1487053469035" expanded="true" signature="3597:3829" ph="SELECT SUM(b... bill" />
+                <marker date="1487053469035" expanded="true" signature="5059:5221" ph="SELECT a.nam... expAccounts" />
+                <marker date="1487053469035" expanded="true" signature="5265:5427" ph="SELECT a.nam... expAccounts" />
+                <marker date="1487053469035" expanded="true" signature="6289:6321" ph="SELECT * FRO... employee" />
+                <marker date="1487053469035" expanded="true" signature="6637:6811" ph="SELECT i.*,c... invoice" />
+                <marker date="1487053469035" expanded="true" signature="6863:7037" ph="SELECT i.*,c... invoice" />
+                <marker date="1487053469035" expanded="true" signature="7373:7598" ph="SELECT i.id,... invoice" />
+                <marker date="1487053469035" expanded="true" signature="7658:7883" ph="SELECT i.id,... invoice" />
+                <marker date="1487053469035" expanded="true" signature="8151:8377" ph="SELECT i.id,... invoice" />
+                <marker date="1487053469035" expanded="true" signature="8437:8663" ph="SELECT i.id,... invoice" />
+                <marker date="1487053469035" expanded="true" signature="9124:9281" ph="SELECT SUM(a... advance" />
+                <marker date="1487053469035" expanded="true" signature="9333:9490" ph="SELECT SUM(a... advance" />
+                <marker date="1487053469035" expanded="true" signature="10249:10368" ph="SELECT * FRO... absents" />
+                <marker date="1487053469035" expanded="true" signature="10249:10386" ph="SELECT SUM(a... absents" />
+                <marker date="1487053469035" expanded="true" signature="10438:10574" ph="SELECT * FRO... absents" />
+                <marker date="1487053469035" expanded="true" signature="10976:11112" ph="SELECT * FRO... salaries" />
+                <marker date="1487053469035" expanded="true" signature="11164:11299" ph="SELECT SUM(s... salaries" />
+                <marker date="1487053469035" expanded="true" signature="11672:11770" ph="SELECT * FRO... bonuses" />
+                <marker date="1487053469035" expanded="true" signature="11672:11806" ph="SELECT * FRO... bonuses" />
+                <marker date="1487053469035" expanded="true" signature="11672:12069" ph="SELECT * FRO... bonuses" />
+                <marker date="1487053469035" expanded="true" signature="11858:11991" ph="SELECT SUM(b... bonuses" />
+                <marker date="1487053469035" expanded="true" signature="14513:14536" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="accounts.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/ledgers/accounts.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="77" lean-forward="true" selection-start-line="18" selection-start-column="77" selection-end-line="18" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ledger.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/expences/ledger.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="67" column="33" lean-forward="false" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+              <folding>
+                <marker date="1487050364647" expanded="true" signature="3688:3724" ph="SELECT e.* F... expences" />
+                <marker date="1487050364647" expanded="true" signature="3740:3830" ph="SELECT e.* F... expences" />
+                <marker date="1487050364647" expanded="true" signature="3985:4052" ph="SELECT name expAccounts" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mppt@RSK41/css/_style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="465" column="1" lean-forward="true" selection-start-line="465" selection-start-column="1" selection-end-line="465" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -66,6 +430,7 @@
       <find>delete</find>
       <find>update</find>
       <find>updatebilltab</find>
+      <find>inbox</find>
     </findStrings>
     <replaceStrings>
       <replace>$GLOBALS['con']</replace>
@@ -83,7 +448,6 @@
         <option value="$PROJECT_DIR$/mppt@RSK41/custMain.php" />
         <option value="$PROJECT_DIR$/admin/admins.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/sheets/closingBalance.php" />
-        <option value="$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/index.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/vanledger/vanledger.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/employees/oldsalarysheet.php" />
@@ -93,8 +457,6 @@
         <option value="$PROJECT_DIR$/mppt@RSK41/employees.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/expences.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/ledgers.php" />
-        <option value="$PROJECT_DIR$/mppt@RSK41/sheets.php" />
-        <option value="$PROJECT_DIR$/mppt@RSK41/css/_style.css" />
         <option value="$PROJECT_DIR$/mppt@RSK41/employees/salarySheetPrint.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/employees/salarysheet.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/vendors/bill_detail.php" />
@@ -103,6 +465,13 @@
         <option value="$PROJECT_DIR$/mppt@RSK41/do.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/vendors/bill_add.php" />
         <option value="$PROJECT_DIR$/mppt@RSK41/vendors/vendor_ledger.php" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/css/_style.css" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/expences/ledger.php" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/expences/detail.php" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/sheets.php" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/sheets/incomestatementYearly.php" />
+        <option value="$PROJECT_DIR$/mppt@RSK41/sheets/incomestatement.php" />
       </list>
     </option>
   </component>
@@ -173,7 +542,25 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendors" />
+              <option name="myItemId" value="sheets" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Margalla-Packages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Margalla-Packages" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mppt@RSK41" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -263,15 +650,15 @@
       <workItem from="1486772180730" duration="14522000" />
       <workItem from="1486841127582" duration="59000" />
       <workItem from="1486935907704" duration="5849000" />
-      <workItem from="1487024016817" duration="16132000" />
+      <workItem from="1487024016817" duration="23788000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37589000" />
+    <option name="totallyTimeSpent" value="45245000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="80" width="1280" height="1000" extended-state="6" />
+    <frame x="0" y="80" width="1280" height="1000" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20234375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -304,310 +691,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/css/_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10785">
-          <caret line="719" column="13" lean-forward="false" selection-start-line="719" selection-start-column="13" selection-end-line="719" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/closingBalance.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3450">
-          <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding>
-            <marker date="1486780532827" expanded="true" signature="119:298" ph="SELECT SUM(i... invoice" />
-            <marker date="1486780532827" expanded="true" signature="443:686" ph="SELECT SUM(b... bill" />
-            <marker date="1486780532827" expanded="true" signature="881:1122" ph="SELECT SUM(b... bill" />
-            <marker date="1486780532827" expanded="true" signature="1324:1494" ph="SELECT a.nam... expAccounts" />
-            <marker date="1486780532827" expanded="true" signature="1662:1694" ph="SELECT * FRO... employee" />
-            <marker date="1486780532827" expanded="true" signature="1876:2058" ph="SELECT i.*,c... invoice" />
-            <marker date="1486780532827" expanded="true" signature="2254:2483" ph="SELECT i.id,... invoice" />
-            <marker date="1486780532827" expanded="true" signature="2634:2864" ph="SELECT i.id,... invoice" />
-            <marker date="1486780532827" expanded="true" signature="3167:3330" ph="SELECT SUM(a... advance" />
-            <marker date="1486780532827" expanded="true" signature="3752:3848" ph="SELECT * FRO... absents" />
-            <marker date="1486780532827" expanded="true" signature="4130:4231" ph="SELECT * FRO... salaries" />
-            <marker date="1486780532827" expanded="true" signature="4437:4537" ph="SELECT * FRO... bonuses" />
-            <marker date="1486780532827" expanded="true" signature="5091:5178" ph="SELECT vl.*,... vanledger" />
-            <marker date="1486780532827" expanded="true" signature="5851:5969" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486780532827" expanded="true" signature="6126:6273" ph="SELECT SUM(i... invoice" />
-            <marker date="1486780532827" expanded="true" signature="6422:6506" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486780532827" expanded="true" signature="6701:6841" ph="SELECT b.* F... bill" />
-            <marker date="1486780532827" expanded="true" signature="6989:7049" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486780532827" expanded="true" signature="7310:7375" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486780532827" expanded="true" signature="7674:7812" ph="SELECT b.* F... bill" />
-            <marker date="1486780532827" expanded="true" signature="7960:8020" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486780532827" expanded="true" signature="8281:8346" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486780532827" expanded="true" signature="8664:8738" ph="SELECT * FRO... monthPayable" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486786105963" expanded="true" signature="3228:3557" ph="..." />
-            <marker date="1486786105963" expanded="true" signature="4112:4291" ph="SELECT SUM(i... invoice" />
-            <marker date="1486786105963" expanded="true" signature="5041:5284" ph="SELECT SUM(b... bill" />
-            <marker date="1486786105963" expanded="true" signature="5973:6214" ph="SELECT SUM(b... bill" />
-            <marker date="1486786105963" expanded="true" signature="7154:7324" ph="SELECT a.nam... expAccounts" />
-            <marker date="1486786105963" expanded="true" signature="8536:8568" ph="SELECT * FRO... employee" />
-            <marker date="1486786105963" expanded="true" signature="8789:8971" ph="SELECT i.*,c... invoice" />
-            <marker date="1486786105963" expanded="true" signature="9216:9449" ph="SELECT i.id,... invoice" />
-            <marker date="1486786105963" expanded="true" signature="9641:9875" ph="SELECT i.id,... invoice" />
-            <marker date="1486786105963" expanded="true" signature="10240:10403" ph="SELECT SUM(a... advance" />
-            <marker date="1486786105963" expanded="true" signature="10987:11095" ph="SELECT * FRO... absents" />
-            <marker date="1486786105963" expanded="true" signature="11446:11559" ph="SELECT * FRO... salaries" />
-            <marker date="1486786105963" expanded="true" signature="11828:11940" ph="SELECT * FRO... bonuses" />
-            <marker date="1486786105963" expanded="true" signature="13589:13676" ph="SELECT vl.*,... vanledger" />
-            <marker date="1486786105963" expanded="true" signature="15545:15663" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486786105963" expanded="true" signature="15869:16016" ph="SELECT SUM(i... invoice" />
-            <marker date="1486786105963" expanded="true" signature="16198:16282" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486786105963" expanded="true" signature="17987:18127" ph="SELECT b.* F... bill" />
-            <marker date="1486786105963" expanded="true" signature="18363:18427" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486786105963" expanded="true" signature="18845:18914" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486786105963" expanded="true" signature="20028:20166" ph="SELECT b.* F... bill" />
-            <marker date="1486786105963" expanded="true" signature="20402:20466" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486786105963" expanded="true" signature="20884:20953" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486786105963" expanded="true" signature="22152:22226" ph="SELECT * FRO... monthPayable" />
-            <marker date="1486786105963" expanded="true" signature="31116:31605" ph="..." />
-            <marker date="1486786105963" expanded="false" signature="31193:31216" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/employees.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding>
-            <marker date="1487026266143" expanded="true" signature="284:316" ph="SELECT * FRO... employee" />
-            <marker date="1487026266143" expanded="true" signature="2818:2851" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/123321.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/do.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="44" lean-forward="false" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
-          <folding>
-            <marker date="1487040488211" expanded="true" signature="534:684" ph="INSERT INTO `logs`... " />
-            <marker date="1487040488211" expanded="true" signature="925:1129" ph="SELECT * FRO... alpha" />
-            <marker date="1487040488211" expanded="true" signature="1511:1722" ph="INSERT INTO `login_log`... " />
-            <marker date="1487040488211" expanded="true" signature="1784:2075" ph="INSERT INTO `login_log`... " />
-            <marker date="1487040488211" expanded="true" signature="2203:2319" ph="SELECT * FRO... absents" />
-            <marker date="1487040488211" expanded="true" signature="2535:2614" ph="UPDATE `abse... " />
-            <marker date="1487040488211" expanded="true" signature="2736:2892" ph="INSERT INTO `absents`... " />
-            <marker date="1487040488211" expanded="true" signature="2995:3111" ph="SELECT * FRO... bonuses" />
-            <marker date="1487040488211" expanded="true" signature="3327:3439" ph="UPDATE `bonu... " />
-            <marker date="1487040488211" expanded="true" signature="3561:3750" ph="INSERT INTO `bonuses`... " />
-            <marker date="1487040488211" expanded="true" signature="3891:4015" ph="SELECT * FRO... salaries" />
-            <marker date="1487040488211" expanded="true" signature="4231:4310" ph="UPDATE `sala... " />
-            <marker date="1487040488211" expanded="true" signature="4432:4595" ph="INSERT INTO `salaries`... " />
-            <marker date="1487040488211" expanded="true" signature="4794:4874" ph="UPDATE `empl... " />
-            <marker date="1487040488211" expanded="true" signature="4955:5014" ph="SELECT * FRO... advance" />
-            <marker date="1487040488211" expanded="true" signature="5196:5410" ph="UPDATE `adva... " />
-            <marker date="1487040488211" expanded="true" signature="5638:6088" ph="INSERT INTO `alpha`... " />
-            <marker date="1487040488211" expanded="true" signature="6386:6774" ph="INSERT INTO `customers`... " />
-            <marker date="1487040488211" expanded="true" signature="7220:7261" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="7364:7397" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="7699:7735" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="8395:8548" ph="INSERT INTO `advance`... " />
-            <marker date="1487040488211" expanded="true" signature="8940:9124" ph="UPDATE `adva... " />
-            <marker date="1487040488211" expanded="true" signature="9456:9630" ph="INSERT INTO `expences`... " />
-            <marker date="1487040488211" expanded="true" signature="9871:10061" ph="INSERT INTO `Ledgers_bill`... " />
-            <marker date="1487040488211" expanded="true" signature="10305:10371" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="10593:10952" ph="INSERT INTO `vanledger`... " />
-            <marker date="1487040488211" expanded="true" signature="11206:11261" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="11513:11571" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="11824:11979" ph="INSERT INTO `expences`... " />
-            <marker date="1487040488211" expanded="true" signature="12241:12431" ph="INSERT INTO `Ledgers_bill`... " />
-            <marker date="1487040488211" expanded="true" signature="12684:12786" ph="INSERT INTO `expAccounts`... " />
-            <marker date="1487040488211" expanded="true" signature="13035:13105" ph="INSERT INTO `Ledgers`... " />
-            <marker date="1487040488211" expanded="true" signature="13342:13478" ph="INSERT INTO `vendor`... " />
-            <marker date="1487040488211" expanded="true" signature="13619:13684" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="13848:13908" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="14157:14222" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="14461:14526" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="14795:14860" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="15113:15201" ph="SELECT * FRO... invoice" />
-            <marker date="1487040488211" expanded="true" signature="15406:15468" ph="SELECT * FRO... invoice_detail" />
-            <marker date="1487040488211" expanded="true" signature="16213:16277" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="16528:16589" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="17211:17306" ph="SELECT * FRO... monthPayable" />
-            <marker date="1487040488211" expanded="true" signature="17504:17620" ph="INSERT INTO `monthPayable`... " />
-            <marker date="1487040488211" expanded="true" signature="17853:17898" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="17942:18025" ph="UPDATE `mont... " />
-            <marker date="1487040488211" expanded="true" signature="18296:18358" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="18648:18711" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="18911:19177" ph="INSERT INTO `invoice`... " />
-            <marker date="1487040488211" expanded="true" signature="19272:19357" ph="SELECT * FRO... invoice" />
-            <marker date="1487040488211" expanded="true" signature="19607:19867" ph="INSERT INTO `payments_recv`... " />
-            <marker date="1487040488211" expanded="true" signature="20062:20340" ph="INSERT INTO `invoice_detail`... " />
-            <marker date="1487040488211" expanded="true" signature="20602:20662" ph="SELECT * FRO... vendor" />
-            <marker date="1487040488211" expanded="true" signature="20860:20976" ph="INSERT INTO `bill`... " />
-            <marker date="1487040488211" expanded="true" signature="21049:21071" ph="SELECT id FR... bill" />
-            <marker date="1487040488211" expanded="true" signature="21049:21095" ph="SELECT id FR... bill" />
-            <marker date="1487040488211" expanded="true" signature="21375:21439" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="21651:21875" ph="INSERT INTO `bill_detail`... " />
-            <marker date="1487040488211" expanded="true" signature="22111:22171" ph="SELECT * FRO... vendor" />
-            <marker date="1487040488211" expanded="true" signature="22369:22494" ph="UPDATE `bill... " />
-            <marker date="1487040488211" expanded="true" signature="22718:22782" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="23048:23108" ph="SELECT * FRO... bill_detail" />
-            <marker date="1487040488211" expanded="true" signature="23248:23488" ph="UPDATE `bill... " />
-            <marker date="1487040488211" expanded="true" signature="23612:23838" ph="INSERT INTO `bill_detail`... " />
-            <marker date="1487040488211" expanded="true" signature="24108:24170" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="24394:24457" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="24721:24995" ph="UPDATE `invo... " />
-            <marker date="1487040488211" expanded="true" signature="25159:25227" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="25416:25660" ph="UPDATE `paym... " />
-            <marker date="1487040488211" expanded="true" signature="25793:26049" ph="INSERT INTO `payments_recv`... " />
-            <marker date="1487040488211" expanded="true" signature="26214:26282" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="26470:26519" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="26742:26803" ph="SELECT * FRO... invoice_detail" />
-            <marker date="1487040488211" expanded="true" signature="26924:27186" ph="UPDATE `invo... " />
-            <marker date="1487040488211" expanded="true" signature="27310:27584" ph="INSERT INTO `invoice_detail`... " />
-            <marker date="1487040488211" expanded="true" signature="27805:27902" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="28049:28145" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="28291:28665" ph="INSERT INTO `payments_recv`... " />
-            <marker date="1487040488211" expanded="true" signature="28797:28857" ph="SELECT * FRO... vendor" />
-            <marker date="1487040488211" expanded="true" signature="29004:29065" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="29211:29478" ph="INSERT INTO `payments_paid`... " />
-            <marker date="1487040488211" expanded="true" signature="29613:29678" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="29825:29889" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="30036:30400" ph="UPDATE `paym... " />
-            <marker date="1487040488211" expanded="true" signature="30557:30617" ph="SELECT * FRO... vendor" />
-            <marker date="1487040488211" expanded="true" signature="30764:30825" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="30972:31243" ph="UPDATE `paym... " />
-            <marker date="1487040488211" expanded="true" signature="31394:31459" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="31663:31724" ph="SELECT * FRO... invoice" />
-            <marker date="1487040488211" expanded="true" signature="31861:31923" ph="SELECT * FRO... invoice_detail" />
-            <marker date="1487040488211" expanded="true" signature="32275:32339" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="32724:32789" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="32936:33015" ph="SELECT * FRO... invoice" />
-            <marker date="1487040488211" expanded="true" signature="33244:33304" ph="SELECT * FRO... vendor" />
-            <marker date="1487040488211" expanded="true" signature="33472:33546" ph="SELECT * FRO... bill" />
-            <marker date="1487040488211" expanded="true" signature="33771:33839" ph="INSERT INTO `sizes`... " />
-            <marker date="1487040488211" expanded="true" signature="33962:34013" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="34231:34465" ph="INSERT INTO `employee`... " />
-            <marker date="1487040488211" expanded="true" signature="34710:34794" ph="UPDATE `expA... " />
-            <marker date="1487040488211" expanded="true" signature="35041:35121" ph="UPDATE `Ledg... " />
-            <marker date="1487040488211" expanded="true" signature="35363:35426" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="35546:35836" ph="UPDATE `cust... " />
-            <marker date="1487040488211" expanded="true" signature="35933:36015" ph="UPDATE invoi... " />
-            <marker date="1487040488211" expanded="true" signature="36164:36283" ph="UPDATE invoi... " />
-            <marker date="1487040488211" expanded="true" signature="36593:36774" ph="UPDATE `expe... " />
-            <marker date="1487040488211" expanded="true" signature="37019:37176" ph="UPDATE `Ledg... " />
-            <marker date="1487040488211" expanded="true" signature="37436:37584" ph="UPDATE `expe... " />
-            <marker date="1487040488211" expanded="true" signature="37832:37976" ph="UPDATE `vend... " />
-            <marker date="1487040488211" expanded="true" signature="38214:38456" ph="UPDATE `empl... " />
-            <marker date="1487040488211" expanded="true" signature="38694:38749" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="38988:39041" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="39279:39338" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="39581:39635" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="39880:39938" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="40188:40245" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="40492:40545" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="40639:40698" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="40938:40990" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="41228:41282" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="41515:41594" ph="UPDATE `misc... " />
-            <marker date="1487040488211" expanded="true" signature="41822:42040" ph="INSERT INTO `admin`... " />
-            <marker date="1487040488211" expanded="true" signature="42305:42355" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="43474:43797" ph="SELECT p.id,... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="43819:44076" ph="SELECT p.id,... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="46552:46781" ph="SELECT p.id,... payments_paid" />
-            <marker date="1487040488211" expanded="true" signature="48565:48651" ph="SELECT c.* F... customers" />
-            <marker date="1487040488211" expanded="true" signature="48827:48882" ph="SELECT * FRO... employee" />
-            <marker date="1487040488211" expanded="true" signature="49210:49235" ph="DELETE FROM " />
-            <marker date="1487040488211" expanded="true" signature="49311:49643" ph="INSERT INTO tmp... " />
-            <marker date="1487040488211" expanded="true" signature="49359:49643" ph="SELECT i.no,... no" />
-            <marker date="1487040488211" expanded="true" signature="49410:49551" ph="SELECT i.no,... invoice" />
-            <marker date="1487040488211" expanded="true" signature="49718:49852" ph="INSERT INTO tmp... " />
-            <marker date="1487040488211" expanded="true" signature="49766:49852" ph="SELECT id,re... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="49927:49944" ph="SELECT * FRO... tmp" />
-            <marker date="1487040488211" expanded="true" signature="50426:50460" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="50515:50549" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="50570:50654" ph="SELECT * FRO... invoice" />
-            <marker date="1487040488211" expanded="true" signature="50855:50960" ph="SELECT SUM(c... invoice_detail" />
-            <marker date="1487040488211" expanded="true" signature="51112:51202" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="53695:53774" ph="SELECT * FRO... vendor" />
-            <marker date="1487040488211" expanded="true" signature="54005:54039" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="54095:54129" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="55448:55591" ph="SELECT e.*,a... expences" />
-            <marker date="1487040488211" expanded="true" signature="55613:55820" ph="SELECT e.*,a... expences" />
-            <marker date="1487040488211" expanded="true" signature="56051:56085" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="56141:56175" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="57046:57182" ph="SELECT e.*,a... Ledgers_bill" />
-            <marker date="1487040488211" expanded="true" signature="57413:57447" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="57503:57537" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="58377:58472" ph="SELECT * FRO... expences" />
-            <marker date="1487040488211" expanded="true" signature="58715:58749" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="58807:58841" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="59681:59817" ph="SELECT e.*,a... Ledgers_bill" />
-            <marker date="1487040488211" expanded="true" signature="60060:60094" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="60152:60186" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="61042:61127" ph="SELECT * FRO... expAccounts" />
-            <marker date="1487040488211" expanded="true" signature="61308:61384" ph="SELECT SUM(a... expences" />
-            <marker date="1487040488211" expanded="true" signature="61631:61680" ph="SELECT * FRO... expAccounts" />
-            <marker date="1487040488211" expanded="true" signature="61852:61929" ph="SELECT SUM(a... expences" />
-            <marker date="1487040488211" expanded="true" signature="62176:62222" ph="SELECT * FRO... expAccounts" />
-            <marker date="1487040488211" expanded="true" signature="62405:62439" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="62495:62529" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="63533:63595" ph="SELECT a.* F... Ledgers" />
-            <marker date="1487040488211" expanded="true" signature="63830:63888" ph="SELECT * FRO... Ledgers_bill" />
-            <marker date="1487040488211" expanded="true" signature="64254:64288" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="64344:64378" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="65170:65252" ph="SELECT * FRO... login_log" />
-            <marker date="1487040488211" expanded="true" signature="65477:65511" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="65566:65600" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="66123:66133" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="66173:66185" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="66717:66855" ph="SELECT l.*,C... logs" />
-            <marker date="1487040488211" expanded="true" signature="67086:67120" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="67176:67210" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="68208:68329" ph="SELECT b.*,v... bill" />
-            <marker date="1487040488211" expanded="true" signature="68349:68528" ph="SELECT b.*,v... bill" />
-            <marker date="1487040488211" expanded="true" signature="68694:68829" ph="SELECT b.ref... bill" />
-            <marker date="1487040488211" expanded="true" signature="68694:68831" ph="SELECT b.id,... bill" />
-            <marker date="1487040488211" expanded="true" signature="68980:69121" ph="SELECT p.bil... bill" />
-            <marker date="1487040488211" expanded="true" signature="72161:72192" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="72398:72524" ph="SELECT c.id,... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="72716:72741" ph="SELECT * FRO... customers" />
-            <marker date="1487040488211" expanded="true" signature="73487:73688" ph="SELECT i.*,c... invoice" />
-            <marker date="1487040488211" expanded="true" signature="74049:74110" ph="SELECT * FRO... invoice_detail" />
-            <marker date="1487040488211" expanded="true" signature="74831:74894" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487040488211" expanded="true" signature="79954:79969" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="80041:80056" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="80234:80249" ph="..." />
-            <marker date="1487040488211" expanded="true" signature="80321:80336" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
-          <caret line="76" column="128" lean-forward="false" selection-start-line="76" selection-start-column="128" selection-end-line="76" selection-end-column="128" />
-          <folding>
-            <marker date="1486936268251" expanded="true" signature="1853:1959" ph="SELECT a.*,l... alpha" />
-            <marker date="1486936268251" expanded="true" signature="4997:5030" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mppt@RSK41/customers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="915">
@@ -626,7 +709,7 @@
         <state relative-caret-position="870">
           <caret line="58" column="25" lean-forward="false" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
           <folding>
-            <marker date="1487026319619" expanded="true" signature="2000:2033" ph="..." />
+            <marker date="1487051235295" expanded="true" signature="2271:2304" ph="..." />
           </folding>
         </state>
       </provider>
@@ -676,32 +759,32 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1486786105963" expanded="true" signature="3228:3557" ph="..." />
-            <marker date="1486786105963" expanded="true" signature="4112:4291" ph="SELECT SUM(i... invoice" />
-            <marker date="1486786105963" expanded="true" signature="5041:5284" ph="SELECT SUM(b... bill" />
-            <marker date="1486786105963" expanded="true" signature="5973:6214" ph="SELECT SUM(b... bill" />
-            <marker date="1486786105963" expanded="true" signature="7154:7324" ph="SELECT a.nam... expAccounts" />
-            <marker date="1486786105963" expanded="true" signature="8536:8568" ph="SELECT * FRO... employee" />
-            <marker date="1486786105963" expanded="true" signature="8789:8971" ph="SELECT i.*,c... invoice" />
-            <marker date="1486786105963" expanded="true" signature="9216:9449" ph="SELECT i.id,... invoice" />
-            <marker date="1486786105963" expanded="true" signature="9641:9875" ph="SELECT i.id,... invoice" />
-            <marker date="1486786105963" expanded="true" signature="10240:10403" ph="SELECT SUM(a... advance" />
-            <marker date="1486786105963" expanded="true" signature="10987:11095" ph="SELECT * FRO... absents" />
-            <marker date="1486786105963" expanded="true" signature="11446:11559" ph="SELECT * FRO... salaries" />
-            <marker date="1486786105963" expanded="true" signature="11828:11940" ph="SELECT * FRO... bonuses" />
-            <marker date="1486786105963" expanded="true" signature="13589:13676" ph="SELECT vl.*,... vanledger" />
-            <marker date="1486786105963" expanded="true" signature="15545:15663" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486786105963" expanded="true" signature="15869:16016" ph="SELECT SUM(i... invoice" />
-            <marker date="1486786105963" expanded="true" signature="16198:16282" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486786105963" expanded="true" signature="17987:18127" ph="SELECT b.* F... bill" />
-            <marker date="1486786105963" expanded="true" signature="18363:18427" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486786105963" expanded="true" signature="18845:18914" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486786105963" expanded="true" signature="20028:20166" ph="SELECT b.* F... bill" />
-            <marker date="1486786105963" expanded="true" signature="20402:20466" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486786105963" expanded="true" signature="20884:20953" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486786105963" expanded="true" signature="22152:22226" ph="SELECT * FRO... monthPayable" />
-            <marker date="1486786105963" expanded="true" signature="31116:31605" ph="..." />
-            <marker date="1486786105963" expanded="false" signature="31193:31216" ph="..." />
+            <marker date="1487042532587" expanded="true" signature="3228:3557" ph="..." />
+            <marker date="1487042532587" expanded="true" signature="4112:4291" ph="SELECT SUM(i... invoice" />
+            <marker date="1487042532587" expanded="true" signature="5041:5283" ph="SELECT SUM(b... bill" />
+            <marker date="1487042532587" expanded="true" signature="5972:6212" ph="SELECT SUM(b... bill" />
+            <marker date="1487042532587" expanded="true" signature="7152:7322" ph="SELECT a.nam... expAccounts" />
+            <marker date="1487042532587" expanded="true" signature="8534:8566" ph="SELECT * FRO... employee" />
+            <marker date="1487042532587" expanded="true" signature="8787:8969" ph="SELECT i.*,c... invoice" />
+            <marker date="1487042532587" expanded="true" signature="9214:9447" ph="SELECT i.id,... invoice" />
+            <marker date="1487042532587" expanded="true" signature="9639:9873" ph="SELECT i.id,... invoice" />
+            <marker date="1487042532587" expanded="true" signature="10238:10401" ph="SELECT SUM(a... advance" />
+            <marker date="1487042532587" expanded="true" signature="10985:11093" ph="SELECT * FRO... absents" />
+            <marker date="1487042532587" expanded="true" signature="11444:11557" ph="SELECT * FRO... salaries" />
+            <marker date="1487042532587" expanded="true" signature="11826:11938" ph="SELECT * FRO... bonuses" />
+            <marker date="1487042532587" expanded="true" signature="13587:13674" ph="SELECT vl.*,... vanledger" />
+            <marker date="1487042532587" expanded="true" signature="15543:15661" ph="SELECT SUM(a... payments_recv" />
+            <marker date="1487042532587" expanded="true" signature="15867:16014" ph="SELECT SUM(i... invoice" />
+            <marker date="1487042532587" expanded="true" signature="16196:16280" ph="SELECT SUM(a... payments_recv" />
+            <marker date="1487042532587" expanded="true" signature="17985:18125" ph="SELECT b.* F... bill" />
+            <marker date="1487042532587" expanded="true" signature="18361:18424" ph="SELECT * FRO... bill_detail" />
+            <marker date="1487042532587" expanded="true" signature="18842:18911" ph="SELECT * FRO... payments_paid" />
+            <marker date="1487042532587" expanded="true" signature="20025:20163" ph="SELECT b.* F... bill" />
+            <marker date="1487042532587" expanded="true" signature="20399:20462" ph="SELECT * FRO... bill_detail" />
+            <marker date="1487042532587" expanded="true" signature="20880:20949" ph="SELECT * FRO... payments_paid" />
+            <marker date="1487042532587" expanded="true" signature="22148:22222" ph="SELECT * FRO... monthPayable" />
+            <marker date="1487042532587" expanded="true" signature="31112:31601" ph="..." />
+            <marker date="1487042532587" expanded="false" signature="31189:31212" ph="..." />
           </folding>
         </state>
       </provider>
@@ -833,41 +916,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-          <folding>
-            <marker date="1486786105963" expanded="true" signature="3228:3557" ph="..." />
-            <marker date="1486786105963" expanded="true" signature="4112:4291" ph="SELECT SUM(i... invoice" />
-            <marker date="1486786105963" expanded="true" signature="5041:5284" ph="SELECT SUM(b... bill" />
-            <marker date="1486786105963" expanded="true" signature="5973:6214" ph="SELECT SUM(b... bill" />
-            <marker date="1486786105963" expanded="true" signature="7154:7324" ph="SELECT a.nam... expAccounts" />
-            <marker date="1486786105963" expanded="true" signature="8536:8568" ph="SELECT * FRO... employee" />
-            <marker date="1486786105963" expanded="true" signature="8789:8971" ph="SELECT i.*,c... invoice" />
-            <marker date="1486786105963" expanded="true" signature="9216:9449" ph="SELECT i.id,... invoice" />
-            <marker date="1486786105963" expanded="true" signature="9641:9875" ph="SELECT i.id,... invoice" />
-            <marker date="1486786105963" expanded="true" signature="10240:10403" ph="SELECT SUM(a... advance" />
-            <marker date="1486786105963" expanded="true" signature="10987:11095" ph="SELECT * FRO... absents" />
-            <marker date="1486786105963" expanded="true" signature="11446:11559" ph="SELECT * FRO... salaries" />
-            <marker date="1486786105963" expanded="true" signature="11828:11940" ph="SELECT * FRO... bonuses" />
-            <marker date="1486786105963" expanded="true" signature="13589:13676" ph="SELECT vl.*,... vanledger" />
-            <marker date="1486786105963" expanded="true" signature="15545:15663" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486786105963" expanded="true" signature="15869:16016" ph="SELECT SUM(i... invoice" />
-            <marker date="1486786105963" expanded="true" signature="16198:16282" ph="SELECT SUM(a... payments_recv" />
-            <marker date="1486786105963" expanded="true" signature="17987:18127" ph="SELECT b.* F... bill" />
-            <marker date="1486786105963" expanded="true" signature="18363:18427" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486786105963" expanded="true" signature="18845:18914" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486786105963" expanded="true" signature="20028:20166" ph="SELECT b.* F... bill" />
-            <marker date="1486786105963" expanded="true" signature="20402:20466" ph="SELECT * FRO... bill_detail" />
-            <marker date="1486786105963" expanded="true" signature="20884:20953" ph="SELECT * FRO... payments_paid" />
-            <marker date="1486786105963" expanded="true" signature="22152:22226" ph="SELECT * FRO... monthPayable" />
-            <marker date="1486786105963" expanded="true" signature="31116:31605" ph="..." />
-            <marker date="1486786105963" expanded="false" signature="31193:31216" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mppt@RSK41/vanledger/vanledger.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="774">
@@ -888,19 +936,6 @@
             <marker date="1486938592699" expanded="true" signature="9484:9580" ph="SELECT * FRO... absents" />
             <marker date="1486938592699" expanded="true" signature="10077:10178" ph="SELECT * FRO... salaries" />
             <marker date="1486938592699" expanded="true" signature="10561:10661" ph="SELECT * FRO... bonuses" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/customers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="29" />
-          <folding>
-            <marker date="1487026201883" expanded="true" signature="278:311" ph="SELECT * FRO... customers" />
-            <marker date="1487026201883" expanded="true" signature="436:467" ph="SELECT * FRO... invoice" />
-            <marker date="1487026201883" expanded="true" signature="588:625" ph="SELECT * FRO... payments_recv" />
-            <marker date="1487026201883" expanded="true" signature="4063:4096" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1096,14 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/css/_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="760" column="17" lean-forward="false" selection-start-line="760" selection-start-column="17" selection-end-line="760" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mppt@RSK41/vendors/list.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1186,16 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="63" lean-forward="true" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
-          <folding>
-            <marker date="1487026319619" expanded="true" signature="2000:2033" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mppt@RSK41/vendors/vendor_ledger.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -1211,10 +1228,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/123321.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/css/_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="465" column="1" lean-forward="true" selection-start-line="465" selection-start-column="1" selection-end-line="465" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mppt@RSK41/do.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="1727" column="0" lean-forward="true" selection-start-line="1727" selection-start-column="0" selection-end-line="1727" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="11" column="65" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="65" />
           <folding>
             <marker date="1487040488211" expanded="true" signature="534:684" ph="INSERT INTO `logs`... " />
             <marker date="1487040488211" expanded="true" signature="925:1129" ph="SELECT * FRO... alpha" />
@@ -1410,11 +1443,197 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mppt@RSK41/123321.php">
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/ledgers/ledger.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="167">
+          <caret line="35" column="23" lean-forward="false" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1486376333923" expanded="true" signature="999:1051" ph="SELECT * FRO... Ledgers" />
+            <marker date="1486376333923" expanded="true" signature="3289:3347" ph="SELECT * FRO... Ledgers_bill" />
+            <marker date="1486376333923" expanded="true" signature="3363:3481" ph="SELECT * FRO... Ledgers_bill" />
+            <marker date="1486376333923" expanded="true" signature="8572:8614" ph="..." />
+            <marker date="1486376333923" expanded="true" signature="8615:9012" ph="..." />
+            <marker date="1486376333923" expanded="true" signature="9835:9877" ph="..." />
+            <marker date="1486376333923" expanded="true" signature="9878:10263" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/expences/ledger_export.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1485696607290" expanded="true" signature="261:297" ph="SELECT e.* F... expences" />
+            <marker date="1485696607290" expanded="true" signature="455:522" ph="SELECT name expAccounts" />
+            <marker date="1485696607290" expanded="true" signature="1086:1118" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/expences/ledger.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="67" column="33" lean-forward="false" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+          <folding>
+            <marker date="1487050364647" expanded="true" signature="3688:3724" ph="SELECT e.* F... expences" />
+            <marker date="1487050364647" expanded="true" signature="3740:3830" ph="SELECT e.* F... expences" />
+            <marker date="1487050364647" expanded="true" signature="3985:4052" ph="SELECT name expAccounts" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/profitsheet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="556" column="8" lean-forward="true" selection-start-line="556" selection-start-column="8" selection-end-line="563" selection-end-column="0" />
+          <folding>
+            <marker date="1487042532587" expanded="true" signature="3228:3557" ph="..." />
+            <marker date="1487042532587" expanded="true" signature="4112:4291" ph="SELECT SUM(i... invoice" />
+            <marker date="1487042532587" expanded="true" signature="5041:5283" ph="SELECT SUM(b... bill" />
+            <marker date="1487042532587" expanded="true" signature="5972:6212" ph="SELECT SUM(b... bill" />
+            <marker date="1487042532587" expanded="true" signature="7152:7322" ph="SELECT a.nam... expAccounts" />
+            <marker date="1487042532587" expanded="true" signature="8534:8566" ph="SELECT * FRO... employee" />
+            <marker date="1487042532587" expanded="true" signature="8787:8969" ph="SELECT i.*,c... invoice" />
+            <marker date="1487042532587" expanded="true" signature="9214:9447" ph="SELECT i.id,... invoice" />
+            <marker date="1487042532587" expanded="true" signature="9639:9873" ph="SELECT i.id,... invoice" />
+            <marker date="1487042532587" expanded="true" signature="10238:10401" ph="SELECT SUM(a... advance" />
+            <marker date="1487042532587" expanded="true" signature="10985:11093" ph="SELECT * FRO... absents" />
+            <marker date="1487042532587" expanded="true" signature="11444:11557" ph="SELECT * FRO... salaries" />
+            <marker date="1487042532587" expanded="true" signature="11826:11938" ph="SELECT * FRO... bonuses" />
+            <marker date="1487042532587" expanded="true" signature="13587:13674" ph="SELECT vl.*,... vanledger" />
+            <marker date="1487042532587" expanded="true" signature="15543:15661" ph="SELECT SUM(a... payments_recv" />
+            <marker date="1487042532587" expanded="true" signature="15867:16014" ph="SELECT SUM(i... invoice" />
+            <marker date="1487042532587" expanded="true" signature="16196:16280" ph="SELECT SUM(a... payments_recv" />
+            <marker date="1487042532587" expanded="true" signature="17985:18125" ph="SELECT b.* F... bill" />
+            <marker date="1487042532587" expanded="true" signature="18361:18424" ph="SELECT * FRO... bill_detail" />
+            <marker date="1487042532587" expanded="true" signature="18842:18911" ph="SELECT * FRO... payments_paid" />
+            <marker date="1487042532587" expanded="true" signature="20025:20163" ph="SELECT b.* F... bill" />
+            <marker date="1487042532587" expanded="true" signature="20399:20462" ph="SELECT * FRO... bill_detail" />
+            <marker date="1487042532587" expanded="true" signature="20880:20949" ph="SELECT * FRO... payments_paid" />
+            <marker date="1487042532587" expanded="true" signature="22148:22222" ph="SELECT * FRO... monthPayable" />
+            <marker date="1487042532587" expanded="true" signature="31112:31601" ph="..." />
+            <marker date="1487042532587" expanded="false" signature="31189:31212" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/customers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="41" column="97" lean-forward="true" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="97" />
+          <folding>
+            <marker date="1487026201883" expanded="true" signature="278:311" ph="SELECT * FRO... customers" />
+            <marker date="1487026201883" expanded="true" signature="436:467" ph="SELECT * FRO... invoice" />
+            <marker date="1487026201883" expanded="true" signature="588:625" ph="SELECT * FRO... payments_recv" />
+            <marker date="1487026201883" expanded="true" signature="4063:4096" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="9" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding>
+            <marker date="1487051235295" expanded="true" signature="2271:2304" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/expences/detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="62" column="23" lean-forward="true" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1487050448175" expanded="true" signature="132:176" ph="SELECT * FRO... expAccounts" />
+            <marker date="1487050448175" expanded="true" signature="3539:3671" ph="SELECT e.*,a... expences" />
+            <marker date="1487050448175" expanded="true" signature="3688:3884" ph="SELECT e.*,a... expences" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/ledgers/accounts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="77" lean-forward="true" selection-start-line="18" selection-start-column="77" selection-end-line="18" selection-end-column="77" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/incomestatementYearly.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="182" column="51" lean-forward="false" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="56" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#5;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#6;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#7;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#8;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1487053469035" expanded="true" signature="1123:1133" ph="..." />
+            <marker date="1487053469035" expanded="true" signature="1478:1649" ph="SELECT SUM(i... invoice" />
+            <marker date="1487053469035" expanded="true" signature="1693:1864" ph="SELECT SUM(i... invoice" />
+            <marker date="1487053469035" expanded="true" signature="2485:2719" ph="SELECT SUM(b... bill" />
+            <marker date="1487053469035" expanded="true" signature="2764:2998" ph="SELECT SUM(b... bill" />
+            <marker date="1487053469035" expanded="true" signature="3320:3552" ph="SELECT SUM(b... bill" />
+            <marker date="1487053469035" expanded="true" signature="3597:3829" ph="SELECT SUM(b... bill" />
+            <marker date="1487053469035" expanded="true" signature="5059:5221" ph="SELECT a.nam... expAccounts" />
+            <marker date="1487053469035" expanded="true" signature="5265:5427" ph="SELECT a.nam... expAccounts" />
+            <marker date="1487053469035" expanded="true" signature="6289:6321" ph="SELECT * FRO... employee" />
+            <marker date="1487053469035" expanded="true" signature="6637:6811" ph="SELECT i.*,c... invoice" />
+            <marker date="1487053469035" expanded="true" signature="6863:7037" ph="SELECT i.*,c... invoice" />
+            <marker date="1487053469035" expanded="true" signature="7373:7598" ph="SELECT i.id,... invoice" />
+            <marker date="1487053469035" expanded="true" signature="7658:7883" ph="SELECT i.id,... invoice" />
+            <marker date="1487053469035" expanded="true" signature="8151:8377" ph="SELECT i.id,... invoice" />
+            <marker date="1487053469035" expanded="true" signature="8437:8663" ph="SELECT i.id,... invoice" />
+            <marker date="1487053469035" expanded="true" signature="9124:9281" ph="SELECT SUM(a... advance" />
+            <marker date="1487053469035" expanded="true" signature="9333:9490" ph="SELECT SUM(a... advance" />
+            <marker date="1487053469035" expanded="true" signature="10249:10368" ph="SELECT * FRO... absents" />
+            <marker date="1487053469035" expanded="true" signature="10249:10386" ph="SELECT SUM(a... absents" />
+            <marker date="1487053469035" expanded="true" signature="10438:10574" ph="SELECT * FRO... absents" />
+            <marker date="1487053469035" expanded="true" signature="10976:11112" ph="SELECT * FRO... salaries" />
+            <marker date="1487053469035" expanded="true" signature="11164:11299" ph="SELECT SUM(s... salaries" />
+            <marker date="1487053469035" expanded="true" signature="11672:11770" ph="SELECT * FRO... bonuses" />
+            <marker date="1487053469035" expanded="true" signature="11672:11806" ph="SELECT * FRO... bonuses" />
+            <marker date="1487053469035" expanded="true" signature="11672:12069" ph="SELECT * FRO... bonuses" />
+            <marker date="1487053469035" expanded="true" signature="11858:11991" ph="SELECT SUM(b... bonuses" />
+            <marker date="1487053469035" expanded="true" signature="14513:14536" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mppt@RSK41/sheets/incomestatement.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="192" column="24" lean-forward="true" selection-start-line="192" selection-start-column="24" selection-end-line="192" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#5;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#6;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#7;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#8;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1487053645563" expanded="true" signature="3955:4134" ph="SELECT SUM(i... invoice" />
+            <marker date="1487053645563" expanded="true" signature="4719:4961" ph="SELECT SUM(b... bill" />
+            <marker date="1487053645563" expanded="true" signature="5247:5487" ph="SELECT SUM(b... bill" />
+            <marker date="1487053645563" expanded="true" signature="6681:6851" ph="SELECT a.nam... expAccounts" />
+            <marker date="1487053645563" expanded="true" signature="7713:7745" ph="SELECT * FRO... employee" />
+            <marker date="1487053645563" expanded="true" signature="8022:8204" ph="SELECT i.*,c... invoice" />
+            <marker date="1487053645563" expanded="true" signature="8497:8730" ph="SELECT i.id,... invoice" />
+            <marker date="1487053645563" expanded="true" signature="8954:9188" ph="SELECT i.id,... invoice" />
+            <marker date="1487053645563" expanded="true" signature="9609:9772" ph="SELECT SUM(a... advance" />
+            <marker date="1487053645563" expanded="true" signature="10492:10600" ph="SELECT SUM(a... absents" />
+            <marker date="1487053645563" expanded="true" signature="10962:11071" ph="SELECT * FRO... salaries" />
+            <marker date="1487053645563" expanded="true" signature="11404:11512" ph="SELECT * FRO... bonuses" />
+          </folding>
         </state>
       </provider>
     </entry>

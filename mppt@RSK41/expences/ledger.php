@@ -65,10 +65,7 @@ $month = $_GET['month'];
 </div>
 </div>
 <div class="row" style="font-size:16px;">
-<div class="col-sm-3"></div>
-<div class="col-sm-2 text-right">
-</div>
-<div class="col-sm-4 text-left">
+<div class="col-sm-12 text-center">
 	<select id="yearOpt">
 		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
 		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
@@ -90,7 +87,6 @@ $month = $_GET['month'];
 	<button onclick="refreshPage()">Go</button>
 	<button onclick="refreshPage(1)">All</button>
 </div>
-<div class="col-sm-3"></div>
 </div>
 <div class="row">
 	<div class="col-sm-9"></div>

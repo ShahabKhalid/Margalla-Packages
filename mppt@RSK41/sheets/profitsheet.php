@@ -128,7 +128,7 @@ switch ($month) {
         <div class="col-sm-1"></div>
     </div>
     <?php
-    $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.ref = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Factory' group by b.vendor ";
+    $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.id = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Factory' group by b.vendor ";
     $run = mysqli_query($con, $qry) or die(mysqli_error($con));
     $fac_bill = 0;
     if (mysqli_num_rows($run) > 0) {
@@ -145,7 +145,7 @@ switch ($month) {
         <div class="col-sm-1"></div>
     </div>
     <?php
-    $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.ref = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Block' group by b.vendor ";
+    $qry = "SELECT SUM(bd.weices * bd.rate) as total,v.name as name FROM `bill` b,`bill_detail` bd,`vendor` v WHERE v.id = b.vendor and b.id = bd.ref and b.date >= '$year-$month-01' and b.date <= '$year-$month-31' and v.name = 'Block' group by b.vendor ";
     $run = mysqli_query($con, $qry) or die(mysqli_error($con));
     $block_bill = 0;
     if (mysqli_num_rows($run) > 0) {
@@ -389,7 +389,7 @@ switch ($month) {
                 $total_balance = 0;
                 while ($data = mysqli_fetch_array($run)) {
                     $advance = 0;
-                    $qry = "SELECT * FROM `bill_detail` WHERE `ref` = '" . $data['ref'] . "'";
+                    $qry = "SELECT * FROM `bill_detail` WHERE `ref` = '" . $data['id'] . "'";
                     $run2 = mysqli_query($con, $qry) or die(mysqli_error($con));
                     $total = 0;
                     while ($data2 = mysqli_fetch_array($run2)) {
@@ -422,7 +422,7 @@ switch ($month) {
                 $total_balance = 0;
                 while ($data = mysqli_fetch_array($run)) {
                     $advance = 0;
-                    $qry = "SELECT * FROM `bill_detail` WHERE `ref` = '" . $data['ref'] . "'";
+                    $qry = "SELECT * FROM `bill_detail` WHERE `ref` = '" . $data['id'] . "'";
                     $run2 = mysqli_query($con, $qry) or die(mysqli_error($con));
                     $total = 0;
                     while ($data2 = mysqli_fetch_array($run2)) {

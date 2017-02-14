@@ -19,14 +19,14 @@
 		</div>
 		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(170,64,255,.8);">
-			<div class="row" onclick="return pageLoad('employees/salarysheet.php')">
-				<div class="col-md-6" id="view"><h1>Salary</h1></div>
-				<div class="col-md-6"><span class="glyphicon glyphicon-send"></span></div>
+			<div class="row" onclick="return pageLoad('sheets/incomestatement.php')">
+				<div class="col-md-8" id="view"><h1>Income Statement</h1></div>
+				<div class="col-md-4"><span class="glyphicon glyphicon-send"></span></div>
 			</div>
-			<h2 style="background-color:rgba(170,64,255,255);" onclick="return pageLoad('employees/salarysheet.php')">Salary Sheet</h2>
+			<h2 style="background-color:rgba(170,64,255,255);" onclick="return pageLoad('sheets/incomestatement.php')">Income Statement</h2>
 			<ul style="background-color:rgba(170,64,255,255);">
-			<li>.</li>
-			<li>.</li>
+                <li><a href="javascript:void()"onclick="return pageLoad('sheets/incomestatement.php')">Income Statement - Monthly</a></li>
+                <li><a href="javascript:void()"onclick="return pageLoad('sheets/incomestatementYearly.php')">Income Statement - Yearly</a></li>
 			</ul></div>
 		</div>
 

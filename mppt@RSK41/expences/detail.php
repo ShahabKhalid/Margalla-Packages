@@ -1,4 +1,4 @@
-<div class="container addBox" style="width:95%;">
+<div class="container addBox" style="width:98%;">
 <div class="inBox">
 	<?php
 	require "../123321.php";
@@ -71,10 +71,7 @@
 </div>
 </div>
 <div class="row" style="font-size:16px;">
-<div class="col-sm-3"></div>
-<div class="col-sm-2 text-right">
-</div>
-<div class="col-sm-4 text-left">
+<div class="col-sm-12 text-center">
 	<select id="yearOpt">
 		<option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
 		<option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
@@ -96,7 +93,6 @@
 	<button onclick="refreshPage()">Go</button>
 	<button onclick="refreshPage(1)">All</button>
 </div>
-<div class="col-sm-3"></div>
 </div>
 <br>
 <div class="row" style="border-bottom:2px solid black;width:95%;position:relative;margin:0 auto;">
