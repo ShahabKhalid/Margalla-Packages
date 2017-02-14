@@ -115,7 +115,9 @@ if(isset($_POST['ajax']))
 						$qry = "UPDATE `employee` SET `salary`='".$_POST['sal']."' WHERE `id`='".$_POST['id']."'";
 						mysqli_query($con,$qry) or die(mysqli_error($con));
 					}
-					$qry = "SELECT * FROM advance WHERE `employee` = '".$_POST['id']."'";
+
+					//Auto Advance Feature Removed
+					/*$qry = "SELECT * FROM advance WHERE `employee` = '".$_POST['id']."'";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$data = mysqli_fetch_array($run);
 					if(strcmp($_POST['advdeduct'],"undefined") !== 0)
@@ -124,7 +126,7 @@ if(isset($_POST['ajax']))
 						.date("Y-m-d")."' WHERE `employee`='".$_POST['id']."'";
 						//echo $qry;
 						mysqli_query($con,$qry) or die(mysqli_error($con));
-					}
+					}*/
 
 
 
@@ -1136,11 +1138,13 @@ if(isset($_POST['ajax']))
 						$filter_qry .= "and `advance` = '1'";
 
 
-					if(intval($year) != 0) $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,p.payMethod,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id and rec_date > '$year-$month-01' and rec_date < '$year-$month-31' ".$filter_qry." order by `".$_POST['orderBy']."` ";
+                    if(intval($year) != 0) $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,p.payMethod,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id and rec_date >= '$year-$month-01' and rec_date <= '$year-$month-31' ".$filter_qry." order by `".$_POST['orderBy']."` ";
+                    //if(intval($year) != 0) $qry = "SELECT p.amount,p.rec_date,p.entry_date FROM `payments_recv` p WHERE rec_date >= '$year-$month-01' and rec_date <= '$year-$month-31' ".$filter_qry." order by `".$_POST['orderBy']."` ";
 					else $qry = "SELECT p.id,p.ref_no,p.inv_no,p.advance,p.payMethod,c.name as cname,e.name as ename,p.amount,p.rec_date,p.entry_date FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id ".$filter_qry." order by `".$_POST['orderBy']."` ";
 					//echo $qry;
 					$count = 0;
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
+					$totalPayment = 0;
 					while($data = mysqli_fetch_array($run))
 					{
 
@@ -1158,10 +1162,18 @@ if(isset($_POST['ajax']))
 					    <div class="col-sm-2 no-border" style="border:1px solid black;"><?php echo $data['ename']; ?></div>
 					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $data['rec_date']; ?></div>
 					    <div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $data['entry_date']; ?></div>
-					    <div class="col-sm-2 no-border" style="border:1px solid black;">Rs. <?php echo $data['amount']; ?></div>
+					    <div class="col-sm-2 no-border" style="border:1px solid black;">Rs. <?php echo $data['amount']; $totalPayment += floatval($data['amount']); ?></div>
 					</div>
 					<?php
 					}
+					?>
+                    <div class="row" id="inv_data"
+                        <?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/payment_update.php') !== false) { ?>
+                            onclick="viewPayment('<?php echo $data['id'] ?>')" <?php } ?> style="background-color:<?php echo $color; ?>;width:95%;position:relative;margin:0 auto;">
+                        <div class="col-sm-10 no-border" style="border:1px solid black;">Total Payment</div>
+                        <div class="col-sm-2 no-border" style="border:1px solid black;">Rs. <?php echo $totalPayment; ?></div>
+                    </div>
+                    <?php
 					break;
 
 				case 'updatePaidPaymentTable':
@@ -1722,7 +1734,7 @@ if(isset($_POST['ajax']))
 					?>
                     <div class="row row_inv" id="inv_data"  style="background-color:rgba(0,0,0,0.5);color:white;font-weight: bold;">
                         <div class="col-sm-10 no-border">Total</div>
-                        <div class="col-sm-2 no-border">Rs. <?php echo round($total,2); ?></div>
+                        <div class="col-sm-2 no-border">Rs. <?php echo number_format(round($total,2)); ?></div>
                     </div>
                     <?php
 

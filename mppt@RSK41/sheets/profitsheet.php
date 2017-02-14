@@ -341,8 +341,7 @@ switch ($month) {
             <div class="col-sm-1"></div>
         </div>
         <?php
-        $qry = "SELECT SUM(amount) as total FROM `payments_recv` WHERE rec_date >= '$year-$month-01' and rec_date <= '$year-$month-31'";
-        //echo $qry;
+        $qry = "SELECT SUM(p.amount) as total FROM `payments_recv` p,customers c,employee e WHERE p.customer = c.id and p.receiver = e.id and rec_date >= '$year-$month-01' and rec_date <= '$year-$month-31'";
         $run = mysqli_query($con, $qry);
         $data = mysqli_fetch_array($run);
         $recd = floatval($data['total']);

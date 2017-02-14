@@ -225,7 +225,11 @@
                                 <div class="col-sm-1" style="border:1px solid black;"><?php echo $dur; ?></div>
                                 <div class="col-sm-2" style="border:1px solid black;padding:0px;"><?php echo $bonus; ?></div>
                                 <div class="col-sm-3" style="border:1px solid black;padding:0px;"><?php echo $bonusdesc; ?></div>
-                                <div class="col-sm-2" style="border:1px solid black;" id='finalSalDIV_<?php echo $data["id"]; ?>'><?php echo  round((intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(floatval($sal) / $numberOfDays * intval($abs)),1, PHP_ROUND_HALF_UP); $tot_sal += (intval($sal) + $total_profit + intval($bonus)) - $advdeduct - floatval(intval($sal) / $numberOfDays * intval($abs));?></div>
+                                <div class="col-sm-2" style="border:1px solid black;" id='finalSalDIV_<?php echo $data["id"]; ?>'><?php
+                                    $employeeSal = intval($sal) + floatval($total_profit) + intval($bonus) - floatval($advdeduct) - (floatval($sal) / $numberOfDays) * intval($abs);
+                                    echo  round($employeeSal,1, PHP_ROUND_HALF_UP);
+                                    $tot_sal += $employeeSal;
+                                    ?></div>
                             </div>
                         </div>
                     </div>
