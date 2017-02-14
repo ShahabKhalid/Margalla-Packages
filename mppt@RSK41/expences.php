@@ -1,6 +1,6 @@
 <br><br><br>
 <div class="conatiner-fluid" >
-	<div class="row center">
+	<div class="row center rowMiddle">
 		<div class="col-md-4 infoBox">
 			<div class="box" style="background-color: rgba(70,23,180,.8);">
 			<div class="row" onclick="pageLoad('expences/ledger.php')">
