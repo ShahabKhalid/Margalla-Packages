@@ -385,7 +385,7 @@ switch ($month) {
             <h3>
                 <?php
                 $TOTAL_PAYABLE = 0;
-                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'FACTORY' and date > '$year-$month-01' and date < '$year-$month-31'";
+                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'FACTORY' and date >= '$year-$month-01' and date <= '$year-$month-31'";
                 $run = mysqli_query($con, $qry) or die(mysqli_error($con));
                 $total_balance = 0;
                 while ($data = mysqli_fetch_array($run)) {
@@ -418,7 +418,7 @@ switch ($month) {
                     <div class="col-sm-1"></div>
                 </div>
                 <?php
-                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date > '$year-$month-01' and date < '$year-$month-31'";
+                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date >= '$year-$month-01' and date <= '$year-$month-31'";
                 $run = mysqli_query($con, $qry) or die(mysqli_error($con));
                 $total_balance = 0;
                 while ($data = mysqli_fetch_array($run)) {

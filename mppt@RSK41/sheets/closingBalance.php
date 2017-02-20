@@ -46,7 +46,6 @@ while($data = mysqli_fetch_array($run))
 {
 
 	$id = $data['id'];
-	$salary = $sal;
 
 	$qry = "SELECT i.*,c.name as cName FROM `invoice` i, customers c WHERE i.customer = c.id and i.`salerep` = '$id' and i.date >= '$year-$month-01' and i.date <= '$year-$month-31' order by i.no";
 	$run1 = mysqli_query($con,$qry) or die(mysqli_error($con));
@@ -147,6 +146,7 @@ $totToll = 0;
 $totRec = 0;
 $totLedger = 0;
 $totPetrol = 0;
+$vanProfit = 0;
 while($data2 = mysqli_fetch_array($run2))
 {
 	$InHand += floatval($data2['Rent']) - floatval($data2['Toll']) - floatval($data2['Petrol']) - floatval($data2['Ledger']);
@@ -182,13 +182,13 @@ $recable_ALL = $custInvTot_ALL - $recd_ALL;
 
 
 $TOTAL_PAYABLE = 0;
-$qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'FACTORY' and date > '$year-$month-01' and date < '$year-$month-31'";
+$qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'FACTORY' and date >= '$year-$month-01' and date <='$year-$month-31'";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $total_balance = 0;
 while($data = mysqli_fetch_array($run))
 {
 	$advance = 0;
-	$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$data['ref']."'";
+	$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$data['id']."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$total = 0;
 	while($data2 = mysqli_fetch_array($run2))
@@ -208,13 +208,13 @@ while($data = mysqli_fetch_array($run))
 $total_balance = $total_balance * -1;
 $TOTAL_PAYABLE += $total_balance;
 
-$qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date > '$year-$month-01' and date < '$year-$month-31'";
+$qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date >= '$year-$month-01' and date <= '$year-$month-31'";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $total_balance = 0;
 while($data = mysqli_fetch_array($run))
 {
 	$advance = 0;
-	$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$data['ref']."'";
+	$qry = "SELECT * FROM `bill_detail` WHERE `ref` = '".$data['id']."'";
 	$run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
 	$total = 0;
 	while($data2 = mysqli_fetch_array($run2))
@@ -242,6 +242,7 @@ while($data = mysqli_fetch_array($run))
 	$payableCount++;
 	$amount = $data['amount'];
 	$TOTAL_PAYABLE += floatval($amount);
+
 }
 if(intval($month) > 1) { $closingBalance = $recable_ALL + closingBalance($con,intval($month) - 1,$year) - $TOTAL_PAYABLE; }
 else { $closingBalance = $recable_ALL + closingBalance($con,12,intval($year) - 1) - $TOTAL_PAYABLE; }

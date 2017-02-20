@@ -111,7 +111,7 @@
 </div>
 <?php
 if(intval($year) == 0) $qry = "SELECT * FROM `bill` WHERE `vendor` = '$id' order by `date`	";
-else $qry = "SELECT * FROM `bill` WHERE `vendor` = '$id' and date > '$year-$month-01' and date < '$year-$month-31' order by `date`	";
+else $qry = "SELECT * FROM `bill` WHERE `vendor` = '$id' and date >= '$year-$month-01' and date <= '$year-$month-31' order by `date`	";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $total_balance = 0;
 while($data = mysqli_fetch_array($run))
