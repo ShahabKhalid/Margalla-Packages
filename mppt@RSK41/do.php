@@ -1288,7 +1288,7 @@ if(isset($_POST['ajax']))
 						<div class="col-md-1" style="border:1px solid black;"><?php echo $count++; ?></div>
 						<div class="col-md-1" style="border:1px solid black;"><?php echo "MPC-".$row['id']; ?></div>
 						<div class="col-md-2" style="border:1px solid black;"><?php if(strlen($row['name']) > 13) echo substr($row['name'],0,13)."..."; else echo $row['name']; ?></div>
-						<div class="col-md-1" style="border:1px solid black;""><?php if(strlen($saleRepName) > 13) echo substr($saleRepName,0,13)."..."; else echo  $saleRepName; ?></div>
+						<div class="col-md-2" style="border:1px solid black;""><?php if(strlen($saleRepName) > 13) echo substr($saleRepName,0,13)."..."; else echo  $saleRepName; ?></div>
 						<div class="col-md-2" style="border:1px solid black;<?php
 							if(strcmp($inv_date,date("Y-m-d")) == 0)
 							{
@@ -1301,7 +1301,7 @@ if(isset($_POST['ajax']))
 								echo "font-weight:bold;color:white;background-color:black;";
 							}
 						 	?>;"><?php if($pay_result > 0) echo "Rs. ".round( $pay_amount, 2, PHP_ROUND_HALF_EVEN)." (".$pay_date.")"; else echo "--"; ?></div>
-						<div class="col-md-2" style="border:1px solid black;">Rs. <?php echo round( $total_balance, 2, PHP_ROUND_HALF_EVEN); ?></div>
+						<div class="col-md-1" style="border:1px solid black;">Rs. <?php echo round( $total_balance, 2, PHP_ROUND_HALF_EVEN); ?></div>
 						</div>
 
 						<div class="col-md-1" style="border:1px solid black;">
@@ -1745,6 +1745,9 @@ if(isset($_POST['ajax']))
 					//Getting Total Payment of each customer
 					//Counting Customer Payments
 					$custs = array();
+                    $year = $_POST['year'];
+                    $month = $_POST['month'];
+                    $totalOfInvoice = 0;
 					$qry = "SELECT * FROM customers WHERE 1;";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					while($row = mysqli_fetch_array($run))
@@ -1773,7 +1776,8 @@ if(isset($_POST['ajax']))
 					if(isset($_POST['f_customer'])) $filterCustomer = 1;
 					//if(isset($_POST['f_salerep'])) $filterSaleRep = 1;
 
-					$qry = "SELECT i.*,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i,`customers` c,`employee` e WHERE i.customer = c.id and i.salerep = e.id ".$filter_qry." order by `date` ";
+                    if(intval($year) != 0) $qry = "SELECT i.*,idd.exp_name,idd.weices,idd.rate,idd.charges,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE i.date >= '$year-$month-01' and i.date <= '$year-$month-31'  ".$filter_qry." order by i.`date`";
+                    else  $qry = "SELECT i.*,idd.exp_name,idd.weices,idd.rate,idd.charges,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE ".$filter_qry." order by i.`date` ";
 
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$count = 1;
@@ -1787,26 +1791,24 @@ if(isset($_POST['ajax']))
 
 
 
-						$qry2 = "SELECT * FROM `invoice_detail` WHERE `ref` = '".$row['no']."'";
-						$run2 = mysqli_query($con,$qry2) or die(mysqli_error($con));
+
 						$total_weight = 0;
 						$total_rate = 0;
 						$total_blockCharges = 0;
 						$total_otherCharges = 0;
 						$total_ = 0;
-						while($row2 = mysqli_fetch_array($run2))
-						{
-							$total_weight += floatval($row2['weices']);
-							$total_rate += floatval($row2['rate']);
-							if($row2['exp_name'] == "Block") {
-								$total_blockCharges += floatval($row2['charges']);
-							}
-							else {
-								$total_otherCharges += floatval($row2['charges']);
-							}
-							$total_here = floatval($row2['weices']) * floatval($row2['rate']) + floatval($row2['charges']);
-							$total_ += $total_here;
-						}
+						$total_weight += floatval($row['weices']);
+                        $total_rate += floatval($row['rate']);
+                        if($row['exp_name'] == "Block") {
+                            $total_blockCharges += floatval($row['charges']);
+                        }
+                        else {
+                            $total_otherCharges += floatval($row['charges']);
+                        }
+                        $total_here = $row['weices'] * $row['rate'] + $row['charges'];
+                        $totalOfInvoice += $row['weices'] * $row['rate'] + $row['charges'];
+                        $total_ += $total_here;
+
 						$advance = 0;
 						$qry2 = "SELECT * FROM `payments_recv` WHERE `inv_no` = '".$row['no']."'";
 						$run2 = mysqli_query($con,$qry2) or die(mysqli_error($con));
@@ -1967,15 +1969,15 @@ if(isset($_POST['ajax']))
 						<div onclick="printInvoice('<?php echo $row['id'] ?>')">
 						<div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $count; ?></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php echo $row['date']; ?></div>
-						<div class="col-sm-1 no-border" style="border:1px solid black;"><span style='font-size:12px;'><?php echo $row['no']; ?></span></div>
-						<div class="col-sm-1 no-border" style="padding-left:0px;text-align:left;border:1px solid black;"><span style='font-size:10px;'><?php echo $row['id']; ?></span></div>
+						<div class="col-sm-1 no-border" style="border:1px solid black;"><span style='font-size:.8vw;'><?php echo $row['no']; ?></span></div>
+						<div class="col-sm-1 no-border" style="padding-left:0px;text-align:left;border:1px solid black;"><span style='font-size:.8vw;'><?php echo $row['id']; ?></span></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php
 
-						if(strlen($row['cName']) > 10) echo "<span style='font-size:12px;'>".substr($row['cName'],0,10)."..."."</span>"; else echo "<span style='font-size:12px;'>".$row['cName']."</span>";
+						if(strlen($row['cName']) > 10) echo "<span style='font-size:1vw;'>".substr(ucfirst(strtolower($row['cName'])),0,10)."..."."</span>"; else echo "<span style='font-size:1vw;'>".ucfirst(strtolower($row['cName']))."</span>";
 						?></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php
 
-						 if(strlen($row['eName']) > 13) echo "<span style='font-size:12px;'>".substr($row['eName'],0,13)."..."."</span>"; else echo "<span style='font-size:12px;'>".$row['eName']."</span>";
+						 if(strlen($row['eName']) > 13) echo "<span style='font-size:1vw;'>".substr(ucfirst(strtolower($row['eName'])),0,13)."..."."</span>"; else echo "<span style='font-size:1vw;'>".ucfirst(strtolower($row['eName']))."</span>";
 						?></div>
 
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php echo $total_weight;
@@ -2026,6 +2028,13 @@ if(isset($_POST['ajax']))
 						<?php
 						$count++;
 					}
+					?>
+                    <div class="row row_inv">
+                        <div class="col-sm-8" style="border:1px solid black;">Total</div>
+                        <div class="col-sm-1" style="border:1px solid black;">Rs <?php echo $totalOfInvoice; ?></div>
+                        <div class="col-sm-3" style="border:1px solid black;"></div>
+                    </div>
+                    <?php
 
 					break;
 

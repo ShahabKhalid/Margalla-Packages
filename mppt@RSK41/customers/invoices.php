@@ -1,6 +1,86 @@
 <div class="container-fluid addBox" style="width:98%;">
 <div class="inBox">
+    <?php
+    if(!isset($_GET['year']) && !isset($_GET['month']))
+    {
+        $year = date("Y");
+        $month = date("m");
+    }
+    else
+    {
+        $year = $_GET['year'];
+        $month = $_GET['month'];
+    }
+    switch ($month) {
+        case 1:
+            $monthT = "Jan";
+            break;
+        case 2:
+            $monthT = "Feb";
+            break;
+        case 3:
+            $monthT = "March";
+            break;
+        case 4:
+            $monthT = "April";
+            break;
+        case 5:
+            $monthT = "May";
+            break;
+        case 6:
+            $monthT = "June";
+            break;
+        case 7:
+            $monthT = "July";
+            break;
+        case 8:
+            $monthT = "Aug";
+            break;
+        case 9:
+            $monthT = "Sep";
+            break;
+        case 10:
+            $monthT = "Oct";
+            break;
+        case 11:
+            $monthT = "Nov";
+            break;
+        case 12:
+            $monthT = "Dec";
+            break;
+
+        default:
+            $monthT = "Unknown";
+            break;
+    }
+    ?>
 <h1>Invoices</h1>
+    <br>
+    <div class="row" style="font-size:16px;">
+        <div class="col-sm-12 text-center">
+            <select id="yearOpt">
+                <option value="2016" <?php if(intval($year) == 2016) echo "selected"; ?>>2016</option>
+                <option value="2017" <?php if(intval($year) == 2017) echo "selected"; ?>>2017</option>
+            </select>
+            <select id="monthOpt">
+                <option value="1" <?php if(intval($month) == 1) echo "selected"; ?>>Jan</option>
+                <option value="2" <?php if(intval($month) == 2) echo "selected"; ?>>Feb</option>
+                <option value="3" <?php if(intval($month) == 3) echo "selected"; ?>>March</option>
+                <option value="4" <?php if(intval($month) == 4) echo "selected"; ?>>April</option>
+                <option value="5" <?php if(intval($month) == 5) echo "selected"; ?>>May</option>
+                <option value="6" <?php if(intval($month) == 6) echo "selected"; ?>>June</option>
+                <option value="7" <?php if(intval($month) == 7) echo "selected"; ?>>July</option>
+                <option value="8" <?php if(intval($month) == 8) echo "selected"; ?>>Aug</option>
+                <option value="9" <?php if(intval($month) == 9) echo "selected"; ?>>Sep</option>
+                <option value="10" <?php if(intval($month) == 10) echo "selected"; ?>>Oct</option>
+                <option value="11" <?php if(intval($month) == 11) echo "selected"; ?>>Nov</option>
+                <option value="12" <?php if(intval($month) == 12) echo "selected"; ?>>Dec</option>
+            </select>
+            <button onclick="updateInvoiceList(orderByWas,dueWas)">Go</button>
+            <button onclick="updateInvoiceList(orderByWas,dueWas,1)">All</button>
+        </div>
+    </div>
+    <br><br>
 <div class="container-fluid due-box">
 <div class="row">
 	<div class="col-sm-2"></div>
@@ -105,6 +185,7 @@
 <p id="esc">Press Escape to go back!</p>
 </div>
 <script>
+    var dueWas = 0;
 function onPageLoad()
 {
 	$("i").slideUp();
@@ -208,8 +289,9 @@ function printInvoice(id)
 	pageLoad("customers/invoice_print.php?id="+id);
 }
 
-function updateInvoiceList(orderBy,due)
+function updateInvoiceList(orderBy = null,due = null,all = null)
 {
+
 	var inv = $("#filter_inv").val();
 	var ref = $("#filter_ref").val();
 	var date = $("#filter_date").val();
@@ -236,10 +318,14 @@ function updateInvoiceList(orderBy,due)
 	if(advance.length > 0) filter_qry += "&f_advance="+advance;
 	if(balance.length > 0) filter_qry += "&f_balance="+balance;
 	if(payment.length > 0) filter_qry += "&f_payment="+payment;
-	if(due > 0) filter_qry += "&f_due="+due;
+	if(due > 0) {filter_qry += "&f_due="+due; dueWas = due; }
 	if($("#f_overTime").is(':checked')) filter_qry += "&f_overTime="+inv;
 	if($("#f_todaysInvoice").is(':checked')) filter_qry += "&f_todaysInvoice="+inv;
 	if($("#f_b2b").is(':checked')) filter_qry += "&f_b2b="+inv;
+
+
+    var month = $("#monthOpt").val();
+    var year = $("#yearOpt").val();
 
 	$("#invoice_table").html("Loading...");
 	var xhttp = new XMLHttpRequest();
@@ -253,7 +339,8 @@ function updateInvoiceList(orderBy,due)
 
     xhttp.open("POST", "do.php?action=updateInvoiceTable", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("orderBy="+orderBy+filter_qry+"&ajax");
+    if(all == null)  xhttp.send("orderBy="+orderBy+filter_qry+"&year="+year+"&month="+month+"&ajax");
+    else  xhttp.send("orderBy="+orderBy+filter_qry+"&year=0&month=0&ajax");
 }
 
 

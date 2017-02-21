@@ -560,9 +560,13 @@ font-size:25px;
 
 .addBox .inBox .row#r2
 {
-	width: 90%;
+	width: 98%;
 	margin: 0 auto;
 	font-size:16px;
+}
+
+.addBox .inBox .row#r2 div {
+	font-size: 1vw;
 }
 
 .addBox .inBox .row#r2 div:hover
@@ -685,9 +689,14 @@ font-size:25px;
 
 .row_inv
 {
-	width:95%;
+	width:98%;
 	position:relative;
 	margin:0 auto;
+}
+
+.row_inv div {
+	font-size:1vw;
+	height: 5vh;
 }
 
 #inv_data:hover

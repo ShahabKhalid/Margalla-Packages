@@ -33,10 +33,10 @@ require "../123321.php";
 <div class="col-md-1"><b>Serial</b></div>
 <div class="col-md-1" onclick="updateCustomerList('id')"><b>ID</b></div>
 <div class="col-md-2" onclick="updateCustomerList('name')"><b>Name</b></div>
-<div class="col-md-1" onclick="updateCustomerList('contact')"><b>Sale Rep.</b></div>
+<div class="col-md-2" onclick="updateCustomerList('contact')"><b>Sale Rep.</b></div>
 <div class="col-md-2" ><b>Last Invoice (Date)</b></div>
 <div class="col-md-2" ><b>Last Payment (Date)</b></div>
-<div class="col-md-2"><b>Balance</b></div>
+<div class="col-md-1"><b>Balance</b></div>
 <div class="col-md-1"><b>Edit</b></div>
 </div>
 <div id="customer_table">
