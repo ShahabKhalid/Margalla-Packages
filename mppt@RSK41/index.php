@@ -149,7 +149,9 @@
         xhttp.onreadystatechange = function() {
         if (xhttp.readyState != 4)
         {
-                $("#apanel_area").html('<h1 style="text-align:center;margin-top:20%;">Loading....</h1>');
+          $("#apanel_area").slideDown();
+          $("#apanel_area").html('<div class="loader" style="position;relative;margin:0 auto;"></div>');
+
         }
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             //alert(xhttp.responseText);

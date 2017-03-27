@@ -16,7 +16,7 @@
 					$qry = "SELECT * FROM `payments_recv` WHERE 1";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$paymentCount = mysqli_num_rows($run);
-				?>			
+				?>
 				<div class="col-md-6" id="view"><h1><?php echo $customerCount; ?></h1>
 				</div>
 				<div class="col-md-6"><span class="glyphicon glyphicon-user"></span></div>
@@ -25,7 +25,7 @@
 			<ul style="background-color:rgba(70,23,180,255);">
 			<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/add.php') !== false) { ?>
 			<li><a href="javascript:void()" id="addCust" title="Add Customer">Add Customer</a></li>
-			<?php } if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/list.php') !== false) { ?>			
+			<?php } if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/list.php') !== false) { ?>
 			<li><a href="#" onclick="return pageLoad('customers/list.php')" title="Edit Customer">List Customer</a></li>
 			<?php }?>
 			</ul></div>
@@ -74,22 +74,24 @@ var mainPage = true;
 var currentPage = null;
 var lastPage = null;
 function pageLoad(page)
-{	
+{
 	lastPage = currentPage;
-	if(page == "custMain.php") 
-		mainPage = true; 
-	else 
+	if(page == "custMain.php")
+		mainPage = true;
+	else
 		mainPage = false;
     $("#contentRoom").slideUp();
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {     
+    xhttp.onreadystatechange = function() {
     if (xhttp.readyState != 4)
-    {                
-            $("#contentRoom").html('<h1 style="text-align:center;margin-top:20%;">Loading....</h1>');
+    {
+			$("#contentRoom").slideDown();
+			$("#contentRoom").html('<div class="loader" style="position;relative;margin:0 auto;"></div>');
+
     }
-    if (xhttp.readyState == 4 && xhttp.status == 200) {         
-        //alert(xhttp.responseText);            
-        setTimeout(function(){ 
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        //alert(xhttp.responseText);
+        setTimeout(function(){
             $("#contentRoom").html(xhttp.responseText);
             $("#contentRoom").slideDown();
             //$("#update-account").slideUp();
@@ -97,12 +99,12 @@ function pageLoad(page)
          }, 500);
         currentPage = page;
 
-        
+
     }
-    };      
+    };
     xhttp.open("POST", ""+page+"", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();        
+    xhttp.send();
 }
 
 function viewInvoice(no)
@@ -122,7 +124,7 @@ $(document).ready(function(){
         });
 
     $("#addCust").click(function() {
-        pageLoad("customers/add.php");        
+        pageLoad("customers/add.php");
     });
 });
 </script>
