@@ -1226,6 +1226,7 @@ if(isset($_POST['ajax']))
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$count = 1;
 
+					$total_Investment = 0;
 					while($row = mysqli_fetch_array($run))
 					{
 						$id = $row['id'];
@@ -1301,7 +1302,7 @@ if(isset($_POST['ajax']))
 								echo "font-weight:bold;color:white;background-color:black;";
 							}
 						 	?>;"><?php if($pay_result > 0) echo "Rs. ".round( $pay_amount, 2, PHP_ROUND_HALF_EVEN)." (".$pay_date.")"; else echo "--"; ?></div>
-						<div class="col-md-1" style="border:1px solid black;">Rs. <?php echo round( $total_balance, 2, PHP_ROUND_HALF_EVEN); ?></div>
+						<div class="col-md-1" style="border:1px solid black;">Rs. <?php echo round( $total_balance, 2, PHP_ROUND_HALF_EVEN); $total_Investment += floatval($total_balance); ?></div>
 						</div>
 
 						<div class="col-md-1" style="border:1px solid black;">
@@ -1312,6 +1313,34 @@ if(isset($_POST['ajax']))
 						</div>
 						<?php
 					}
+                    ?>
+                    <div '>
+                        <div class="col-md-1" style="border:1px solid black;"></div>
+                        <div class="col-md-1" style="border:1px solid black;"></div>
+                        <div class="col-md-2" style="border:1px solid black;"></div>
+                        <div class="col-md-2" style="border:1px solid black;""></div>
+                    <div class="col-md-2" style="border:1px solid black;<?php
+                    if(strcmp($inv_date,date("Y-m-d")) == 0)
+                    {
+                        echo "font-weight:bold;color:white;background-color:black;";
+                    }
+                    ?>"></div>
+                    <div class="col-md-2" style="border:1px solid black<?php
+                    if(strcmp($pay_date,date("Y-m-d")) == 0)
+                    {
+                        echo "font-weight:bold;color:white;background-color:black;";
+                    }
+                    ?>;"></div>
+                    <div class="col-md-1" style="border:1px solid black;">Rs. <?php echo $total_Investment; ?></div>
+                    </div>
+
+                    <div class="col-md-1" style="border:1px solid black;">
+                        <?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/edit.php') !== false) { ?>
+                            <a href="javascript:void()" onclick='pageLoad("customers/edit.php?id=<?php echo $id; ?>")'>Edit</a>
+                        <?php } else echo "N/A"; ?>
+                    </div>
+                    </div>
+                    <?php
 
 					break;
 
@@ -1766,6 +1795,7 @@ if(isset($_POST['ajax']))
 					$filter_qry = "";
 					$overTime = 0;
 					$todaysInvoice = 0;
+					$totalOfInvoicePayments = 0;
 					$filterCustomer = 0;
 					$filterSaleRep = 0;
 					//if(isset($_POST['f_inv'])) $filter_qry .= "and `no` LIKE '".$_POST['f_inv']."%'";
@@ -1776,9 +1806,8 @@ if(isset($_POST['ajax']))
 					if(isset($_POST['f_customer'])) $filterCustomer = 1;
 					//if(isset($_POST['f_salerep'])) $filterSaleRep = 1;
 
-                    if(intval($year) != 0) $qry = "SELECT i.*,idd.exp_name,idd.weices,idd.rate,idd.charges,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE i.date >= '$year-$month-01' and i.date <= '$year-$month-31'  ".$filter_qry." order by i.`date`";
-                    else  $qry = "SELECT i.*,idd.exp_name,idd.weices,idd.rate,idd.charges,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE ".$filter_qry." order by i.`date` ";
-
+                    if(intval($year) != 0) $qry = "SELECT sub.no,sub.id,sub.customer,sub.salerep,sub.date,sub.rateby,sub.paymentTime,sub.ldRate,sub.hdRate,SUM(sub.invoiceTotal) as invoiceSum,sub.cid,sub.cName,sub.eName,sub.payMethod FROM (SELECT i.*,idd.exp_name,(idd.weices*idd.rate+idd.charges) as invoiceTotal,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE i.date >= '$year-$month-01' and i.date <= '$year-$month-31' ".$filter_qry." order by i.`date`) as sub group by sub.no";
+                    else  $qry = "SELECT sub.no,sub.id,sub.customer,sub.salerep,sub.date,sub.rateby,sub.paymentTime,sub.ldRate,sub.hdRate,SUM(sub.invoiceTotal) as invoiceSum,sub.cid,sub.cName,sub.eName,sub.payMethod FROM (SELECT i.*,idd.exp_name,(idd.weices*idd.rate+idd.charges) as invoiceTotal,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE 1 ".$filter_qry." order by i.`date`) as sub group by sub.no";
 					$run = mysqli_query($con,$qry) or die(mysqli_error($con));
 					$count = 1;
 
@@ -1805,8 +1834,8 @@ if(isset($_POST['ajax']))
                         else {
                             $total_otherCharges += floatval($row['charges']);
                         }
-                        $total_here = $row['weices'] * $row['rate'] + $row['charges'];
-                        $totalOfInvoice += $row['weices'] * $row['rate'] + $row['charges'];
+                        $total_here = round($row['invoiceSum'],2);
+                        $totalOfInvoice += round($row['invoiceSum'],2);
                         $total_ += $total_here;
 
 						$advance = 0;
@@ -1965,8 +1994,8 @@ if(isset($_POST['ajax']))
 						<div class="col-md-6">
 						<div class="row">
 						<div class="col-sm-1 no-border" style="border:1px solid black;">
-						<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/invoice_update.php') !== false) { ?><a href="javascript:void()" onclick="viewInvoice('<?php echo $row['id'] ?>')">Edit</a><?php } else echo "N/A"; ?></div>
-						<div onclick="printInvoice('<?php echo $row['id'] ?>')">
+						<?php if(strcmp($_SESSION['access'],"all") === 0 || strpos($_SESSION['access'],'customers/invoice_update.php') !== false) { ?><a href="javascript:void()" onclick="viewInvoice('<?php echo $row['no'] ?>')">Edit</a><?php } else echo "N/A"; ?></div>
+						<div onclick="printInvoice('<?php echo $row['no'] ?>')">
 						<div class="col-sm-1 no-border" style="border:1px solid black;"><?php echo $count; ?></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;"><?php echo $row['date']; ?></div>
 						<div class="col-sm-1 no-border" style="border:1px solid black;"><span style='font-size:.8vw;'><?php echo $row['no']; ?></span></div>
@@ -1999,6 +2028,7 @@ if(isset($_POST['ajax']))
 
 						<div class="col-sm-2 no-border" style="border:1px solid black;">Rs. <?php
 						echo $total_amount;
+						$totalOfInvoicePayments += floatval($total_amount);
 						?></div>
 						<div class="col-sm-2 no-border" style="border:1px solid black;<?php
 
@@ -2032,7 +2062,9 @@ if(isset($_POST['ajax']))
                     <div class="row row_inv">
                         <div class="col-sm-8" style="border:1px solid black;">Total</div>
                         <div class="col-sm-1" style="border:1px solid black;">Rs <?php echo $totalOfInvoice; ?></div>
-                        <div class="col-sm-3" style="border:1px solid black;"></div>
+                        <div class="col-sm-1" style="border:1px solid black;"></div>
+                        <div class="col-sm-1" style="border:1px solid black;">Rs <?php echo $totalOfInvoicePayments; ?></div>
+                        <div class="col-sm-1" style="border:1px solid black;"></div>
                     </div>
                     <?php
 

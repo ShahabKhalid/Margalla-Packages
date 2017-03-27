@@ -70,6 +70,7 @@
 <b><a style="font-size:14px;text-decoration:none;" href="javascript:void()" onclick="exportExcel(<?php echo $id; ?>)">Export to excel</a></b></span>
 </div>
 </div>
+    <input type="hidden" id="exp_id" value="<?php echo $id; ?>">
 <div class="row" style="font-size:16px;">
 <div class="col-sm-12 text-center">
 	<select id="yearOpt">
@@ -133,14 +134,14 @@ while($data = mysqli_fetch_array($run))
 </div>
 <script>
 function refreshPage(all = null) {
+    var id = $("#exp_id").val();
 	if(all != null) {
-			pageLoad("expences/detail.php?year=0&month=0");
+			pageLoad("expences/detail.php?id="+id+"&year=0&month=0");
 	}
 	else {
 		var year = $("#yearOpt").val();
 		var month = $("#monthOpt").val();
-		pageLoad("expences/detail.php?year="+year+"&month="+month);
-
+		pageLoad("expences/detail.php?id="+id+"&year="+year+"&month="+month);
 	}
 }
 

@@ -244,7 +244,7 @@ function PrintList(id)
 }
 
 
-function exportExcel(id)
+function exportExcel(id,due = null,all = null)
 {
 	var inv = $("#filter_inv").val();
 	var ref = $("#filter_ref").val();
@@ -272,21 +272,28 @@ function exportExcel(id)
 	if(advance.length > 0) filter_qry += "&f_advance="+advance;
 	if(balance.length > 0) filter_qry += "&f_balance="+balance;
 	if(payment.length > 0) filter_qry += "&f_payment="+payment;
-
+    if(due > 0) {filter_qry += "&f_due="+due; dueWas = due; }
 	if($("#f_overTime").is(':checked')) filter_qry += "&f_overTime="+inv;
 	if($("#f_todaysInvoice").is(':checked')) filter_qry += "&f_todaysInvoice="+inv;
 	if($("#f_b2b").is(':checked')) filter_qry += "&f_b2b="+inv;
-	window.open("customers/export_invoiceList.php?orderBy=id"+filter_qry);
+
+
+    var month = $("#monthOpt").val();
+    var year = $("#yearOpt").val();
+
+
+    if(all == null) window.open("customers/export_invoiceList.php?orderBy=id"+filter_qry+"&year="+year+"&month="+month);
+    else window.open("customers/export_invoiceList.php?orderBy=id"+filter_qry+"&year=0&month=0");
 }
 
 function viewInvoice(id)
 {
-	pageLoad("customers/invoice_update.php?id="+id);
+	pageLoad("customers/invoice_update.php?no="+id);
 }
 
 function printInvoice(id)
 {	
-	pageLoad("customers/invoice_print.php?id="+id);
+	pageLoad("customers/invoice_print.php?no="+id);
 }
 
 function updateInvoiceList(orderBy = null,due = null,all = null)

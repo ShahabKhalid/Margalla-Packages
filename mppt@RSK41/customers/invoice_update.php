@@ -47,7 +47,7 @@ $sRepName = $row2['name'];
 	<?php
 	}
 	?>
-</select>
+</datalist>
 </div><div class="col-md-3"></div></div><br>
 <div class="row" id="r1"><div class="col-md-2"></div><div class="col-md-3"><label>Sale Rep.</label></div><div class="col-md-4">
 <input class="mainField" type='text' list='listid' id="saleRep" value="<?php echo $sRepName; ?>">

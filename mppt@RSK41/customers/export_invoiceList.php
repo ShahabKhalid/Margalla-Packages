@@ -1,5 +1,15 @@
 <?php
 require "../123321.php";
+if(!isset($_GET['year']) && !isset($_GET['month']))
+{
+    $year = date("Y");
+    $month = date("m");
+}
+else
+{
+    $year = $_GET['year'];
+    $month = $_GET['month'];
+}
 
 function getDays($date,$paymentTime)
 {
@@ -17,7 +27,7 @@ function getDays($date,$paymentTime)
 
 
 
-$filename = "../excel/invoice_list_".strtotime("now").'.csv';
+$filename = "../excel/invoice_list_".$month.'-'.$year.'.csv';
 $fp = fopen($filename, "w");
 $seperator = "Sr.,Date,Inv. #,Ref. #,Party Name,Sales Rep.,Weight / Pieces,Block Charges,0. Charge,Total,Advance,Balance,Payment(s)";
 
@@ -37,37 +47,23 @@ if(isset($_GET['f_todaysInvoice'])) $todaysInvoice = 1;
 if(isset($_GET['f_customer'])) $filterCustomer = 1;
 if(isset($_GET['f_salerep'])) $filterSaleRep = 1;
 
-$qry = "SELECT i.*,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i,`customers` c,`employee` e WHERE i.customer = c.id and i.salerep = e.id ".$filter_qry." order by `".$_GET['orderBy']."` ";
-
+if(intval($year) != 0) $qry = "SELECT sub.no,sub.id,sub.customer,sub.salerep,sub.date,sub.rateby,sub.paymentTime,sub.ldRate,sub.hdRate,SUM(sub.invoiceTotal) as invoiceSum,sub.cid,sub.cName,sub.eName,sub.payMethod FROM (SELECT i.*,idd.exp_name,(idd.weices*idd.rate+idd.charges) as invoiceTotal,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE i.date >= '$year-$month-01' and i.date <= '$year-$month-31' ".$filter_qry." order by i.`date`) as sub group by sub.no";
+else  $qry = "SELECT sub.no,sub.id,sub.customer,sub.salerep,sub.date,sub.rateby,sub.paymentTime,sub.ldRate,sub.hdRate,SUM(sub.invoiceTotal) as invoiceSum,sub.cid,sub.cName,sub.eName,sub.payMethod FROM (SELECT i.*,idd.exp_name,(idd.weices*idd.rate+idd.charges) as invoiceTotal,c.id as cid,c.name as cName,e.name eName,c.paymentMethod as payMethod FROM `invoice` i LEFT JOIN `invoice_detail` idd ON i.no = idd.ref LEFT JOIN customers c ON i.customer = c.id LEFT JOIN employee e ON i.salerep = e.id WHERE 1 ".$filter_qry." order by i.`date`) as sub group by sub.no";
 $run = mysqli_query($con,$qry) or die(mysqli_error($con));
 $count = 1;
-
+$total_weight = 0;
+$total_rate = 0;
+$total_blockCharges = 0;
+$total_otherCharges = 0;
+$total_ = 0;
 while($row = mysqli_fetch_array($run))
 {
 	$dayDif = getDays($row['date'],$row['paymentTime']);
 
 
+	$total_here = round($row['invoiceSum'],2);
+	$total_ = round($row['invoiceSum'],2);
 
-	$qry2 = "SELECT * FROM `invoice_detail` WHERE `ref` = '".$row['no']."'";
-	$run2 = mysqli_query($con,$qry2) or die(mysqli_error($con));
-	$total_weight = 0;
-	$total_rate = 0;
-	$total_blockCharges = 0;
-	$total_otherCharges = 0;
-	$total_ = 0;
-	while($row2 = mysqli_fetch_array($run2))
-	{
-		$total_weight += floatval($row2['weices']);
-		$total_rate += floatval($row2['rate']);
-		if($row2['exp_name'] == "Block") {
-			$total_blockCharges += floatval($row2['charges']);
-		}
-		else {
-			$total_otherCharges += floatval($row2['charges']);
-		}
-		$total_here = floatval($row2['weices']) * floatval($row2['rate']) + floatval($row2['charges']);
-		$total_ += $total_here;
-	}
 	$advance = 0;
 	$qry2 = "SELECT * FROM `payments_recv` WHERE `inv_no` = '".$row['no']."'";
 	$run2 = mysqli_query($con,$qry2) or die(mysqli_error($con));
@@ -77,6 +73,7 @@ while($row = mysqli_fetch_array($run))
 		if(intval($row2['advance']) == 0 )$total_amount += floatval($row2['amount']);
 		else $advance += floatval($row2['amount']);
 	}
+	$total_amount = 0;
 
 
 	if($filterCustomer == 1)

@@ -1,0 +1,4 @@
+[09-Nov-2016 02:39:35 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home1/bashsofts/public_html/mppt@RSK41/excel_reader/ledgerreader.php on line 6
+[09-Nov-2016 02:39:35 America/Chicago] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home1/bashsofts/public_html/mppt@RSK41/excel_reader/ledgerreader.php on line 6
+[09-Nov-2016 02:41:22 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home1/bashsofts/public_html/mppt@RSK41/excel_reader/ledgerreader.php on line 6
+[09-Nov-2016 02:41:22 America/Chicago] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home1/bashsofts/public_html/mppt@RSK41/excel_reader/ledgerreader.php on line 6

@@ -1,0 +1,9 @@
+[30-Sep-2016 23:50:53 America/Chicago] PHP Warning:  mysqli_query(): Empty query in /home1/bashsofts/public_html/mppt@RSK41/customers/invoice_print.php on line 14
+[12-Oct-2016 07:46:17 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home1/bashsofts/public_html/mppt@RSK41/customers/export_custList.php on line 4
+[12-Oct-2016 07:52:30 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home1/bashsofts/public_html/mppt@RSK41/customers/export_custList.php on line 4
+[13-Oct-2016 02:01:52 America/Chicago] PHP Warning:  Illegal string offset 'opening_balance' in /home1/bashsofts/public_html/mppt@RSK41/customers/customer_ledger_print.php on line 22
+[17-Oct-2016 05:42:15 America/Chicago] PHP Warning:  Illegal string offset 'opening_balance' in /home1/bashsofts/public_html/mppt@RSK41/customers/customer_ledger_print.php on line 22
+[18-Oct-2016 05:33:46 America/Chicago] PHP Warning:  Illegal string offset 'opening_balance' in /home1/bashsofts/public_html/mppt@RSK41/customers/customer_ledger_print.php on line 22
+[19-Oct-2016 23:27:28 America/Chicago] PHP Warning:  Illegal string offset 'opening_balance' in /home1/bashsofts/public_html/mppt@RSK41/customers/customer_ledger_print.php on line 22
+[19-Oct-2016 23:28:00 America/Chicago] PHP Warning:  Illegal string offset 'opening_balance' in /home1/bashsofts/public_html/mppt@RSK41/customers/customer_ledger_print.php on line 22
+[19-Oct-2016 23:28:52 America/Chicago] PHP Warning:  Illegal string offset 'opening_balance' in /home1/bashsofts/public_html/mppt@RSK41/customers/customer_ledger_print.php on line 22

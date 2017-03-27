@@ -1,0 +1,2 @@
+[02-Nov-2016 23:57:47 America/Chicago] PHP Warning:  move_uploaded_file(../uploads/Sargun_Mehta.jpg): failed to open stream: No such file or directory in /home1/bashsofts/public_html/mppt@RSK41/settings/ajax_php_file.php on line 22
+[02-Nov-2016 23:57:47 America/Chicago] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phptDfdjo' to '../uploads/Sargun_Mehta.jpg' in /home1/bashsofts/public_html/mppt@RSK41/settings/ajax_php_file.php on line 22

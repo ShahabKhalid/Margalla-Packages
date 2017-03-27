@@ -347,18 +347,68 @@ switch ($month) {
         $recd = floatval($data['total']);
         $recable = $custInvTot - $recd;
 
-        $qry = "SELECT SUM(idd.weices * idd.rate + idd.charges) as total FROM `invoice` i,`invoice_detail` idd WHERE i.no = idd.ref and i.date <= '$year-$month-31'";
-        $run = mysqli_query($con, $qry) or die(mysqli_error($con));
-        $data = mysqli_fetch_array($run);
-        $custInvTot_ALL = floatval($data['total']);
+        $qry = "SELECT c.* FROM `customers` c WHERE 1  order by `id`";
+        $run = mysqli_query($con,$qry) or die(mysqli_error($con));
+        $count = 1;
 
-        $qry = "SELECT SUM(amount) as total FROM `payments_recv` WHERE rec_date <= '$year-$month-31'";
-        //echo $qry;
-        $run = mysqli_query($con, $qry);
-        $data = mysqli_fetch_array($run);
-        $recd_ALL = floatval($data['total']);
+        $total_Investment = 0;
+        while($row = mysqli_fetch_array($run))
+        {
+            $id = $row['id'];
 
-        $recable_ALL = $custInvTot_ALL - $recd_ALL;
+
+            $qry = "SELECT * FROM employee WHERE id = '".$row['saleRep']."'";
+            $run2 = mysqli_query($con,$qry) or die(mysqli_error($con));
+            $saleRepName = "NONE";
+            if(mysqli_num_rows($run2) > 0)
+            {
+                $emp = mysqli_fetch_array($run2);
+                $saleRepName = $emp['name'];
+            }
+
+            $open_balance = $row['opening_balance'];
+            $total_balance = $open_balance;
+            $qry = "DELETE FROM `tmp` WHERE 1 ";
+            mysqli_query($con,$qry) or die(mysqli_error($con));
+            $qry = "INSERT INTO tmp (id,ref,date,amount,type)
+                            SELECT i.no,i.id,i.date,sub.amount,'invoice' FROM (SELECT i.no,i.id,SUM(idd.weices * idd.rate + idd.charges) as amount FROM invoice i , invoice_detail idd WHERE i.no = idd.ref GROUP BY idd.ref ) sub, invoice i,customers c WHERE i.no = sub.no and c.id = i.customer and c.id = '".$id."'";
+            mysqli_query($con,$qry) or die(mysqli_error($con));
+            $qry = "INSERT INTO tmp (id,ref,date,amount,type)
+                            SELECT id,ref_no,rec_date,amount,'pay' FROM payments_recv WHERE `customer` = '".$id."'";
+            mysqli_query($con,$qry) or die(mysqli_error($con));
+            $qry = "SELECT * FROM tmp";
+            $run3 = mysqli_query($con,$qry) or die(mysqli_error($con));
+            $prev_inv_no = 0;
+            while($data = mysqli_fetch_array($run3))
+            {
+
+                if($data['type'] == "invoice") {  if($prev_inv_no !== $data['id']) { $total_balance += floatval($data['amount']); } $prev_inv_no = $data['id']; }
+                else if($data['type'] == "pay") { $prev_inv_no = 0;  $total_balance -= floatval($data['amount']); }
+
+            }
+
+
+            $qry = "SELECT * FROM `invoice` WHERE `customer` = '".$row['id']."' order by no DESC LIMIT 1";
+            $run3 = mysqli_query($con,$qry) or die(mysqli_error($con));
+            $data = mysqli_fetch_array($run3);
+            $inv_result = mysqli_num_rows($run3);
+            $inv_date = $data['date'];
+            $qry = "SELECT SUM(charges + weices * rate) as tot FROM invoice_detail WHERE ref = '".$data['no']."' GROUP BY ref";
+            $run3 = mysqli_query($con,$qry) or die(mysqli_error($con));
+            $data = mysqli_fetch_array($run3);
+            $tot = $data['tot'];
+
+            $qry = "SELECT * FROM `payments_recv` WHERE `customer` = '".$row['id']."' order by id DESC LIMIT 1";
+            $run3 = mysqli_query($con,$qry) or die(mysqli_error($con));
+            $data = mysqli_fetch_array($run3);
+            $pay_result = mysqli_num_rows($run3);
+            $pay_date = $data['rec_date'];
+            $pay_amount = $data['amount'];
+
+
+
+            $total_Investment += floatval($total_balance);
+        }
         ?>
         <div class="row">
             <div class="col-sm-1"></div>
@@ -372,53 +422,12 @@ switch ($month) {
                         style="font-size:18px;">Rs. <?php echo number_format($recable); ?></span></div>
             <div class="col-sm-1"></div>
         </div>
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-5 text-left" style="border:1px solid black;"><span
-                        style="font-size:18px;font-weight:bold;">Market Investment</span></div>
-            <div class="col-sm-5 text-center" style="border:1px solid black;"><span
-                        style="font-size:18px;font-weight:bold;">Rs. <?php echo number_format($recable_ALL); ?></span>
-            </div>
-            <div class="col-sm-1"></div>
-        </div>
+
         <h3>Payables
-            <h3>
+            </h3>
                 <?php
                 $TOTAL_PAYABLE = 0;
-                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'FACTORY' and date >= '$year-$month-01' and date <= '$year-$month-31'";
-                $run = mysqli_query($con, $qry) or die(mysqli_error($con));
-                $total_balance = 0;
-                while ($data = mysqli_fetch_array($run)) {
-                    $advance = 0;
-                    $qry = "SELECT * FROM `bill_detail` WHERE `ref` = '" . $data['id'] . "'";
-                    $run2 = mysqli_query($con, $qry) or die(mysqli_error($con));
-                    $total = 0;
-                    while ($data2 = mysqli_fetch_array($run2)) {
-                        $total += floatval($data2['weices']) * floatval($data2['rate']);
-                    }
-                    $balance = $advance - $total;
-                    $total_balance += $balance;
-                    $qry = "SELECT * FROM `payments_paid` WHERE `bill_no` = '" . $data['id'] . "'";
-                    $run2 = mysqli_query($con, $qry) or die(mysqli_error($con));
-                    $total = 0;
-                    while ($data2 = mysqli_fetch_array($run2)) {
-                        $balance += floatval($data2['amount']);
-                        $total_balance += floatval($data2['amount']);
-                    }
-                }
-                ?>
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-5 text-left" style="border:1px solid black;"><span
-                                style="font-size:18px;font-weight:bold;">Factory</span></div>
-                    <div class="col-sm-5 text-center" style="border:1px solid black;"><span
-                                style="font-size:18px;font-weight:bold;">Rs. <?php $total_balance = $total_balance * -1;
-                            echo number_format($total_balance);
-                            $TOTAL_PAYABLE += $total_balance; ?></span></div>
-                    <div class="col-sm-1"></div>
-                </div>
-                <?php
-                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date >= '$year-$month-01' and date <= '$year-$month-31'";
+                $qry = "SELECT b.* FROM `bill` b,`vendor` v  WHERE v.id = b.vendor and  v.name = 'BLOCK' and date <= '$year-$month-31'";
                 $run = mysqli_query($con, $qry) or die(mysqli_error($con));
                 $total_balance = 0;
                 while ($data = mysqli_fetch_array($run)) {
@@ -517,6 +526,15 @@ switch ($month) {
                 </div>
                 <div class="row">
                     <div class="col-sm-1"></div>
+                    <div class="col-sm-5 text-left" style="border:1px solid black;"><span
+                                style="font-size:18px;font-weight:bold;">Total Market Investment</span></div>
+                    <div class="col-sm-5 text-center" style="border:1px solid black;"><span
+                                style="font-size:18px;font-weight:bold;">Rs. <?php echo number_format($total_Investment); ?></span>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
                     <div class="col-sm-10 text-center"><span style="font-size:18px;font-weight:bold;"><a
                                     href="javascript:void()" onclick="addPayable();">Add Payable</a></span></div>
                     <div class="col-sm-1"></div>
@@ -537,7 +555,7 @@ switch ($month) {
                     <div class="col-sm-5 text-left" style="border:1px solid black;"><span
                                 style="font-size:18px;font-weight:bold;">Closing Balance</span></div>
                     <div class="col-sm-5 text-center" style="border:1px solid black;"><span
-                                style="font-size:18px;font-weight:bold;"><?php echo number_format($recable_ALL + $openBal - $TOTAL_PAYABLE); ?></span>
+                                style="font-size:18px;font-weight:bold;"><?php echo number_format($total_Investment + $openBal - $TOTAL_PAYABLE); ?></span>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>

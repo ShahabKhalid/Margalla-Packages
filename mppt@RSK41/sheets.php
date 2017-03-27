@@ -64,13 +64,14 @@ function pageLoad(page)
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState != 4)
     {
-            $("#contentRoom").html('<h1 style="text-align:center;margin-top:20%;">Loading....</h1>');
+						$("#contentRoom").slideDown();
+            $("#contentRoom").html('<div class="loader" style="position;relative;margin:0 auto;"></div>');
     }
     if (xhttp.readyState == 4 && xhttp.status == 200) {
         //alert(xhttp.responseText);
         setTimeout(function(){
             $("#contentRoom").html(xhttp.responseText);
-            $("#contentRoom").slideDown();
+            //$("#contentRoom").slideDown();
             //$("#update-account").slideUp();
             onPageLoad();
          }, 500);
