@@ -327,6 +327,8 @@
 
     function print()
     {
-        window.open("employees/salarySheetPrint.php");
+        var month = $("#monthOpt").val();
+        var year = $("#yearOpt").val();
+        window.open("employees/salarySheetPrint.php?year="+year+"&month="+month);
     }
 </script>

@@ -228,23 +228,16 @@ switch ($month) {
         }
 
         $qry = "SELECT SUM(amount) as amount,SUM(duration) as dur FROM `advance` WHERE employee = '$id' and date >= '$year-$month-01' and date <= '$year-$month-31' group by employee";
-        $run1 = mysqli_query($con, $qry) or die(mysqli_error($con));
+        $run1 = mysqli_query($con,$qry) or die(mysqli_error($con));
         $advance = 0;
         $dur = 0;
         $advdeduct = 0;
-        if (mysqli_num_rows($run1) > 0) {
+        if(mysqli_num_rows($run1) > 0)
+        {
             $data1 = mysqli_fetch_array($run1);
             $advance = $data1['amount'];
             $dur = $data1['dur'];
-            if (intval($advance) > 0) {
-                if (intval($dur) > 0) {
-                    $advdeduct = intval($advance) / intval($dur);
-                } else {
-                    $advdeduct = intval($advance);
-                }
-            }
-
-
+            $advdeduct = intval($advance);
         }
 
         $qry = "SELECT * FROM absents WHERE employee = '" . $id . "' and year = '" . $year . "' and month = '" . $month . "'";
